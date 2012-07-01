@@ -1,0 +1,59 @@
+<%= content_for :head do %>
+<script type='text/javascript'>
+$(function(){
+	
+	$('#search_departure_date_greater_than_or_equal_to').datepicker({
+		showButtonPanel: true,
+		dateFormat: 'yy-mm-dd'
+	});
+	$('#search_departure_date_less_than_or_equal_to').datepicker({
+		showButtonPanel: true,
+		dateFormat: 'yy-mm-dd'
+	});	
+});
+</script>
+<% end %>
+
+<div class='toolbar'>
+    <%= form_for @search, :url => admin_schedules_path do |f| %>
+    <ul class="actions">
+    	<li>
+    	Departure 
+    	from: <%= f.text_field :departure_date_greater_than_or_equal_to, :size => 7 %> 
+    	to: <%= f.text_field :departure_date_less_than_or_equal_to, :size => 7 %>
+    	<%= button t('search') %>
+    	</li>
+    	<li>
+    	<%= button_link_to "Generate schedules", 'schedules/generate', { :icon => 'add', :id => 'generate_schedule'} %>
+    	</li>
+     
+    </ul>
+    <% end %>  
+  <br class='clear' />
+</div>
+
+
+<div id="new_photo"></div>
+
+<table class="data-list" id='list_schedules'>
+  <thead>
+  <tr>
+      <th><%= t("schedule_id") %></th>
+      <th><%= t("tour") %></th>
+      <th><%= t("days") %></th>
+      <th>Price</th>
+      <th>Departure</th>
+      <th>Tour Guide</th>
+      <th>Driver</th>
+      <th>Status</th>
+  </tr>
+</thead>
+<tbody>
+<% @collection.each do |s| %>
+	<%= render :partial => 'row', :locals => {:obj => s} %>
+<% end %>
+</tbody>
+</table>
+<%= will_paginate(@collection) %>
+
+

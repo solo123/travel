@@ -1,0 +1,30 @@
+<% 
+	seat = assignment.seats.where(:seat_number => i).first
+	css = ''
+	if seat
+		if seat.order
+			css = 'sold'
+		else
+			css = 'hold'
+		end
+	else
+		css = 'blnk'
+	end
+%>
+<div class='seat <%= css %>'>
+		<div class="seat-check">
+			<input type="checkbox" name="checks[<%= i %>]" id="cb_<%= i %>">
+			<label for="cb_<%= i %>"><%= i %></label>
+		</div>
+		<div class="seat-pickup">
+			<% if seat && seat.state == 'hold' %>
+			<%= link_to 'new', 'newOrder' %>
+			<% end %>
+			<%= raw seat.message1 if seat %>
+		</div>
+		<div class="seat-info">
+			<%= seat.order_id + '<br />' if seat && seat.order_id && seat.order_id > 0 %>
+			<%= raw seat.message2 if seat %>
+			&nbsp;
+		</div>
+</div>

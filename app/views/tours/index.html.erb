@@ -1,0 +1,31 @@
+<%
+  day = 0 %>
+<div class="tours">
+  <% @tours.each do |t| %>
+  <% if t.days > day
+    day = t.days
+    tit = "#{day} days tour"
+    if day > 3
+      tit = "4 and more days tour"
+      day = 10000
+    end
+  %>
+  <div class="clear"></div>
+  <h2>-- <%= tit %> --</h2>
+  <% end %>
+  <div class="tour">
+    <div class='tour-icon'>
+      <%= image_tag t.title_photo.photo_m if t.title_photo %>
+    </div>
+    <div class='tour-info'>
+      <div class="tour-name">
+        <a href='/tours/<%=  t.id %>'>
+                <%=t.title %> <%= t.days %>
+            </a>
+      </div>
+      <div class="price">Price: $<%=t.tour_price.price_adult if t.tour_price%></div>
+    </div>
+  </div>
+  <% end %>
+  <div class="clear"></div>
+</div>

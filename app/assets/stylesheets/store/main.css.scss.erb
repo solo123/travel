@@ -1,0 +1,263 @@
+@import 'color_define';
+
+.header, .site-nav, .main-content, .footer{
+	position: relative;
+	width: 980px;
+	margin: 0 auto;
+}
+
+.clear {clear:both;}
+.col-628{float:left;position:relative;width:628px;}
+.col-336{float:left;position:relative;width:336px;}
+.list-108 {
+	list-style: none outside none;
+	li {float:left;width:114px;margin-right:8px;line-height:18px;padding-bottom:5px;white-space:nowrap;overflow:hidden;}
+}
+.list-184 {
+	list-style: none outside none;
+	li {float:left;width:184px;margin-right:8px;line-height:18px;padding-bottom:5px;white-space:nowrap;overflow:hidden;}
+}
+
+.light-block {border: 1px solid $color_border;}
+.color-block {background-color:#F5F5F5;}
+.ad-block {background-color:#EFF5F5;}
+.search-block {border-left:solid 6px #efefef;border-bottom:solid 1px #efefef;}
+.content-block {padding:16px;margin-bottom:16px;}
+.block {margin-bottom:16px;overflow:hidden;}
+
+/* Header */
+.header-wrapper {background-color:$bg_color_block;}
+.header {
+	height: 170px;
+	.advertisement{
+		float:right;
+		text-align:right;
+		padding-top:2px;
+	}
+	.aetravel-logo{
+		position: absolute;
+		left: 0;
+		bottom: 16px;
+	}
+}
+
+/* login status */
+.login-status{
+	position: absolute;
+	right: 0;
+	top: 102px;
+	color:white;
+	a {
+		color:white;
+		font-weight:bold;
+	}
+	a.lang {margin-left:17px;font-weight:normal;}
+}
+
+/* main nav */
+.site-nav-wrapper {background-color: $bg_color_hot;}
+.site-nav{
+	height: 32px;
+	list-style: none;
+	li {
+		float:left;
+		font-size: 15px;
+		font-weight: bold;
+		a {
+			border-right: solid 1px $color_link_light;
+			color: white;
+			line-height: 32px;
+			padding: 0 16px;
+			text-decoration: none;
+		}
+	}
+	li.last {
+		a { border-right: none;}
+	}
+}
+.menu.current a {
+	position:relative;right:1px;margin-right:-2px;border:none;background-color:#fff;padding:10px 16px 8px 16px;color:#000;-moz-border-radius:3px 3px 0 0;-webkit-border-radius:3px 3px 0 0;border-radius:3px 3px 0 0;
+} 
+
+
+/* main content */
+	.col1 {
+		float: left;
+    position: relative;
+    width: 400px;
+  }
+	.col2 {
+		float: right;
+		position: relative;
+    width: 212px;		
+	}
+.main-content {margin-top:16px;margin-bottom:16px;}
+#content {float: left;position: relative;width: 628px;
+
+
+}
+#sidebar {float: left;position: relative;width: 336px;
+	position: absolute;right: 0;top: 0;}
+
+.slide {
+	background-color: #0F385F;
+  
+  height: 358px;
+  overflow: hidden;
+  position: relative;
+  width: 400px;
+
+  h2{
+ 		color: #FFFFFF;
+    font-weight: bold;
+    line-height: 22px;
+    padding: 8px 16px;
+    z-index: 1;  	
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: -0.25px;
+    margin-bottom: 8px;
+    margin-right: 4px;
+    position: relative;
+  }
+}
+
+/* footer */
+.footer {
+	list-style: none;
+	li {
+		float:left;
+		font-size: 12px;
+		font-weight: bold;
+		a {
+			line-height: 32px;
+			padding: 0 16px;
+			text-decoration: none;
+		}
+	}
+}
+.white-text{
+	color:white;
+	a {color:white;}
+	a.visited {color:white;}
+	a:hover {text-decoration:underline;}
+}
+.copyright-wrapper {
+	background-color:$bg_color_block;
+	font-size: 9px;
+	color: white;
+	a { color: white;}
+}
+
+/* map */
+#mapholder {
+    background: url(<%= image_path("store/home/hp-map.gif") %>) no-repeat scroll 0 0 transparent;
+    display: block;
+    height: 161px;
+    position: relative;
+    width: 260px;
+}
+.map-nav {
+  position: absolute;
+  right: 10px;
+}
+
+/* icons listing */
+#dest_list {
+	li {
+		width: 110px;
+		height: 140px;
+		text-align: center;
+		padding: 4px;
+		border: solid 1px white;
+		float: left;
+		margin: 4px;
+		overflow: hidden;
+
+		.img-case {
+			margin:auto;
+			width:81px;height:81px;
+			border:solid 1px #aaa;
+			img {margin:3px auto;}
+		}
+	}
+	li:hover {border: solid 1px red;background-color:$bg_color_focus;}
+}
+.related-tours{
+	float: right;
+	margin: 22px;
+	border: solid 1px #CCC;
+	padding: 10px 20px;
+	background-color: $bg_color_block;
+	h2{color: $bg_color_focus;}
+	li{
+		a {color:white;}
+		a:hover {color:white;text-decoration:underline;}
+	}
+}
+
+/* hp-galleries */
+.hp-galleries{
+	margin-top: 16px;
+	li {
+		position: relative;
+		margin-bottom: 16px;
+		width: 210px;
+		img {
+			display: block;
+			width: 100%;
+		}
+		.hp-gallery-title {
+			background: #0F385F;
+			padding: 4px 8px;
+			font-size: 14px;
+			font-weight: normal;
+			a {color:white;text-decoration:none;}
+			a:hover {text-decoration:underline;}
+		}
+	}
+}
+
+a.color-button:after {
+  position:absolute;
+  top:8px;
+  right:6px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid white;
+  content: "";
+  display:block;
+  width: 0;
+  height: 0;
+}
+.color-button:link {color:#fff;font-weight:bold;}
+.color-button:hover {color:#fff;}
+.color-button{
+	position:relative;
+	background:#eb6d27;
+	border:none;
+	margin:16px 0;padding:4px 16px 4px 4px;
+	color:#fff;-moz-border-radius:8px;
+	border-radius:8px;
+}
+
+/* color schema table */
+#color_schemas{
+	width: 200px;
+	height: 30px;
+	position: absolute;
+	right: 0;
+	bottom: 10px;
+	.color1 {background-color: $ptn_1;}
+	.color2 {background-color: $ptn_2;}
+	.color3 {background-color: $ptn_3;}
+	.color4 {background-color: $ptn_4;}
+	.color5 {background-color: $ptn_5;}
+	li {
+		height: 20px;
+		width: 20px;
+		border:solid 1px green;
+		float:right;
+		margin: 2px;
+	}
+}

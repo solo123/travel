@@ -1,0 +1,19 @@
+<%= form_for( @operates_assignment, :url => admin_schedule_path(@operates_schedule) + '/update_bus', :remote => true) do |ass| %>
+
+		<%= ass.label :title %>
+		<%= ass.text_field :title %>
+		<%= ass.label :bus %>
+		<%= ass.text_field :bus_id %>
+		<%= ass.label :driver %>
+		<%= ass.text_field :driver_id %>
+		<%= ass.label :driver_assistance %>
+		<%= ass.text_field :driver_assistance_id %>
+		<%= ass.label :tour_guide %>
+		<%= ass.text_field :tour_guide_id %>
+		<%= ass.label :tour_guide_assistance %>
+		<%= ass.text_field :tour_guide_assistance_id %>
+	
+  <div class="actions">
+    <%= ass.submit %>
+  </div>
+<% end %>

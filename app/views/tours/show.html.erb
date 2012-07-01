@@ -1,0 +1,130 @@
+<% content_for :head do %>
+<%= javascript_tag do %>
+function date_to_string(date){
+  var m = date.getMonth() + 1;
+  var d = date.getDate();
+  return date.getFullYear() + '.' + (m<10?'0'+m:m) + '.' + (d<10?'0'+d:d);
+}
+
+function add_room(){
+  room_index++;
+  var rid = 'room_' + room_index;
+  var row = "<tr id='"+ rid +"'>" +
+      "<td>Room "+ room_index +"# </td>" +
+      "<td>Adult:</td>" +
+      "<td><select name='num_adult[]'><option>1</option><option>2</option><option>3</option><option>4</option></select></td>" + 
+      "<td>Child:</td>" + 
+      "<td><select name='num_child[]'><option>0</option><option>1</option><option>2</option><option>3</option></select></td>" +
+      "<td></td>" +
+      "<td><a href='javascript:remove_room(\""+ rid +"\");'>remove</a></td>" +
+    "</tr>";
+    $('#room_table').append(row);
+}
+var room_index = 1;
+function remove_room(rid){
+  $('#' + rid).remove();
+}
+var vds = '<%= @datelist %>';
+function new_order(){
+  $('.dialog-normal')
+    .dialog('option', 'title', 'New Order *')
+    .dialog('open');
+
+}
+$(function(){
+  $('#departure').datepicker({
+    numberOfMonths: 2,
+    showButtonPanel: false,
+    minDate: 0,
+    maxDate: <%= @max_date %>,
+    onSelect: function(dateText, inst){
+      $('#departure_date').val(dateText);
+    },
+    beforeShowDay: function(date){
+      var s = date_to_string(date);
+      if (vds.indexOf(s)<0)
+        return [0, '', null];
+      else
+        return [1, '', s];  
+    }
+  });
+  set_current_menu('menu_<%= @tour.tour_type_menu_id %>');
+  $('.dialog-normal').dialog({autoOpen: false, show: "blind", hide: "blind", width: 700, height: 300});
+});
+<% end %>
+<% end %>
+<div class='crumb'>
+<a href='/'>Home</a> > <a href='/tours'>Tours</a> > <a href='/tours/<%= @tour.tour_type_menu_id %>'><%= @tour.tour_type_name %></a> > <%= @tour.title %>
+</div>
+
+<div class="main_lightGreen" style="padding:20px;">
+
+    <div id="tour_detail">
+        <div class="head">
+            <h2><%=h @tour.title %></h2>
+        </div>
+        <%=h @tour.description.en if @tour.description %>
+    </div>
+  <div id="order">
+    Departure Date<input type='hidden' id='departure_date' /><br />
+    <div id='departure'></div>
+    <% if @tour.tour_price %>
+    <p>
+      <b>$<%= @tour.tour_price.price1 %></b>(1 person/room)
+      <b>$<%= @tour.tour_price.price2 %></b>(2 person/room)<br />
+      <b>$<%= @tour.tour_price.price3 %></b>(3 person/room)
+      <b>$<%= @tour.tour_price.price4 %></b>(4 person/room)
+    </p>
+    <% end %>
+    <p style='margin-top:20px;'>
+      <% if current_user %>
+        <%= link_to 'Order Now', 'javascript:new_order();', :class => 'color-button' %>
+      <% else %>
+        <%= link_to 'Order Now', '/users/sign_in', :class => 'color-button' %>
+      <% end %>
+    </p>
+  </div>
+  <div class="clear"></div>
+    <div id="tour_dests">
+        <%
+        cd = 0
+        image_path = ''
+        @tour.spots.each do |spot|
+        if (spot.visit_day != cd)
+            cd = spot.visit_day %>
+            <div class="day">Day <%= cd %></div>
+     <% end %>
+
+        <div class='dest'>
+          <div class="pic">
+          	<%= image_tag spot.destination.photo.photo_m if spot.destination.photo %>
+          </div>
+          <div class="info">
+              <%= link_to spot.destination.title, destination_path(spot.destination) %>
+              <%=h spot.description.en if spot.description %>
+          </div>
+          <div class="clear"></div>
+        </div>
+
+    <% end %>
+    <div class="clear"></div>
+    </div>
+</div>
+
+<div class='dialog-normal'>
+  <%= form_tag tour_path(@tour) + '/order' do %>
+  <table id='room_table'>
+    <tr>
+      <td>Room 1# </td>
+      <td>Adult:</td>
+      <td><%= select_tag 'num_adult[]', '<option>1</option><option>2</option><option>3</option><option>4</option>'.html_safe %></td>
+      <td>Child:</td>
+      <td><%= select_tag 'num_child[]', '<option>0</option><option>1</option><option>2</option><option>3</option>'.html_safe %></td>
+    </tr>
+  </table>
+  <%= link_to 'add room', 'javascript:add_room();' %>
+  <p>
+    <%= submit_tag %>
+  </p>
+  <% end %>
+</div>

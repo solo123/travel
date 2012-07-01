@@ -1,0 +1,19 @@
+$("#select_customer_div")
+	.html("<%= escape_javascript(render(:partial => "select_form"))%>")
+	.dialog('open');
+
+
+$( "#member_select" ).autocomplete({
+	source: "/admin/members/search",
+	minLength: 2,
+	select: function( event, ui ) {
+		if (ui.item) {
+			$('#member_id').val(ui.item.id);
+		}
+	}
+});
+
+$('#member_select').click(function(){
+	$(this).select();
+});
+

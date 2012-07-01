@@ -1,0 +1,8 @@
+<% if params[:op] == 'change_schedule' %>
+	$('#order_head').html('<%= escape_javascript(render(:partial => 'order_head')) %>');
+<% elsif params[:p] == 'customer' %>
+	$("#customer_info").html("<%= escape_javascript(render(:partial => "customer")) %>");
+<% elsif params[:price_changed] %>
+  $('#items').html("<%= escape_javascript(render(:partial => "items")) %>");
+<% end %>
+$("#dialog").dialog('close');

@@ -1,0 +1,6 @@
+  <%= f.fields_for :remarks do |notes| %>
+  <div>
+		<%= notes.label :notes %><br />
+		<%= notes.text_area :notes, :style => 'width:90%' %>
+  </div>
+  <% end %>

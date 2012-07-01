@@ -1,0 +1,24 @@
+$(function(){
+	$('#banners').slides({
+		preload: true,
+		preloadImage: '<%= image_path 'loading.gif' %>',
+		play: 30000,
+		pause: 30000,
+		effect: 'fade',
+		randomize: true,
+		generatePagination: false,
+		hoverPause: true
+	});	
+	$('#slides').slides({
+		preload: true,
+		preloadImage: '<%= image_path 'loading.gif' %>',
+		play: 5000,
+		pause: 2500,
+		hoverPause: true
+	});
+
+});
+
+function set_current_menu(menu_id){
+	$('#' + menu_id).addClass('current');
+}

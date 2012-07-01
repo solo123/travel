@@ -1,0 +1,38 @@
+<%= form_for( @object, :url => post_path, :remote => true) do |f| %>
+  <div class="yui-g">
+  	<div class='yui-u first'>
+	  <%= f.field_container :agent_id do %>
+	  	<%= f.label :agent_id %><br />
+
+			<%= f.select :agent_id, Agent.all.map { |c| [c.short_name, c.id] }, {}, :class => 'data-field' %>
+
+	  <% end %>
+	  <%= f.field_container :nickname do %>
+	  	<%= f.label :nickname %><br />
+	  	<%= f.text_field :nickname %>
+	  <% end %>
+	  <%= f.field_container :employ_date do %>
+	  	<%= f.label :employ_date %><br />
+	  	<%= f.text_field :employ_date %>
+	  <% end %>
+	  </div>
+	  <div class='yui-u'>
+	  <%= f.field_container :ssn do %>
+	  	<%= f.label :ssn %><br />
+	  	<%= f.text_field :ssn %>
+	  <% end %>
+	  <%= f.field_container :birthday do %>
+	  	<%= f.label :birthday %><br />
+	  	<%= f.text_field :birthday %>
+	  <% end %>
+	  <%= f.field_container :locked_at do %>
+	  	<%= f.label :locked_at %><br />
+	  	<%= f.text_field :locked_at %>
+	  <% end %>
+	 	</div>
+	</div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,16 @@
+<%= form_for( @ad, :url => admin_ad_path(@ad), :remote => true) do |f| %>
+	<%= image_tag @ad.image_url, :style => 'float:left;width:200px;' %>
+	<div style="float:left;padding-left:10px;">
+	<p>
+		<%= f.label :info %><br />
+		<%= f.text_area :info, :style => 'height:100px;' %>		
+	</p>
+	<p>
+		<%= f.label :url %><br />
+		<%= f.text_field :url %>		
+	</p>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+	</div>
+<% end %>

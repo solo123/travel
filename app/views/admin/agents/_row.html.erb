@@ -1,0 +1,13 @@
+  <tr id="<%= dom_id obj %>" <%= 'class=\'deleted\'' if !obj.status || obj.status < 1 %>>
+      <td><%= obj.id %></td>
+      <td><%= obj.short_name %></td>
+      <td><%= obj.company_name %></td>
+      <td><%= obj.company_type %></td>
+      <td><%= obj.icon_url %></td>
+      <td><%= obj.website %></td>
+      <td><%= obj.status %></td>
+    <td class="actions">
+      <%= link_to_edit obj %> |
+      <%= link_to_hide obj, 'data-confirm' => 'Are you sure to hide/show this Agent?' %>
+    </td>
+  </tr>

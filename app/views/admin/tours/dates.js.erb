@@ -1,0 +1,18 @@
+var vds = '<%= @datelist %>';
+$('#departure').datepicker({
+  numberOfMonths: 2,
+  showButtonPanel: false,
+  minDate: 0,
+  maxDate: <%= @max_date %>,
+  dateFormat: 'yy-mm-dd',
+  onSelect: function(dateText, inst){
+    $('#departure_date').val(dateText);
+  },
+  beforeShowDay: function(date){
+    var s = date_tostring(date);
+    if (vds.indexOf(s)<0)
+      return [0, '', null];
+    else
+      return [1, '', s];  
+  }
+}).datepicker( "refresh" );

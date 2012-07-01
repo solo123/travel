@@ -1,0 +1,38 @@
+<%= render :partial => 'admin/shared/report_sub_menu' %>
+
+<div class='toolbar'>
+  <ul class='actions'>
+    <li>
+      <%= form_for( @search, :url => admin_operations_path ) do |f| %>
+      <%= f.select :employee_id_eq, Infos::Employee.all.map { |c| [c.nickname, c.id] }, {}, :class => 'data-field' %>
+      <%= f.text_field :title_contains, :size => 15, :class => 'data-field' %>
+      <%= button 'search' %>
+      <% end %>
+    </li>
+  </ul>
+  <br class='clear' />
+</div>
+
+<h1><%= raw "#{t('actions.listing')} #{t('photos')}" %></h1>
+
+<div id="edit_div" class='dialog-normal'></div>
+
+<table class="index" id='listing_objs'>
+  <tr>
+      <th><%= t("id") %></th>
+      <th><%= t("operate_type") %></th>
+      <th><%= t("operate_id") %></th>
+      <th><%= t('employ_id')%></th>
+      <th><%= t('title') %></th>
+      <th><%= t('created_at') %></th>
+      <th>op</th>
+    <th>
+    </th>
+  </tr>
+<% @collection.each do |e| %>
+  <%= render :partial => 'row', :locals => {:obj => e} %>
+<% end %>
+</table>
+<%= paginate(@collection) %>
+
+

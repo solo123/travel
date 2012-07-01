@@ -1,0 +1,15 @@
+  <tr id="<%= dom_id obj %>">
+    <td><%= obj.name %></td>
+    <td><%= obj.bus_type %></td>
+    <td><%= obj.seats %></td>
+    <td><%= obj.plate_number %></td>
+    <td><%= obj.vin_number %></td>
+    <td><%= obj.inspection_date %></td>
+    <td><%#= obj.remark %></td>
+    <td><%= obj.is_own %></td>
+    <td><%= obj.status %></td>
+    <td class="actions">
+      <%= link_to_edit obj %> |
+      <%= link_to_hide obj, 'data-confirm' => 'Are you sure to hide/show this Bus?' %>
+    </td>
+  </tr>

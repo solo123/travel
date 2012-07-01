@@ -1,0 +1,26 @@
+<div class="toolbar">
+  <ul class="actions">
+    <li>
+      <%= button_link_to 'New Order', new_admin_shop_order_path, {:icon => 'add'} %>
+    </li>
+  </ul>
+  <br class="clear">
+</div>
+
+<table class="index" id='listing_photos'>
+  <tr>
+      <th><%= t("order_id") %></th>
+      <th>Type</th>
+      <th>Related id</th>
+      <th><%= t("tour") %></th>
+      <th>Departure</th>
+      <th>Customer</th>
+      <th>Phone</th>
+      <th>Status</th>
+  </tr>
+<% @shop_orders.each do |order| %>
+  <%= render :partial => 'tour_order_line', :locals => {:order => order}  %>
+<% end %>
+</table>
+<%= paginate(@shop_orders) %>
+

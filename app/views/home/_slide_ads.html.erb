@@ -1,0 +1,11 @@
+<div id="slides">
+  <div class="slides_container">
+    <% Ad.ads.each do |ad| %>
+    <div>
+      <a href='<%= ad.url %>'><%= image_tag ad.image_url %></a>
+      <h2><%= ad.info %></h2>
+    </div>
+    <% end %>  
+  </div>
+</div>
+

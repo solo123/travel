@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+		<title><%= title %></title>
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />  	
+	  <%= stylesheet_link_tag    "store/all", :media => "all" %>
+	  <%= javascript_include_tag "store/all" %>
+	  <%= csrf_meta_tags %>
+	  <%= yield :head %>
+  </head>
+  <body>
+
+    <div class='header-wrapper'>
+      <div class='header'>
+        <div class='advertisement'>
+          <%= render 'shared/ad_top_banner' %>
+        </div>
+        <div class='aetravel-logo'>
+          <a href="/">
+            <%= image_tag 'store/ae_logo_w.png', :height => '46', :alt => 'AEtravel | New York Departure Tours EVERYDAY!'  %>
+          </a>
+        </div>
+        <div class='login-status'>
+          <%= render 'shared/login_bar' %>
+        </div>
+      </div>
+    </div>
+
+    <div class='site-nav-wrapper'>
+      <%= render 'shared/site_menu' %>
+    </div>
+
+    <%#= breadcrumbs(@taxon) %>
+    <%= flash_messages %>
+    <div class='main-content clear'>
+      <%= yield %>
+    </div>
+
+    <%= render 'shared/footer' %>
+  </body>
+</html>

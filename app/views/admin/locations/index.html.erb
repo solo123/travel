@@ -1,0 +1,43 @@
+<% content_for :head do %>
+<script type="text/javascript">
+$(function(){
+	$('#edit_div').dialog({ autoOpen: false, width: 600});
+});
+</script>
+<% end %>
+<%= render :partial => 'admin/shared/product_sub_menu' %>
+
+<div class="toolbar">
+  <ul class="actions">
+  	<li>
+  		<%= form_for [:admin, @search] do |f| %>
+  		<%= f.label :title_contains, "Title" %> <%= f.text_field :title_contains, :size => 15 %> &nbsp;
+  		<%= button t('search') %>
+			<% end %>
+  	</li>
+    <li id="edit_location_link">
+      <a href="locations/new" class="button" data-remote="true" id="admin_edit_location">
+      	<span><img alt="Add" src="/images/admin/icons/add.png?1305355888"> New location</span></a>
+    </li>
+  </ul>
+  <br class="clear">
+</div>
+
+<div id="edit_div" style="display:none;">
+	<div id="form"><form></form></div>
+</div>
+
+<table class="index" id="locations">
+  <tr>
+    <th><%= t("id") %></th>
+    <th><%= t("abbr") %></th>
+		<th><%= t("title") %></th>
+		<th><%= t("title_cn") %></th>
+	  <th>operate</th>
+  </tr>
+	<% @collection.each do |location| %>
+		<%= render location %>
+	<% end %>
+</table>
+<%= will_paginate(@collection, :previous_label => "&#171; #{t('previous')}", :next_label => "#{t('next')} &#187;") %>
+

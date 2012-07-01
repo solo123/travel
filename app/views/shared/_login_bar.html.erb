@@ -1,0 +1,19 @@
+<% if current_user %>
+	Welcome <%= current_user.email %>,
+	&nbsp;
+  <%#= link_to t(:my_account), account_path %>
+  |
+  <%= link_to t(:logout), destroy_user_session_path, :method => :delete %>
+
+  &nbsp;
+  &nbsp;
+  <%= image_tag asset_path('store/vm_cart.png'), :width => '25px' %>
+  Empty ▼
+
+<% else %>
+  <%= link_to t('.log_in'), '/users/sign_in' %>
+  |
+  <%= link_to t(:sign_up), '/users/sign_up' %>
+<% end %>
+
+  <%= link_to( t('.lang'), "#{t(:switch_host)}#{request.path}", :class => 'lang') %>

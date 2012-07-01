@@ -1,0 +1,4 @@
+<% if @price %>
+$('#prices').html('<%= escape_javascript(render(:partial => "price", :locals => {:price => @price}))%>');
+schedule_prices = [<%= @price.price1 %>, <%= @price.price2 %>, <%= @price.price3 %>, <%= @price.price4 %>];
+<% end %>

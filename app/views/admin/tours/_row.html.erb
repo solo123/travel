@@ -1,0 +1,29 @@
+<tr id="<%= dom_id obj%>" <%= 'class=\'deleted\'' if !obj.status || obj.status < 1 %>>
+	<td><%= obj.id %></td>
+	<td><%= obj.title %><br /><%= obj.title_cn %></td>
+	<td><%= obj.tour_type_name %></td>
+	<td><%= obj.days %></td>
+	<td><%= obj.tour_setting.weekly if obj.tour_setting %></td>
+	<td>
+		<% if obj.tour_price %>
+			<%= obj.tour_price.price_adult %> / 
+			<%= obj.tour_price.price_adult %>
+		<% end %>
+	</td>
+	<td>
+		<% if obj.tour_price %>
+		<%= obj.tour_price.price1 %>, <%= obj.tour_price.price2 %><br />
+		<%= obj.tour_price.price3 %>, <%= obj.tour_price.price4 %>
+		<% else %>
+		[no price]
+		<% end %>
+	</td>
+	<td><%= obj.tour_setting.days_in_advance if obj.tour_setting %></td>
+	<td><%= obj.tour_setting.last_schedule_date if obj.tour_setting %></td>
+	<td><%= obj.status_text %></td>
+	<td nowrap="nowrap">
+		<%= link_to 'Route', admin_tour_spots_path(obj) %> |
+		<%= link_to_edit obj %> |
+		<%= link_to_hide obj, 'data-confirm' => 'Are you sure to hide/show this Tour?' %>
+	</td>
+</tr>

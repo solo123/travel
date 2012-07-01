@@ -1,0 +1,9 @@
+		<div class='search-block'>
+			<div class='content-block'>
+				<h2>Destination:</h2>
+				<%= form_tag do %>
+					<%= text_field_tag :search_text, '', :size => '10' %>
+					<%= submit_tag 'GO', :class => 'search-button' %>
+				<% end %>
+			</div>
+		</div>

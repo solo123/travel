@@ -1,0 +1,14 @@
+  <tr id="<%= dom_id obj %>" <%= 'class=\'deleted\'' if !obj.status || obj.status < 1 %>>
+      <td><%= obj.id %></td>
+      <td><%= obj.amount %></td>
+      <td><%= obj.refund_order_id %></td>
+      <td><%= obj.pre_voucher_id %></td>
+      <td><%= obj.operator_id %></td>
+      <td><%= obj.expire_date %></td>
+      <td><%= obj.updated_at %></td>
+      <td><%= obj.status %></td>
+    <td class="actions">
+      <%= link_to_edit obj %> |
+      <%= link_to_hide obj, 'data-confirm' => 'Are you sure to hide/show this Voucher?' %>
+    </td>
+  </tr>

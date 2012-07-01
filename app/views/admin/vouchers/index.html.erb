@@ -1,0 +1,33 @@
+<div class='toolbar'>
+  <ul class='actions'>
+    <li>
+    <%= button_link_to 'Add Agent', new_admin_agent_path, {:remote => true, :icon => 'add', :id => 'admin_new_agent'} %>
+    </li>
+  </ul>
+  <br class='clear' />
+</div>
+
+<h1><%= raw "#{t("actions.listing")} #{t(:vouchers)}" %></h1>
+<div id='edit_div' class='dialog-normal'></div>
+<table id='list_vouchers' class="data-list">
+  <thead>
+    <tr>
+        <th><%= t(:id) %></th>
+        <th><%= t(:amount) %></th>
+        <th><%= t(:refund_order_id) %></th>
+        <th><%= t(:pre_voucher_id) %></th>
+        <th><%= t(:operator) %></th>
+        <th><%= t(:expire_date) %></th>
+        <th><%= t(:status) %></th>
+        <th><%= t(:updated_at) %></th>
+        <th>op</th>
+      <th>
+      </th>
+    </tr>
+  </thead>
+<% @collection.each do |c| %>
+  <%= render :partial => 'row', :locals => {:obj => c} %>
+<% end %>
+</table>
+<%= will_paginate(@collection) %>
+

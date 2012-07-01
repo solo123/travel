@@ -1,0 +1,44 @@
+<%= form_for( [:admin, @object], :remote => true) do |f| %>
+  <div class="container">
+  	<div class='span-8'>
+	  <%= f.field_container :full_name do %>
+	  	<%= f.label :full_name %><br />
+	  	<%= f.text_field :full_name %>
+	  <% end %>
+	  <%= f.field_container :user_type do %>
+	  	<%= f.label :user_type %><br />
+	  	<%= f.text_field :user_type %>
+	  <% end %>
+	  <%= f.field_container :status do %>
+	  	<%= f.label :status %><br />
+	  	<%= f.text_field :status %>
+	  <% end %>
+	  </div>
+	  <div class='span-8 last'>
+	  	<% if @object.user %>
+	  	<p>email(login): <%= @object.user.email %></p>
+	  	<p>sign_in_count: <%= @object.user.sign_in_count %></p>
+	  	<p>last_sign_in: <%= @object.user.last_sign_in_at %></p>
+	  	<p>created at: <%= @object.user.created_at %></p>
+	  	<% end %>
+
+	  	Telephones:
+      <%= link_to 'Add', admin_user_infos_path + '/add_tel', :remote => true %>
+      <br /> 
+      <table id='tels' class='compact'>
+        <%= f.fields_for :telephones do |tel_form| %>
+        	<%= render :partial => 'form_tel', :locals => { :f => tel_form} %>
+        <% end %>
+	  	</table>
+	  	<p>Emails:
+	  	</p>
+	  	<p>Addresses:
+	  	</p>
+
+	 	</div>
+	</div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

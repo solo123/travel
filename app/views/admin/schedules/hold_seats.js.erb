@@ -1,0 +1,5 @@
+$("#dialog_hold").dialog('close');
+//alert('seats hold success!');
+
+$('#tabs-<%= @assignment.id %>')
+	.html("<%= escape_javascript(render :partial => 'seat_table', :locals => {:assignment => @assignment}) %>");

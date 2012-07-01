@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>omei-admin</title>
+  <%= favicon_link_tag %>
+
+  <%= stylesheet_link_tag 'blueprint/print', 'media' => 'print' %>
+  <!--[if lt IE 8]>
+    <%= stylesheet_link_tag 'blueprint/ie' %>
+  <![endif]-->  
+
+  <%= stylesheet_link_tag    "admin/admin", :media => "all" %>
+  <%= javascript_include_tag "admin/admin" %>
+  <%= csrf_meta_tags %>
+
+  <%= yield :head %>
+</head>
+<body>
+
+  <div id='page_container'>
+    <div id='page_head'>
+      <div id="progress"><%= image_tag 'admin/progress.gif' %> <%= t(:loading) %>...</div>      
+      <%= render '/admin/shared/main_menu' %>
+
+    </div>
+    <div id='page_breadcrumbs'>
+    </div>
+
+    <div id='page_main'>
+      <div class='contents'>
+
+        <% if flash[:error] %>
+          <div class="flash error"><%= flash[:error] %></div>
+        <% end %>
+        <% if notice %>
+          <div class="flash notice"><%= notice %></div>
+        <% end %>
+
+        <%= yield %>
+      </div>
+    </div>
+
+    <div id='page_foot'>
+    </div>
+  </div>
+</body>
+</html>

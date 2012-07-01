@@ -1,0 +1,47 @@
+<%= form_for( [:admin, @object], :remote => true) do |f| %>
+  <div class="container">
+  	<div class='span-8'>
+	  <%= f.field_container :short_name do %>
+	  	<%= f.label :short_name %><br />
+	  	<%= f.text_field :short_name %>
+	  <% end %>
+	  <%= f.field_container :company_name do %>
+	  	<%= f.label :company_name %><br />
+	  	<%= f.text_field :company_name %>
+	  <% end %>
+	  <%= f.field_container :website do %>
+	  	<%= f.label :website %><br />
+	  	<%= f.text_field :website %>
+	  <% end %>
+	  <%= f.field_container :icon_url do %>
+	  	<%= f.label :icon_url %><br />
+	  	<%= f.text_field :icon_url %>
+	  <% end %>
+		<%= render :partial => 'admin/shared/status', :locals => {:f => f} %> 
+	  </div>
+	  <div class='span-8 last'>
+		  <div>
+		  	<b>Accounts:</b><br />
+		  	<% if @object.agent_account %>
+		  	<table>
+		  		<tr><td>Discount:</td><td><%= @object.agent_account.discount %></td></tr>
+		  		<tr><td>Max credit:</td><td><%= @object.agent_account.max_credit %></td></tr>
+		  		<tr><td>Balance:</td><td><%= @object.agent_account.balance %></td></tr>
+		  	</table>
+		  	<% end %>
+
+		  	<b>Contacts: </b><br />
+		  	<% @object.contacts.each do |c| %>
+		  		<p>
+			  		<%= c.to_s %> | 
+			  		<%= link_to_hide c, 'data-confirm' => 'Are you sure to delete this contact?' %>
+		  		</p>
+		  	<% end %>
+		  </div>
+	 	</div>
+	</div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

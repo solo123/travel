@@ -1,0 +1,25 @@
+<div id='order_head'>
+	<div class='order_number'>
+		<%= image_tag "/barcode/T#{"%06d" % @shop_order.id}" %><br />
+		Tour Order: T<%= "%06d" % @shop_order.id %>
+	</div>
+	<div class='logo'>
+		<%= image_tag 'website/AEtravel.png', :style => 'height:36px;margin-right:10px;' %>
+	</div>
+	<div class='clear'></div>
+</div>
+
+<div id="schedule_title">
+  	<%= icon_link_remote 'document', 'Change Schedule', admin_schedules_path + '/select' %>
+	<% if @shop_order.order_source_type == 'Operates::Schedule' && @shop_order.order_source_id %>
+	<%= render :partial => 'admin/schedules/schedule_title', :locals => {:s => Operates::Schedule.find(@shop_order.order_source_id) } %>
+	<% end %>
+</div>
+
+<div>title
+	State: <%= @shop_order.state %>
+	Created by: <%= @shop_order.created_by %>
+	Operator: <%= @shop_order.operator %>
+	Created at: <%= @shop_order.created_at %>
+	Updated at: <%= @shop_order.updated_at %>
+</div>

@@ -1,0 +1,51 @@
+<%= render :partial => 'admin/shared/product_sub_menu' %>
+
+<div class='toolbar'>
+  <ul class='actions'>
+    <li id="new_photo_link">
+      <%= button_link_to t("new_photo"), new_object_url, {:remote => true, :icon => 'add', :id => 'admin_new_photo'} %>
+    </li>
+  </ul>
+  <br class='clear' />
+</div>
+
+<h1><%= "#{t("actions.listing")} #{t("photos")}" %></h1>
+
+<div id="new_photo"></div>
+
+<table class="index" id='listing_photos'>
+  <tr>
+      <th><%= t("sku") %></th>
+      <th><%= t("abc") %></th>
+      <th><%= t("ddd") %></th>
+    <th>
+    </th>
+  </tr>
+<% @collection.each do |p| %>
+  <tr id="<%= dom_id p %>">
+      <td><%= p.id %></td>
+      <td><%= p.title %></td>
+    <td class="actions">
+        <%= link_to_edit p, :class => 'edit'   %>
+        &nbsp;
+        <%= link_to_clone p, :class => 'clone' %>
+        &nbsp;
+        <%= link_to_delete p  %>
+    </td>
+  </tr>
+<% end %>
+</table>
+<%= will_paginate(:previous_label => "&#171; #{t('previous')}", :next_label => "#{t('next')} &#187;") %>
+
+<% content_for :sidebar do %>
+    <%= form_for [:admin, @search] do |f| %>
+      <div class="box">
+        <h3><%= t(:search) %></h3>
+
+          <p class="form-buttons">
+            <%= button t("search") %>
+          </p>
+      </div>
+    <% end %>
+<% end %>
+

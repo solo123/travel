@@ -1,0 +1,24 @@
+<%= form_for( @object, :url => post_path, :remote => true) do |f| %>
+	<%= render :partial => 'admin/shared/title', :locals => {:f => f} %>
+  <div class="container">
+  	<div class='span-8'>
+	  <%= f.field_container :tour_type do %>
+	  	<%= f.label :tour_type %><br />
+	  	<%= f.text_field :tour_type %>
+	  <% end %>
+	  </div>
+	  <div class='span-8 last'>
+	  <%= f.field_container :days do %>
+	  	<%= f.label :days %><br />
+	  	<%= f.text_field :days %>
+	  <% end %>
+	  </div>
+	</div>
+	<%= render :partial => 'tour_setting', :locals => {:f => f} %>
+	<%= render :partial => 'tour_price', :locals => {:f => f} %>
+	<%= render :partial => 'admin/shared/status', :locals => {:f => f} %>	
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

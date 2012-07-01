@@ -1,0 +1,63 @@
+<%= content_for :head do %>
+	<%= javascript_include_tag 'flickr/jquery.fleeckr' %>
+	<%= stylesheet_link_tag 'flickr/fleeckr' %>
+	<% if @object && @object.photo %>
+<script type="text/javascript"> 
+$(function(){
+	refresh_thumbs();
+});
+function set_icon(id){
+	$.get(location.href, {photo_id: id});
+}
+function refresh_thumbs(){
+	$("#photos").html('').jfleeckr({
+		apikey: '1e45d3cbe81db329e29dbbf8c966540b',
+		extra: 'photoset_id=<%= @object.photo.photoset %>',
+		method: 'flickr.photosets.getPhotos',
+		itemTemplate: '<div class="fleeckr-image"><a href="{{image_b}}" rel="example1" title="{{title}}"><img alt="{{title}}" src="{{image_s}}" /></a><br /><a href="javascript:set_icon({{id}})" title="{{title}}">Set as icon</a></div>'
+	},
+		function(data){
+		}
+	);	
+}
+</script>	
+	<% end %>
+<% end %>
+
+<h2>show [<%= @object.title if @object %>]</h2>
+<%#= render :partial => 'admin/shared/product_sub_menu' %>
+<% if @object %>
+<div class='crumb'>
+	<%= link_to 'Destinations', 'javascript:history.go(-1)' %> &gt;
+	<%= @object.title %>
+</div>
+<h1><%= @object.title %>, <%= @object.title_cn %></h1>
+
+<% if @object.photo %>
+<div>
+	<%= image_tag @object.photo.photo_m, :id => 'dest_icon', :style => 'float:left;margin-right:10px;' %>
+
+	<div style='float:left;'>
+		<div style='float:left;width:48%;margin-right:10px;'><%= @object.description.en %></div>
+		<div style='float:left;width:48%;'><%= @object.description.cn %></div>
+		<div class='clear'></div>
+	</div>
+	<div class='clear'></div>
+</div>
+<p>
+<%= link_to 'Photos on Flickr.com', 'http://www.flickr.com/photos/organize/?start_tab=one_set' + @object.photo.photoset, :target => '_blank' %> | 
+<%= link_to 'Upload', 'http://www.flickr.com/photos/upload/', :target => '_blank' %> |
+<%= link_to 'Refresh', 'javascript:refresh_thumbs()' %>
+</p>
+<div>
+	<div id='photos'></div>
+	<div class='clear'></div>
+</div>
+
+<% else %>
+<p>
+	<%= link_to 'Upload photo', 'javascript:alert("create photoset.")' %>
+</p>
+<% end %>
+
+<% end %>

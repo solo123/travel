@@ -1,0 +1,11 @@
+		<h2>Photo Gallery</h2>
+		<ul class="hp-galleries clearfix">
+			<% Ad.photos('page_gallery').each do |g| %>
+			<li>
+				<a href="<%= g.url %>"><%= image_tag g.image_url %></a>
+				<div class="hp-gallery-title">
+					<a href="<%= g.url %>"><%= g.info %></a>
+				</div>
+			</li>
+			<% end %>
+		</ul>

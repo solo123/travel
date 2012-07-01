@@ -1,0 +1,89 @@
+$("#dialog")
+	.html("<%= escape_javascript(render(:partial => "new_payment"))%>");
+
+$('#tabs-payment').tabs({
+	selected: 0,
+	select: function(e,ui){
+		$('#pay_method').val(ui.panel.attributes['tag'].value);
+	}
+});
+	
+$('#dialog')
+	.dialog('option', 'title', 'Payment')
+	.dialog('open');
+
+init_pay_cash();
+init_pay_credit_card();
+init_pay_check();
+
+function init_pay_cash(){
+	$('#balance,#payment_amount,#balance_after,#pay_cash_amount,#pay_cash_change').addClass('pay_fonts');
+	$('#payment_amount,#pay_cash_amount').css('font-size', '30px').css('width','100px');
+	$('#cash_casher_id').val(<%= @current_employee.id %>);
+	$('#button_casher_by_me').click(function(){ $('#cash_casher_id').val(<%= @current_employee.id %>); });
+	$('#pay_cash_amount').focus();
+		
+	$('#pay_cash_amount').keyup(function(){
+		var b = parseFloat($('#balance').text());
+		var p = parseFloat($('#pay_cash_amount').val());
+		var c = 0;
+		if (p > b) c = p-b;
+		$('#pay_cash_change').text(c);
+		if (c==0){
+			$('#pay_cash_amount').css('color', 'black');
+			$('#pay_cash_change').css('color', 'blue');
+			$('#payment_amount').val(p);
+		}
+		else {
+			$('#pay_cash_amount').css('color', 'green');
+			$('#pay_cash_change').css('color', 'green');
+			$('#payment_amount').val(b);
+		}
+			 
+	});
+}
+
+function init_pay_credit_card(){
+	$('#credit_card_amount').keyup(function(){
+		var b = parseFloat($('#balance').text());
+		var p = parseFloat($('#credit_card_amount').val());
+		var c = b-p;
+		$('#balance_after').text(c);
+		$('#payment_amount').val(p);
+		if (c<0){
+			$('#credit_card_amount').css('color', 'red');
+			$('#balance_after').css('color', 'red');
+		}
+		else if(c==0) {
+			$('#credit_card_amount').css('color', 'green');
+			$('#balance_after').css('color', 'green');
+		}
+		else {
+			$('#credit_card_amount').css('color', 'black');
+			$('#balance_after').css('color', 'blue');
+		}
+	});	
+}
+
+function init_pay_check(){
+	$('#check_amount').keyup(function(){
+		var b = parseFloat($('#balance').text());
+		var p = parseFloat($('#check_amount').val());
+		var c = b-p;
+		$('#balance_after').text(c);
+		$('#payment_amount').val(p);
+		if (c<0){
+			$('#check_amount').css('color', 'red');
+			$('#balance_after').css('color', 'red');
+		}
+		else if(c==0) {
+			$('#check_amount').css('color', 'green');
+			$('#balance_after').css('color', 'green');
+		}
+		else {
+			$('#check_amount').css('color', 'black');
+			$('#balance_after').css('color', 'blue');
+		}
+	});	
+}
+

@@ -1,0 +1,131 @@
+<%= form_for :payment, :url => admin_payments_path, :remote => true do |f| %>
+<%= f.hidden_field :bill_type, :value => 'Operates::Order' %>
+<%= f.hidden_field :bill_id, :value => params[:order_id] %>
+<p>
+	Balance before: <label id='balance'><%#= @shop_order.price.balance_amount %></label>
+	&nbsp;&nbsp;
+  Pay Amount: <%= f.text_field :amount, :readonly => 'readonly' %>
+  &nbsp;&nbsp;
+  Balance after: <label id='balance_after'><%#= @shop_order.price.balance_amount %></label>
+</p>
+<p>
+	<%= hidden_field_tag :pay_method, 'cash' %>
+</p>
+<div>
+	<%= button_link_to 'By Credit card', 'payments/pay_credit_card', {:icon => 'add', 'data-remote' => true} %>
+</div>
+
+<div id='tabs-payment'>
+	<ul>
+		<li><a href='#tab-cash'>Cash</a></li>
+		<li><a href='#tab-cc'>Credit Card</a></li>
+		<li><a href='#tab-check'>Check</a></li>
+		<li><a href='#tab-voucher'>Credit Voucher</a></li>
+		<li><a href='#tab-pr'>Company PR</a></li>
+	</ul>
+	<div id='tab-cash' tag='cash' style="height:100px;">
+		<table style="width:auto;">
+			<tr>
+				<td style="padding-top:20px;text-align: right;">Pay:</td>
+				<td><input type='text' id='pay_cash_amount' /></td>
+				<td style="padding-top:20px;text-align: right;">Change:</td>
+				<td><label id='pay_cash_change'>0.00</label></td>
+			</tr>
+			<tr>
+				<td style="text-align: right;">Casher:</td>
+				<td>
+					<%#= render :partial => 'admin/employees/select', :locals => {:employee_field => 'cash[casher_id]'} %>
+				</td>
+				<td>
+					<input type="button" id='button_casher_by_me' value="by me" />
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id='tab-cc' tag='credit_card' >
+		<table style="width:auto;">
+			<tr>
+				<td>Full name:</td>
+				<td><%= text_field_tag 'credit_card[full_name]' %></td>
+			</tr>
+			<tr>
+				<td>Card type:</td>
+				<td><%= select('credit_card','card_type', %w[Visa Master AE]) %></td>
+			</tr>
+			<tr>
+				<td>Card Number:</td>
+				<td><%= text_field_tag 'credit_card[card_number]' %></td>
+			</tr>
+			<tr>
+				<td>Valid date:</td>
+				<td><%= text_field_tag 'credit_card[valid_date]' %></td>
+			</tr>
+			<tr>
+				<td>CSC:</td>
+				<td><%= text_field_tag 'credit_card[csc]' %></td>
+			</tr>
+			<tr>
+				<td>Amount:</td>
+				<td><%= text_field_tag 'credit_card[amount]' %></td>
+			</tr>
+			<tr>
+				<td>Prof code:</td>
+				<td><%= text_field_tag 'credit_card[prof_code]' %></td>
+			</tr>
+			<tr>
+				<td>Service fee:</td>
+				<td><%= text_field_tag 'credit_card[service_fee]' %></td>
+			</tr>
+			<tr>
+				<td>Total amount:</td>
+				<td><%= text_field_tag 'credit_card[total_amount]' %></td>
+			</tr>
+		</table>
+	</div>
+	<div id='tab-check' tag='check' style='height:100px;'>
+		<table style="width:auto;">
+			<tr>
+				<td>Amount:</td>
+				<td><%= text_field_tag 'check[amount]' %></td>
+			</tr>
+			<tr>
+				<td>Check number:</td>
+				<td><%= text_field_tag 'check[check_number]' %></td>
+			</tr>
+		</table>
+	</div>
+	<div id='tab-voucher' tag='voucher' style='height:100px;'>
+		<table style="width:auto;">
+			<tr>
+				<td>Voucher#</td>
+				<td><%= text_field_tag 'voucher[voucher_number]'%></td>
+			</tr>
+			<tr>
+				<td>Amount:</td>
+				<td><%= text_field_tag 'voucher[amount]'%></td>
+			</tr>
+		</table>
+	</div>
+	<div id='tab-ap' tag='company_receivable' style='height:100px;'>
+		<p>
+			Company:
+		</p>
+		<p>
+			Company commission: <%= text_field_tag 'company_receivable[commission]' %>
+		</p>
+		<p>
+			Amount: <%= text_field_tag 'company_receivable[amount]' %>
+		</p>
+		<p>
+			Company order# <%= text_field_tag 'company-receivable[related_order_number]' %>
+		</p>
+	</div>
+</div>
+<br />
+<p>
+	Remark: <%= f.text_area :remark, :style => 'height:50px;' %>
+</p>
+<p>
+  <%= f.submit %>
+</p>
+<% end %>

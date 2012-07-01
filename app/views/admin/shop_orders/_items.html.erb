@@ -1,0 +1,33 @@
+<%= icon_link_remote 'copy', 'Add Items', edit_admin_shop_order_path(@shop_order) + '?p=add_item' %>
+
+	<% if @shop_order.items.count > 0 %>
+	<table>
+		<tr>
+			<th>Room (adult/child)</th>
+			<th>Amount</th>
+			<th>remark</th>
+			<th>Created at</th>
+		</tr>
+		<% @shop_order.items.each do |item| %>		
+		<tr>
+			<td><%= item.room_number %>(<%= item.num_adult %>/<%= item.num_child %>)</td>
+			<td><%= item.amount %></td>
+			<td><%= item.remark %></td>
+			<td><%= item.created_at %></td>
+		</tr>
+		<% end %>
+	</table>
+	<% end %>
+
+  <% if @shop_order.price %>
+    <div>
+      <p>
+      	<b>Price:</b>
+        Rooms: <%= @shop_order.price.num_rooms %>
+        Adult: <%= @shop_order.price.num_adult %>
+        Child: <%= @shop_order.price.num_child %>
+        Amount: <%= @shop_order.price.total_amount %>
+      </p>
+      
+    </div>
+  <% end %>

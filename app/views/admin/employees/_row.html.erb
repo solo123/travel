@@ -1,0 +1,14 @@
+  <tr id="<%= dom_id obj %>" <%= 'class=\'deleted\'' if obj.locked_at %>>
+      <td><%= obj.id %></td>
+      <td><%= obj.agent_id %></td>
+      <td><%= obj.nickname %></td>
+      <td><%= obj.employ_date %></td>
+      <td><%= obj.ssn %></td>
+      <td><%= obj.birthday %></td>
+      <td><%= obj.locked_at %></td>
+    <td class="actions">
+      <%= link_to_show obj %> |
+      <%= link_to_edit obj %> |
+      <%= link_to_hide obj, 'data-confirm' => 'Are you sure to hide/show this Employee?' %>
+    </td>
+  </tr>

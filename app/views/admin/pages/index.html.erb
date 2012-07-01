@@ -1,0 +1,53 @@
+<% content_for :head do %>
+
+<style type="text/css" >
+	.deleted {font-style:italic;color:#666;text-decoration:line-through;}
+</style>
+<% end %>
+
+
+
+<div class="toolbar">
+  <ul class="actions">
+    <li>
+      <%= button_link_to 'Refresh Ads', 'pages/refresh', {:remote => true, :icon => 'add', :id => 'admin_new_page'} %>
+    </li>
+    <li>
+      <%= button_link_to 'New Page', 'pages/new', {:remote => true, :icon => 'add', :id => 'admin_new_page'} %>
+    </li>
+  </ul>
+  <br class="clear">
+</div>
+
+<h1><%= "Pages List" %></h1>
+
+<div id="edit_div"></div>
+
+<table class="index" id='pages'>
+  <tr>
+      <th>permalink</th>
+      <th>title</th>
+      <th>updated</th>
+	    <th>Action</th>
+  </tr>
+<% @collection.each do |page| %>
+	<%= render :partial => 'page', :locals => { :page => page } %>
+<% end %>
+</table>
+<%= will_paginate(@collection) %>
+
+<% content_for :sidebar do %>
+    <%= form_tag admin_pages_path do |f| %>
+      <div class="box">
+        <h3><%= t(:search) %></h3>
+
+        <%- locals = {:f => f} %>
+  
+
+          <p class="form-buttons">
+            <%= button t("search") %>
+          </p>
+      </div>
+  <% end %>
+<% end %>
+

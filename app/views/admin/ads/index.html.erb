@@ -1,0 +1,55 @@
+<% content_for :head do %>
+<script type="text/javascript">
+$(function(){
+	$('#edit_div').dialog({ autoOpen: false, width: 600});
+});
+</script>
+<% end %>
+<%= render :partial => 'admin/shared/configuration_menu' %>
+
+<div class="toolbar">
+  <ul class="actions">
+    <li>
+      <%= button_link_to 'Refresh Ads', 'ads/refresh', {:icon => 'add', :id => 'admin_refresh'} %>
+    </li>
+  </ul>
+  <br class="clear">
+</div>
+
+<h1>Ads</h1>
+<div class='images'>
+	<% @ads.each do |ad| %>
+		<%= render :partial => 'ad', :locals => {:ad => ad} %>
+	<% end %>
+	<div class='clear'></div>
+</div>
+
+<p>
+<a href='http://www.flickr.com/photos/65483249@N05/sets/72157628106287811' target='_blank'>[Upload Images]</a>
+</p>
+
+<h1>Banners</h1>
+<div class='images'>
+  <% @banners.each do |banner| %>
+    <%= render :partial => 'banner', :locals => {:banner => banner} %>
+  <% end %>
+  <div class='clear'></div>
+</div>
+
+<p>
+<a href='http://www.flickr.com/photos/65483249@N05/sets/72157628106287811' target='_blank'>[Upload Images]</a>
+</p>
+
+<h1>Gallery</h1>
+<div class='images'>
+  <% @gallery.each do |ad| %>
+    <%= render :partial => 'ad', :locals => {:ad => ad} %>
+  <% end %>
+  <div class='clear'></div>
+</div>
+
+<p>
+<a href='http://www.flickr.com/photos/65483249@N05/sets/72157628188227587' target='_blank'>[Upload Images]</a>
+</p>
+
+<div id="edit_div" style="display:none;"></div>

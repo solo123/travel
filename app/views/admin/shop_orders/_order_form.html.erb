@@ -1,0 +1,21 @@
+<%= form_for( @shop_order, :url => admin_shop_order_path(@shop_order), :remote => true) do |f| %>
+
+  <p>
+  Order: <%= @shop_order.id %>
+  </p>
+	<%= f.fields_for :items do |item| %>
+<p>
+	Room #: 
+	Adult: <%= item.text_field :num_adult, :size => 2 %> 
+	Child: <%= item.text_field :num_child, :size => 2 %>
+  <% unless item.object.new_record? %>
+    <%= item.check_box :_destroy %>
+    <%= item.label :_destroy, 'Remove' %>
+  <% end %>
+</p>
+	<% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

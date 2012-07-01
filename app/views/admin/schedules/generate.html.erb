@@ -1,0 +1,81 @@
+
+<% if !@gen_schedule %>
+<div class='toolbar'>
+  <ul class='actions'>
+  	<li>
+  		Last generate schedule at: <%= Spree::Config[:schedule_generated_date] %>
+  		&nbsp;&nbsp;
+  	</li>
+    <li id="generate_schedule_link">
+      <%= button_link_to "Generate schedules", 'javascript:start_generate_schedules();', { :icon => 'add', :id => 'generate_schedule'} %>
+    </li>
+  </ul>
+  <br class='clear' />
+</div>
+<% end %>
+<h1>Gen schedules</h1>
+<% @messages.each do |msg| %>
+<ul class="gen">
+	<li class="gen-tour gen-new"><%= msg[0] %></li>
+	<li class="gen-title"><%= msg[1] %></li>
+	<li class="gen-days">
+		<ul>
+			<% msg[2].each do |d| %>
+			<li><%= d %></li>
+			<% end %>
+		</ul>
+	</li>
+	<li class="clear"></li>
+</ul>
+<% end %>
+
+<div class='fixed' id='operate_box'>
+  <%= button_link_to 'Stop Generate!', 'javascript:cancle_operate();', { :icon => 'stop', :id => 'stop_generate'} %>
+</div>
+<%= content_for :head do %>
+<script type="text/javascript">
+var cancle_processing = false;
+function generate_schedules(){
+	var t = $(".gen-new:first");
+	if (cancle_processing || t.length < 1 ) {
+		$('#operate_box').hide();
+		return;
+	}
+	t.removeClass('gen-new').addClass('gen-current')
+		.parent().addClass('do-current').animate({backgroundColor:'#f4b4b4'},1000);
+	var ids = t.next().next().find('ul li').map(function(){return $(this).text();}).get().join(',');
+	$('body').animate({scrollTop: t.offset().top-160}, 1000);
+	
+	$.get('/admin/schedules/generate',{tour: t.text(), ids: ids}, function(data){
+		var t = $(".gen-current:first");
+		t.text(data).removeClass('gen-current')
+			.parent().removeClass('do-current').addClass('do-done').animate({backgroundColor:'#90ee90'},500);
+		generate_schedules();
+	});
+}
+function start_generate_schedules(){
+	cancle_processing=false;
+	$('#operate_box').show();
+	generate_schedules();
+}
+function cancle_operate(){
+	cancle_processing=true;
+	$('#operate_box').hide();
+}
+</script>
+<style type="text/css">
+.gen {border:solid 1px green;padding:4px;}
+.gen li {list-style:none;}
+.gen .gen-tour {float:left;font-weight:bold;}
+.gen .gen-title {}
+.gen .gen-days li {float:left;margin-right:16px;}
+
+.fixed {padding: 6px; right: 60px; bottom:100px; width:200px; height:40px; background: #009999; 
+ border:#336699 1px bold; position:fixed; z-index:2010;
+ -moz-border-radius: 10px;
+-webkit-border-radius: 10px;
+text-align: center;
+ }
+#operate_box {display:none;}
+</style>
+<% end %>

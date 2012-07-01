@@ -1,0 +1,14 @@
+@import 'color_define';
+
+.data-field {
+	font-size:110%;
+}
+.data-2num{
+	width:34px;
+}
+.data-date{
+	width: 100px;
+}
+.error{
+	background-color: $bg_color_hot;
+}

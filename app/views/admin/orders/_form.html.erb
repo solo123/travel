@@ -1,0 +1,50 @@
+<%= form_for([:admin, @object], :remote => true) do |f| %>
+  <div class="container">
+    <div class='span-8'>
+    <p>
+      order_number: <%= @object.order_number %>
+    </p>
+    <%= f.field_container :order_source_type do %>
+      <%= f.label :order_source_type %><br />
+      <%= f.text_field :order_source_type %>
+      <%= button_link_to 'Select Schdule', '/admin/schedules/select', {:icon => 'add', 'data-remote' => true} %>
+    <% end %>
+    <%= f.field_container :order_source_id do %>
+      <%= f.label :order_source_id %><br />
+      <%= f.text_field :order_source_id %>
+    <% end %>
+    <%= f.fields_for :order_customer do |customer| %>
+      <p>
+        <%= customer.label :customer_id %><br />
+        <%= customer.text_field :customer_id %>
+        <%= customer.hidden_field :full_name %>
+        <%= button_link_to 'Select Customer', '/admin/members/select', {:icon => 'add', 'data-remote' => true} %>
+      </p>
+    <% end %>
+    <%= f.fields_for :order_option do |option| %>
+      <p>
+        <%= option.label :pickup %><br />
+        <%= option.text_field :pickup %>
+      </p>
+    <% end %>
+
+    </div>
+    <div class='span-8 last'>
+      <% unless @object.order_items.count > 0 
+            @object.order_items.build
+         end        
+      %>
+      <%= f.fields_for :order_items do |item| %>
+        <div>
+          <p>Room number:<%= item.text_field :room_number %></p>
+          <p>Adult:<%= item.text_field :num_adult %></p>
+          <p>Child:<%= item.text_field :num_child %></p>
+          <p>Amount:<%= item.text_field :amount %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>  
+<% end %>

@@ -1,0 +1,12 @@
+<ul class="site-nav clear">
+  <li id='menu_home' class="menu<%= ' current' if controller_name == 'home' %>"><a href="/">Home</a></li>
+  <li id='menu_dest' class="menu<%= ' current' if controller_name == 'destinations' %>"><a href="/destinations">Destination</a></li>
+  <li id='menu_bus' class="menu<%= ' current' if controller_name == 'tours' && params[:id] == 'bus' %>"><a href="/tours/bus">Bus Tour</a></li>
+  <li id='menu_package' class="menu<%= ' current' if controller_name == 'tours' && params[:id] == 'package' %>"><a href="/tours/package">Package</a></li>
+  <li id='menu_cruise' class="menu<%= ' current' if controller_name == 'tours' && params[:id] == 'cruise' %>"><a href="/tours/cruise">Cruise</a></li>
+  <li class="menu"><a href="/pages/airline-tickets">Airline Ticket</a></li>
+  <li class="menu"><a href="/pages/hotel">Hotel</a></li>
+  <li class="menu<%= ' current' if controller_name == 'pages' && params[:id] == 'rent-bus' %>"><a href="/pages/rent-bus">Rent Bus</a></li>
+  <li class="last menu<%= ' current' if controller_name == 'pages' && params[:id] == 'about-us' %>"><a href="/pages/about-us">About Us</a></li>
+  <div class="clear" ></div>
+</ul>

@@ -1,0 +1,56 @@
+<% if params[:p] == 'customer' %>
+	$("#dialog").html("<%= escape_javascript(render(:partial => "edit_customer"))%>");
+	show_customer_dialog();
+
+<% elsif params[:p] == 'add_item' %>
+$("#dialog")
+	.html("<%= escape_javascript(render(:partial => "new_item"))%>");
+<% elsif params[:p] == 'order_seats' %>
+$('#dialog')
+	.html("<%= escape_javascript(render(:partial => 'order_form')) %>");
+<% end %>
+$('#dialog')
+	.dialog('option', 'title', 'Customer (select)')
+	.dialog('open');
+
+function show_customer_dialog(){
+	$("#search_customer")
+		.autocomplete("/admin/customers/search", { 
+			width: 300,
+			selectFirst: true,
+			autoFill: true,
+			delay: 1000,
+			formatItem: function(row, i, max, term){
+				return row[0] + "# " + row[1] + ' ' + row[2];
+			},
+			formatResult: function(row){
+				return row[1];
+			}
+		})
+	.result(function(event,data,formatted){
+		if (data) {
+			$('#operates_order_customer_attributes_customer_id').val(data[0]);
+			return;
+			
+			$.get('/admin/tours/' + data[0] + '/get_schedules', function(data){
+				var vds = eval(data);
+				$('#departure_date')
+				.datepicker({
+					numberOfMonths: 3,
+					showButtonPanel: false,
+					minDate: 0,
+					maxDate: new Date(vds[vds.length-1]),
+					dateFormat: 'yy-mm-dd',
+					beforeShowDay: function(date){
+						var s = date_tostring(date)
+						if ($.inArray(s,vds) < 0)
+							return [0, '', null];
+						else
+							return [1, '', s];	
+					}
+				}).show(); 
+			});
+		}
+	});
+
+}

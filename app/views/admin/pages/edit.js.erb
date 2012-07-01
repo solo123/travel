@@ -1,0 +1,5 @@
+$("#edit_div")
+	.html("<%= escape_javascript(render(:partial => "form"))%>")
+	.dialog('option', 'title', 'Page ID: <%= @page.id %> (edit)').dialog('open');
+
+$('#infos_page_description_attributes_en, #infos_page_description_attributes_cn').xheditor({tools: 'Blocktag,Bold,Italic,Underline,|,List,Link,Img,|,Source'});

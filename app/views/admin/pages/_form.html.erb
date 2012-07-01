@@ -1,0 +1,38 @@
+<% @page.build_description if !@page.description %>
+<%= form_for(@page, :url => admin_page_path(@page), :remote => true) do |f| %>
+	<div class="yui-g">
+		<div class="yui-u first">
+      <div class='content'>
+      <%= f.field_container :permalink do %>
+        <%= f.label :permalink, t("permalink") %> <span class="required">*</span><br />
+        <%= f.text_field :permalink, :class => 'fullwidth title'  %>
+        <%= f.error_message_on :permalink %>
+      <% end %>
+  		<%= f.field_container :meta_keywords do %>
+		    <%= f.label :meta_keywords, t("meta_keywords")%><br />
+		    <%= f.text_field :meta_keywords, :class => 'fullwidth' %>
+		  <% end %>
+      </div>
+  	</div>
+
+  	<div class="yui-u">
+      <div class='content'>
+      <%= f.field_container :title do %>
+        <%= f.label :title, t("title") %> <span class="required">*</span><br />
+        <%= f.text_field :title, :class => 'fullwidth title'  %>
+        <%= f.error_message_on :title %>
+      <% end %>
+  		<%= f.field_container :meta_description do %>
+		    <%= f.label :meta_description, t("meta_description")%><br />
+		    <%= f.text_field :meta_description, :class => 'fullwidth' %>
+		  <% end %>
+      </div>
+  	</div>
+  </div>
+	<%= render :partial => 'admin/shared/description', :locals => {:f => f} %>
+	<%= render :partial => 'admin/shared/status', :locals => {:f => f} %>  
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

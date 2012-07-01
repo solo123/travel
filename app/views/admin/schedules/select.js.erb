@@ -1,0 +1,29 @@
+$("#select_schedule_div")
+	.html("<%= escape_javascript(render(:partial => "select_form"))%>")
+	.dialog('open');
+
+$( "#tour_select" ).autocomplete({
+	source: "/admin/tours/search",
+	minLength: 2,
+	select: function( event, ui ) {
+		if (ui.item) {
+			$('#tour_id').val(ui.item.id);
+			$('#departure_date').val('');
+			$.ajax('tours/' + ui.item.id + '/dates.js');
+		}
+	}
+});
+
+$('#tour_select').click(function(){
+	$(this).select();
+});
+
+
+function date_tostring(d){
+	var m = d.getMonth() + 1;
+	if (m < 10)
+		m = "0" + m;
+	else
+		m = '' + m;
+	return d.getFullYear() + '.' + m + '.' + d.getDate();		
+}

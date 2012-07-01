@@ -1,0 +1,130 @@
+<% content_for :head do %>
+<%= javascript_include_tag 'jquery-ui', 'store/order' %>
+<%= stylesheet_link_tag 'jqueryui/jquery-ui' %>
+
+<%= javascript_tag do %>
+	var valid_days = '<%= @datelist %>';
+	var max_days = <%= @max_date %>;
+	var tour_id = 1;
+
+	var room_count = 1;
+<% end %>
+<% end %>
+<%= form_tag 'order', :remote => true do %>
+	<div>
+		<%= hidden_field_tag :tour_id, @tour.id %>
+		<%= hidden_field_tag :rooms, '', :id => 'inp_rooms' %>
+
+		<h2 style='float:left;'>Order: <%= @tour.title %></h2>
+		<a href=''>Choose another tour</a>
+		<div class='data-block clear'>
+		<p>
+			Departure date: <br />
+			<%= text_field_tag :departure, params[:departure_date], :class => 'data-field data-date' %>
+		</p>
+		</div>
+		<div id='prices' class='data-block'>
+		</div>
+		<div class='data-block color-block'>
+			<div class='content-block'>
+				<div style='width:120px;float:left;'>
+				Rooms: 
+				<select id='rooms_num' name="rooms_num">
+	        <option value="1">1</option>
+	        <option value="2">2</option>
+	        <option value="3">3</option>
+	        <option value="4">4</option>
+	        <option value="5">5</option>
+	        <option value="6">6</option>
+	        <option value="7">7</option>
+	        <option value="8">8</option>
+	        <option value="9">9+</option>
+	      </select>
+				</div>
+				<div id='rooms' style='float:left;'>
+					<div class='a_room'>
+						Room 1:
+						Adult
+						<select id="num" name="adult_num[]">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+						</select>
+						Child
+						<select id="num" name="child_num[]">
+							<option value="0">0</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+						</select>
+						<span class="price"></span>
+					</div>
+			  </div>
+			  <div class='clear'></div>
+			</div>
+	  </div>
+		
+		<div class='data-block'>
+			Pickup: <br />
+			<ul>
+				<li>
+					<input id='pickup_flushing' name='pickup' type='radio' value='flushing' />
+					<label for='pickup_flushing'>7:00am Flushing, NY-ff</label>
+				</li>
+				<li>
+					<input id='pickup_chinatown' name='pickup' type='radio' value='chinatown' />
+					<label for='pickup_chinatown'>8:00am Chinatown, NY-ff</label>
+				</li>
+		</div>
+	</div>
+	<div class='data-block'>
+	<%= link_to 'Caculate Tour Fares', 'javascript:void(0)', :class => 'color-button', :id => 'btn_caculate' %>
+	</div>
+
+
+	<div id='order_step2' style='display:none;' class='content-block light-block ad-block'>
+		<div class='data-block'>
+			<h2>Total Fares:</h2>
+			<label id='total_fares'>$0.00</label>
+		</div>
+		<div class='data-block'>
+			<h2>Credit Card Info</h2>
+			<p>
+				Name:<br />
+				<%= text_field_tag :name, '', :class => 'data-field' %>
+			</p>
+			<p>
+				Card number:<br />
+				<%= text_field_tag :card_number, '', :class => 'data-field' %>
+			</p>
+			<p>
+				Valid date:<br />
+				<%= text_field_tag :valid_date_month,'', :class => 'data-field data-2num' %>
+				/
+				<%= text_field_tag :valid_date_year, '', :class => 'data-field data-2num' %>
+			</p>
+			<p>
+				Secure number:<br />
+				<%= text_field_tag :scs, '', :class => 'data-field' %>
+			</p>
+		</div>
+	</div>
+
+	<div>
+		<div class='data-block'>
+			<h2>Billing Address</h2>
+			<ul>
+				<% @addresses.each_with_index do |address, index| %>
+				<li>
+					<%= check_box_tag "address[#{index}]", 1, false %>
+					<%= label_tag "address[#{index}]", address.address1 %>
+				</li>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+	<p>
+		<%= submit_tag 'submit' %>
+	</p>
+<% end %>

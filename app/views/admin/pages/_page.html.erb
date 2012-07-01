@@ -1,0 +1,10 @@
+<tr id="<%= dom_id page %>" <%= 'class=\'deleted\'' if page.status && page.status < 1 %>>
+  <td><%= page.permalink %></td>
+  <td><%= page.title %></td>
+  <td><%= page.updated_at %></td>
+  <td class="actions">
+		<%= link_to 'Edit', edit_admin_page_path(page), :remote => true %>
+    &nbsp;
+    <%= link_to 'Delete', admin_page_path(page), :remote => true unless page.deleted?  %>
+  </td>
+</tr>

@@ -1,0 +1,6 @@
+$("#dialog")
+	.html("<%= escape_javascript(render(:partial => "form"))%>")
+	.dialog('option', 'title', 'New Spot *')
+	.dialog('open');
+
+$('.html-editor').xheditor({tools: 'Blocktag,Bold,Italic,Underline,|,List,Link,Img,|,Source'});	

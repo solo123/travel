@@ -1,0 +1,54 @@
+<% content_for :head do %>
+<script type='text/javascript'>
+function set_schedule(schedule_id){
+  $('#order_order_source_type').val('Schedule');
+  $('#order_order_source_id').val(schedule_id);
+  $('#select_schedule_div').dialog('close');
+}
+function set_member(){
+  $('#order_order_customer_attributes_customer_id').val($('#member_id').val());
+  $('#order_order_customer_attributes_full_name').val($('#member_select').val());
+
+  $('#select_customer_div').dialog('close');
+}
+</script>
+<% end %>
+
+<div class="toolbar">
+  <ul class="actions">
+    <li>
+      <%= form_for( @search, :url => admin_orders_path ) do |f| %>
+      <%= f.label :order_number_contains, "Title" %>
+      <%= f.text_field :order_number_contains, :size => 15 %> &nbsp;
+      <%= button 'Search' %>
+      <% end %>
+    </li>
+    <li>
+      <%= button_link_to 'New Order', 'orders/new', {:icon => 'add', 'data-remote' => true} %>
+    </li>
+  </ul>
+  <br class="clear">
+</div>
+<h1><%= t("listing_orders") %></h1>
+<div id='edit_div' class='dialog-normal'></div>
+<div id='select_schedule_div' class='dialog-normal'></div>
+<div id='select_customer_div' class='dialog-normal'></div>
+<table class="data-list" id='list_orders'>
+  <thead>
+    <tr>
+        <th>Order number</th>
+        <th>Customer</th>
+        <th>Order type</th>
+        <th>Created</th>
+        <th>State</th>
+        <th>op</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @collection.each do |order| %>
+    <%= render :partial => 'row', :locals => {:obj => order} %>
+  <% end %>
+  </tbody>
+</table>
+<%= will_paginate(@collection) %>
+

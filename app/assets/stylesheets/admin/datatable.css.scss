@@ -1,0 +1,50 @@
+@import 'def_colors';
+
+table.data-list {
+	thead{ background-color: $bg3;color:white;
+		th {background-color: $bg3;border:solid 1px $bd1; text-align:center;
+			a, a:link, a:visited {color: white;}
+		}
+	}
+	border-width: 1px;
+	border-style: solid;
+	border-color: $bd1;
+	border-collapse: collapse;
+	width: 100%;
+	tbody{
+		td {
+			border-width: 1px;
+			padding: 4px;
+			border-style: solid;
+			border-color: $bd1;
+			background-color: $bg1;
+			-moz-border-radius: 3px;
+		}
+		tr:nth-child(even) td, tr.even td {
+			background: $bg2;
+		}
+		tr:hover td {background-color: $bg_highline;}
+		tr.deleted{
+			text-decoration: line-through;
+			color: #aaa;
+			td{background-color:#eee;}
+		}
+		tr.current_line{
+			td {background-color:yellow;}
+		}
+	}	
+}
+
+div.data-pager {
+	border-top: solid 1px $bd1;
+	border-left: solid 1px $bd1;
+	border-right: solid 1px $bd1;
+	padding: 6px;
+	margin-top: 6px;
+}
+
+table.compact {
+	margin:0; padding:0;
+	tr {margin:0; padding: 0;}
+	td {margin:0; padding:0;}
+}

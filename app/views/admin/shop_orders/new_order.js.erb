@@ -1,0 +1,7 @@
+$("#edit_div")
+	.html("<%= escape_javascript(render(:partial => 'quick_form', :locals => {:post_path => 'my_url'})) %>")
+	.dialog('option', 'title', 'New Order *')
+	.dialog('open');
+
+$('#asm_id').val($('.ui-tabs-panel:not(.ui-tabs-hide)').attr('id').substr(5));
+$('#order_schedule_id').val($('#schedule_id').val());

@@ -1,0 +1,17 @@
+<tr id="<%= dom_id obj %>" >
+    <td style="font-weight:bold;text-align:center;text-decoration:underline;"><%= link_to obj.id, admin_schedule_path(obj) %></td>
+    <td><span class="tour-name"><%= obj.tour.title_cn %></span><br /><%= obj.tour.title %></td>
+    <td><%= obj.tour.days %></td>
+    <td>
+		<% if obj.price %>
+		<%= obj.price.price1 %>, <%= obj.price.price2 %><br />
+		<%= obj.price.price3 %>, <%= obj.price.price4 %>
+		<% else %>
+		[no price]
+		<% end %>
+    </td>
+    <td><%= obj.departure_date %></td>
+    <td><%#= obj.schedule_assignment.tour_guide_id if obj.schedule_assignment %></td>
+    <td><%#= obj.schedule_assignment.driver_id if obj.schedule_assignment %></td>
+    <td><%= obj.status %></td>
+</tr>

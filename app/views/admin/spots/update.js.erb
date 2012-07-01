@@ -1,0 +1,4 @@
+$("#<%= dom_id(@spot) %>")
+	.replaceWith("<%= escape_javascript(render(:partial => 'spot', :locals => {:sp => @spot})) %>");
+
+$("#dialog").dialog('close');

@@ -1,0 +1,12 @@
+	<%
+	hide_label = 'Hide'
+	hide_label = 'Show' if ad.status == 0
+	%>
+	<div class='image<%= ' not-show' if ad.status == 0 %>' id='<%= dom_id(ad) %>'>
+		<%= image_tag ad.image_url %>
+		<p><%= ad.info %></p>
+		<p><%= ad.url %></p>
+		<p><%= link_to 'Edit', edit_admin_ad_path(ad), :remote => true %> |
+			<%= link_to hide_label, edit_admin_ad_path(ad)+ '?hide=1', :remote => true %>
+		</p>
+	</div>

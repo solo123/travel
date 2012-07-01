@@ -1,0 +1,4 @@
+//alert('Release seats: <%= @seats.join ", " %>');
+
+$('#tabs-<%= @assignment.id %>')
+	.html("<%= escape_javascript(render :partial => 'seat_table', :locals => {:assignment => @assignment}) %>");

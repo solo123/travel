@@ -1,0 +1,60 @@
+<div id="content">
+	
+
+<div class='block clear'>
+	<div class='col1'>
+		<div class='slide light-block' id='ads'>
+			<%= render 'slide_ads' %>
+		</div>
+	</div>
+	<div class='col2 light-block' style='height:358px;'>
+		<%= render 'search' %>
+		<div class='content-block'>
+			<%= render '/shared/cms_page', :cms_title => 'page.home.connect' %>
+		</div>
+	</div>
+</div>
+<div class='block light-block clear'>
+	<div class='col1'>
+		<%= render 'hot_destinations' %>
+	</div>
+	<div class='col2 color-block'>
+		<%= render 'picks' %>
+	</div>
+</div>
+<div class='block clear'>
+	<div class='col1'>
+		<div class='light-block content-block'>
+			<div class="ttod hp-section ttod-hp-module">
+				<%= render '/shared/cms_page', :cms_title => 'page.home.tip' %>
+			</div>
+		</div>
+		<div class='light-block content-block'>
+			<%= render 'news' %>
+		</div>
+	</div>
+	<div class='col2'>
+		<%= render 'gallery' %>
+	</div>
+</div>
+</div>
+
+<div id="sidebar">
+	<div class='content-block light-block ad-block'>
+		<%= render 'shared/ad_home_side' %>
+	</div>
+	<div class='content-block light-block ad-block'>
+		<div id="otc_bottompromotext">
+			<%= render '/shared/cms_page', :cms_title => 'page.home.side1' %>
+		</div>
+	</div>
+	<div>
+		<div class="forums">
+			<%= render '/shared/cms_page', :cms_title => 'page.home.side2' %>
+		</div>
+	</div>
+	<div class="content-block light-block">
+		<%= render '/shared/cms_page', :cms_title => 'page.home.side3' %>
+	</div>
+</div>
+<div class='clear'></div>

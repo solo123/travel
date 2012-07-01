@@ -1,0 +1,40 @@
+<%= form_for( @operates_schedule.price, :url => admin_schedule_path(@operates_schedule), :remote => true) do |f| %>
+  <div class="yui-g">
+  	<div class='yui-u first'>
+	  <%= f.field_container :price_adult do %>
+	  	<%= f.label :price_adult %><br />
+	  	<%= f.text_field :price_adult %>
+	  <% end %>
+
+	  <%= f.field_container :price1 do %>
+	  	<%= f.label :price1 %><br />
+	  	<%= f.text_field :price1 %>
+	  <% end %>
+
+	  <%= f.field_container :price3 do %>
+	  	<%= f.label :price3 %><br />
+	  	<%= f.text_field :price3 %>
+	  <% end %>	  
+	  </div>
+	  <div class='yui-u'>
+	  <%= f.field_container :price_child do %>
+	  	<%= f.label :price_child %><br />
+	  	<%= f.text_field :price_child %>
+	  <% end %>
+
+	  <%= f.field_container :price2 do %>
+	  	<%= f.label :price2 %><br />
+	  	<%= f.text_field :price2 %>
+	  <% end %>
+
+	  <%= f.field_container :price4 do %>
+	  	<%= f.label :price4 %><br />
+	  	<%= f.text_field :price4 %>
+	  <% end %>	  
+	  </div>
+	</div>
+
+  <div class="actions">
+    <%= f.submit 'Update Price' %>
+  </div>
+<% end %>

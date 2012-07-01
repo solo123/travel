@@ -1,0 +1,11 @@
+<tr id="<%= dom_id location%>">
+	<td><%= location.id %></td>
+	<td><%= location.abbr %></td>
+	<td><%= location.title %></td>
+	<td><%= location.title_cn %></td>
+	<td>
+		<%= link_to 'Show', admin_location_path(location) %> |
+		<%= link_to 'Edit', edit_admin_location_path(location), :remote => true %> |
+		<%= link_to 'Destroy', admin_location_path(location), :confirm => 'Are you sure?', :method => :delete, :remote => true %>
+	</td>
+</tr>

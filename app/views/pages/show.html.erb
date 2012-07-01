@@ -1,0 +1,7 @@
+<div>
+  <% if @page && @page.status == 1 %>
+  <%= raw @page.description.en if @page.description %>
+  <% else %>
+  [] not found.
+  <% end %>
+</div>

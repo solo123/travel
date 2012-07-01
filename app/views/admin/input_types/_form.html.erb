@@ -1,0 +1,22 @@
+<%= form_for( [:admin, @object], :remote => true) do |f| %>
+  <div class="container">
+  	<div class='span-8'>
+	  <%= f.field_container :type_name do %>
+	  	<%= f.label :type_name %><br />
+	  
+			<%= f.select :type_name, Agent.where(:type_name => 'tel'.map { |c| [c.type_text, c.type_text] }, {}, :class => 'data-field' %>
+	  <% end %>
+
+	  <%= f.field_container :type_text do %>
+	  	<%= f.label :type_text %><br />
+	  	<%= f.text_field :type_text %>
+	  <% end %>
+	  </div>
+	  <div class='span-8 last'>
+	 	</div>
+	</div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

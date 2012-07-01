@@ -1,0 +1,9 @@
+<% i = rand(10000) %>
+<tr>
+  <td><select class="data-field" name="user_info[telephones_attributes][<%= i %>][tel_type]"><option value="Home">Home</option>
+<option value="mobile" selected="selected">mobile</option>
+<option value="fax">fax</option>
+<option value="page">page</option></select>
+  </td>
+  <td><input name="user_info[telephones_attributes][<%= i %>][tel]" size="30" type="text" value=""></td>
+</tr>

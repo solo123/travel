@@ -1,0 +1,7 @@
+<% content_for :sub_menu do %>
+  <ul id="sub_nav">
+      <%= tab :tours, :match_path => '/tours' %>
+      <%= tab :destinations, :match_path => '/destinations' %>
+      <%= tab :hotels, :match_path => '/hotels', :css_class => 'last' %>
+  </ul>
+<% end %>

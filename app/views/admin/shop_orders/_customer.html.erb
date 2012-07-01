@@ -1,0 +1,19 @@
+<%= icon_link_remote 'contact', 'Edit Customer', edit_admin_shop_order_path(@shop_order, :p => 'customer') %>
+<% if @shop_order.customer
+	c = @shop_order.customer 
+%>
+<table>
+	<tr>
+		<td width="15%">Full name</td>
+		<td width="35%" class="underline_field"><%= c.full_name %>(<%= c.customer_id %>)</td>
+		<td width="15%">Tel</td>
+		<td width="35%" class="underline_field"><%= c.tel %></td>
+	</tr>
+	<tr>
+		<td>Address</td>
+		<td class="underline_field"><%= c.bill_address %></td>
+		<td>Email</td>
+		<td class="underline_field"><%= c.email %></td> 
+	</tr>
+</table>
+<% end %>

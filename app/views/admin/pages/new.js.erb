@@ -1,0 +1,3 @@
+$("#edit_div")
+	.html("<%= escape_javascript(render(:partial => "form"))%>")
+	.dialog('option', 'title', 'New Page *').dialog('open');

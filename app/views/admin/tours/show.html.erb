@@ -1,0 +1,18 @@
+<%= render :partial => 'admin/shared/product_sub_menu' %>
+
+<div class='toolbar'>
+  <ul class='actions'>
+    <li id="new_spot_link">
+
+    </li>
+  </ul>
+  <br class='clear' />
+</div>
+
+<div class='crumb'>
+	<%= link_to 'Tours', admin_tours_path %> &gt;
+	<%= link_to @infos_tour.title, admin_tour_path(@infos_tour) %> &gt;
+	Tour Routes
+</div>
+
+<h1><%= "#{@infos_tour.title}/#{@infos_tour.title_cn}" %></h1>

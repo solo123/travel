@@ -1,0 +1,71 @@
+@import 'color_define';
+
+#tour_detail {
+	width: 424px; padding-right:12px; 
+	border-right:solid 1px $color_border; 
+	float:left; margin-bottom:6px; 
+}
+#tour_dests {
+	clear:both; margin-top:10px;
+	.pic {
+		width: 150px; height:100px; float:left;
+		padding:2px;
+		border:solid 1px $color_border;
+		img {
+			width:148px;height:98px;
+		}
+	}
+	.day {
+		margin-top:8px;margin-bottom:8px;
+		background-color:$bg_color_block; 
+		color: $bg_color_focus; 
+		font-size:120%; font-weight:bold; 
+		text-align:center;
+		padding:4px;
+	}
+	a {display:block;}
+	.dest {margin-bottom: 10px;}
+	.info {
+		padding-left:170px;
+		a {
+			display: block;
+			font-weight: bold;
+			font-size: 110%;
+			margin-bottom: 6px;
+		}
+	}
+}
+#order{float:right;width:480px;text-align:center;margin-top:-20px;}
+
+.data-block {margin-bottom: 12px;}
+
+.tours {
+	h2{
+		background-color: $bg_color_focus;
+	}
+	.tour {
+		width: 48%;
+		float: left;
+		margin:4px;
+		.tour-icon {
+			border:solid 1px $color_border;
+			width: 48px;
+			height: 36px;
+			padding: 2px;
+			float: left;
+			img {width: 100%;}
+		}
+		.tour-info {
+			padding-left: 62px;
+		}
+	}
+}
+
+div#departure {width:100px;font-size:90%;}
+
+.crumb {
+	color: #555;
+	padding-left: 20px;
+	font-size: 90%;
+	a:link, a:visited {color:#555;}
+}

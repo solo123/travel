@@ -1,0 +1,37 @@
+<div class="toolbar">
+  <ul class="actions">
+    <li>
+      <%= form_for( @search, :url => admin_user_infos_path ) do |f| %>
+      <%= f.text_field :full_name_contains, :size => 15, :class => 'data-field' %>
+      <%= button 'search' %>
+      <% end %>
+    </li>
+    <li>
+    <%= button_link_to 'New user', 'user_infos/new', {:remote => true, :icon => 'add', :id => 'admin_new_user_info'} %>
+    </li>
+  </ul>
+  <div class='clear'></div>
+</div>
+
+<table class="data-list" id='list_user_infos'>
+  <thead>
+  <tr>
+      <th><%= t("id") %></th>
+      <th><%= t("full_name") %></th>
+      <th><%= t("user_type") %></th>
+      <th><%= t('status') %></th>
+      <th><%= t('created_at') %></th>
+      <th><%= t('updated_at') %></th>
+      <th></th>
+    <th>
+    </th>
+  </tr>
+</thead>
+<tbody>
+<% @collection.each do |obj| %>
+  <%= render :partial => 'row', :locals => {:obj => obj} %>
+<% end %>
+</tbody>
+</table>
+<%= will_paginate(@collection) %>
+<div id='edit_div' class='dialog-normal'></div>

@@ -1,0 +1,36 @@
+<div class="toolbar">
+  <ul class="actions">
+    <li>
+      <%= form_for( @search, :url => admin_payments_path ) do |f| %>
+      <%= button 'Search' %>
+      <% end %>
+    </li>
+    <li>
+      <%= button_link_to 'Pay', 'payments/new', {:icon => 'add', 'data-remote' => true} %>
+    </li>
+  </ul>
+  <br class="clear">
+</div>
+<h1><%= t("list_payments") %></h1>
+<div id='edit_div' class='dialog-normal'></div>
+<table class="data-list" id='list_payments'>
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>bill_type</th>
+      <th>bill_id</th>
+      <th>before</th>
+      <th>amount</th>
+      <th>after</th>
+      <th>created_at</th>
+      <th>op</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @collection.each do |p| %>
+    <%= render :partial => 'row', :locals => {:obj => p} %>
+  <% end %>
+  </tbody>
+</table>
+<%= will_paginate(@collection) %>
+

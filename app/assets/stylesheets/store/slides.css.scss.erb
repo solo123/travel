@@ -1,0 +1,32 @@
+  #slides {
+    .slides_container {
+      width:400px;
+      height:330px;
+      div {
+        width:400px;
+        height:330px;
+        display:block;
+        a {display:block;height:266px;}
+      }
+    }
+    .pagination {
+      margin:10px 0 0 auto;width:80px;
+      li {
+        float:left;margin: 0 1px; list-style:none;
+        a {display:block;width:12px;height:0;padding-top:12px;float:left;overflow:hidden;background-image:url(<%= asset_path 'store/pagination.png' %>);background-position:0 0;}
+        &.current a {background-position:0 -12px;}
+      }
+    }
+  }
+  #banners {
+    width:758px;height:78px;overflow:hidden;
+    .slides_container {
+      width:758px;
+      height:78px;
+      div {
+        width:758px;
+        height:78px;
+        display:block;
+      }
+    }
+  } 

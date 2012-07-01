@@ -1,0 +1,33 @@
+<div id="tabs-<%= assignment.id %>">
+	<p>
+		Bus: <%= assignment.bus.name if assignment.bus %>
+		Driver: <%= assignment.driver.nickname if assignment.driver %> / 
+		<%= assignment.driver_assistance.nickname if assignment.driver_assistance %>
+		Tour guide: <%= assignment.tour_guide.nickname if assignment.tour_guide %> / 
+		<%= assignment.tour_guide_assistance.nickname if assignment.tour_guide_assistance %>
+	</p>
+	
+	<table width="380" cellspacing="0" cellpadding="4" border="0" style="border: solid 1px darkgreen; width:auto;">
+	  <tbody><tr class="diagram-exp">
+	    <td nowrap="nowrap" align="center" class="edit_en">圖示:(<a href="ScheduleOrders.aspx">相关订单</a>)</td>
+	    <td nowrap="nowrap" align="center" class="edit_en"><div class="block blnk">&nbsp;</div> Avilible</td>
+	    <td nowrap="nowrap" align="center" class="edit_en"><div class="block hold">&nbsp;</div> Hold</td>
+	    <td nowrap="nowrap" align="center" class="edit_en"><div class="block sold">&nbsp;</div> Sold balance</td>
+	    <td nowrap="nowrap" align="center" class="edit_en"><div class="block paid">&nbsp;</div> Full pay</td>
+	  </tr>
+	</tbody></table>
+	
+	<div class='seat-table'>
+		<% (1..assignment.total_seats).each do |i| %>
+		<% if ((i-1) % 4) == 0 %>
+			<div class="clear"></div>
+		<% elsif ((i-1) % 2) == 0 %>
+			<div class="space">&nbsp;</div>
+		<% end %>
+			<%= render :partial => 'seat', :locals => {:i => i, :assignment => assignment} %>
+		<% end %>
+		<div class="clear"></div>
+	</div>
+</div>
+		
+

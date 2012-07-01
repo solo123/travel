@@ -1,0 +1,33 @@
+@import 'def_colors';
+.toolbar {border:solid 1px $bd2; background-color:$bg2;
+	ul.actions {
+		list-style-type: none;
+		li {float:left;margin-top:3px;margin-right:6px;
+			a.button {
+				display: block;
+				vertical-align: middle;
+				padding: 3px 4px 2px 4px;
+				background: buttonface;
+				text-decoration: none;
+				border-left: 1px solid buttonhighlight;
+				border-top: 1px solid buttonhighlight;
+				border-right: 1px solid buttonshadow;
+				border-bottom: 1px solid buttonshadow;
+				span{
+					white-space: nowrap;
+					display:block;
+					line-height: 20px;
+					vertical-align: middle;
+					img {vertical-align:middle;}
+				}
+			}
+			a.button:hover {
+				border-left: 1px solid buttonshadow;
+				border-top: 1px solid buttonshadow;
+				border-right: 1px solid buttonhighlight;
+				border-bottom: 1px solid buttonhighlight;
+
+			}
+		}
+	}
+}

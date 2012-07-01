@@ -1,0 +1,7 @@
+  <%= f.field_container :status do %>
+    <%= f.label :status %> :
+    <%= f.radio_button :status, '0' %>
+    <%= f.label 'status_0', 'hide' %>
+    <%= f.radio_button :status, '1' %>
+    <%= f.label 'status_1', 'show' %>
+  <% end %>

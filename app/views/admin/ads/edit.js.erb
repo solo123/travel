@@ -1,0 +1,9 @@
+<% if params[:hide] %>
+$("#<%= dom_id(@ad) %>")
+	.replaceWith("<%= escape_javascript(render(:partial => 'ad', :locals => {:ad => @ad})) %>");
+<% else %>
+$("#edit_div")
+	.html("<%= escape_javascript(render(:partial => "form"))%>")
+	.dialog('option', 'title', 'Ad: <%= @ad.id %> (edit)')
+	.dialog('open');
+<% end %>

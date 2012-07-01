@@ -1,0 +1,10 @@
+<%= form_tag 'members/selected', :method => :put do %>
+	<p>
+		Search:<br />
+		<%= text_field_tag :member_select, '', :style => 'width:200px' %>
+		<%= hidden_field_tag :member_id %>
+	</p>
+	<p>
+		<input type='button' value='Submit' onclick='set_member();' />
+	</p>
+<% end %>

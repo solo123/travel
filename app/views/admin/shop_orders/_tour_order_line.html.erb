@@ -1,0 +1,12 @@
+  <tr id="<%= dom_id order %>" class='<%= cycle('row', 'alt-row') %>'>
+      <td style="font-weight:bold;text-align:center;text-decoration:underline;">
+      	<%= link_to order.id, admin_shop_order_path(order) %>
+      </td>
+      <td><%= order.order_source_type %></td>
+      <td><%= order.order_source_id %></td>
+      <td></td>
+      <td></td>
+      <td><%= order.customer_name %></td>
+      <td>phone</td>
+      <td><%= order.state %></td>
+  </tr>

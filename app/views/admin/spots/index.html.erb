@@ -1,0 +1,30 @@
+<%= render :partial => 'admin/shared/product_sub_menu' %>
+
+<div class='toolbar'>
+  <ul class='actions'>
+    <li id="new_spot_link">
+      <%= button_link_to 'Add Spot', new_admin_tour_spot_path, {:remote => true, :icon => 'add', :id => 'admin_add_spot'} %>    
+    </li>
+  </ul>
+  <br class='clear' />
+</div>
+
+<div class='crumb'>
+	<%= link_to '<< Back', 'javascript:history.go(-1)' %> |
+	<%= link_to 'Tours', admin_tours_path %> &gt;
+	<%= link_to 'Tours icon', admin_tours_path+'/icons' %>
+	&gt; Routes
+</div>
+
+<div class='route-title'>
+	<%= render :partial => 'route_title' %>
+</div>
+
+<div id="dialog" class='dialog-normal'></div>
+
+<div id="spots">
+<% @spots.each do |sp| %>
+	<%= render :partial => 'spot', :locals => {:sp => sp}%> 
+<% end %>
+</div>
+

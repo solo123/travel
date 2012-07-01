@@ -1,0 +1,27 @@
+<%= form_for([:admin, @location], :remote => true) do |f| %>
+
+	<div>
+		<%= f.field_container :abbr do %>
+			<%= f.label :abbr %><br />
+			<%= f.text_field :abbr %>
+		<% end %>
+	</div>
+	<div class="yui-g">
+		<div class="yui-u first">
+		  <%= f.field_container :title do %>
+		    <%= f.label :title %><br />
+		    <%= f.text_field :title %>
+		  <% end %>
+  	</div>
+  	<div class="yui-u">
+		  <%= f.field_container :title_cn do %>
+		    <%= f.label :title_cn %><br />
+		    <%= f.text_field :title_cn %>
+		  <% end %>
+  	</div>
+  </div>
+ 
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

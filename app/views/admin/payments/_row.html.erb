@@ -1,0 +1,12 @@
+  <tr id='<%= dom_id(obj) %>'>
+    <td><%= obj.id %></td>
+    <td><%= obj.bill_type %></td>
+    <td><%= obj.bill_id %></td>
+    <td><%= obj.balance_before %></td>
+    <td><%= obj.amount %></td>
+    <td><%= obj.balance_after %></td>
+    <td><%= obj.created_at %></td>
+    <td class='actions'>
+        <%= link_to_edit_url edit_admin_payment_path(obj), :title => "admin_edit_#{dom_id(obj)}" %>
+    </td>
+  </tr>
