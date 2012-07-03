@@ -1,4 +1,4 @@
 <tr>
-  <td><%= f.select :tel_type, InputType.where(:type_name => 'tel').map { |c| [c.type_text, c.type_text] }, {}, :class => 'data-field' %></td>
+  <td><%= f.select :tel_type, InputType.where(:type_name => 'tel').map { |c| [c.type_text, c.type_text] },  :class => 'data-field' %></td>
   <td><%= f.text_field :tel %></td>
 </tr>

@@ -1,0 +1,6 @@
+<% @object = UserInfo.new %>
+$("#add_contact_div")
+	.html("<%= escape_javascript(render(:partial => "/admin/user_infos/form", :locals => {:post_path => objects_url(@object)}))%>")
+	.dialog('option', 'title', '* New <%= @object.class.name %> *')
+	.dialog('open');
+alert('ok');

@@ -30,13 +30,16 @@
 		  	</table>
 		  	<% end %>
 
-		  	<b>Contacts: </b><br />
-		  	<% @object.contacts.each do |c| %>
-		  		<p>
-			  		<%= c.to_s %> | 
-			  		<%= link_to_hide c, 'data-confirm' => 'Are you sure to delete this contact?' %>
-		  		</p>
+        <b>Contacts: </b> | <%= link_to 'add', 'user_infos/new?edit_div=add_contact_div', :remote => true  %> <br />
+        <table id='short_list_user_infos'>
+          
+          <% @object.contacts.each do |c| %>
+            <tr>
+              <td><%= c.to_s %></td>
+              <td><%= link_to_hide c, 'data-confirm' => 'Are you sure to delete this contact?' %></td>
+            </tr>
 		  	<% end %>
+        </table>
 		  </div>
 	 	</div>
 	</div>

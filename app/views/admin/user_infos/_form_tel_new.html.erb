@@ -1,9 +1,7 @@
 <% i = rand(10000) %>
 <tr>
-  <td><select class="data-field" name="user_info[telephones_attributes][<%= i %>][tel_type]"><option value="Home">Home</option>
-<option value="mobile" selected="selected">mobile</option>
-<option value="fax">fax</option>
-<option value="page">page</option></select>
+  <td>
+    <%= select_tag "user_info[telephones_attributes][#{i}][tel_type]", options_for_select(InputType.where(:type_name => 'tel').map { |c| [c.type_text, c.type_text] }), :class => 'data-field' %>
   </td>
   <td><input name="user_info[telephones_attributes][<%= i %>][tel]" size="30" type="text" value=""></td>
 </tr>

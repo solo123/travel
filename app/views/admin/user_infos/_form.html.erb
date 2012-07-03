@@ -1,4 +1,5 @@
 <%= form_for( [:admin, @object], :remote => true) do |f| %>
+  <%= hidden_field_tag :edit_div, params[:edit_div] %>
   <div class="container">
   	<div class='span-8'>
 	  <%= f.field_container :full_name do %>
