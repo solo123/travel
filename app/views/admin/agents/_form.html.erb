@@ -19,6 +19,7 @@
 	  <% end %>
 		<%= render :partial => 'admin/shared/status', :locals => {:f => f} %> 
 	  </div>
+          <% if @object.id %>
 	  <div class='span-8 last'>
 		  <div>
 		  	<b>Accounts:</b><br />
@@ -30,7 +31,7 @@
 		  	</table>
 		  	<% end %>
 
-        <b>Contacts: </b> | <%= link_to 'add', 'user_infos/new?edit_div=add_contact_div', :remote => true  %> <br />
+        <b>Contacts: </b> | <%= link_to 'add', "user_infos/new?edit_div=add_contact_div&agent_id=#{@object.id}&short=1", :remote => true  %> <br />
         <table id='short_list_user_infos'>
           
           <% @object.contacts.each do |c| %>
@@ -42,7 +43,9 @@
         </table>
 		  </div>
 	 	</div>
+        <% end %>
 	</div>
+      
 
   <div class="actions">
     <%= f.submit %>

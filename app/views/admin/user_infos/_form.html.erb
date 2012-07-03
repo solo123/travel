@@ -1,6 +1,11 @@
 <%= form_for( [:admin, @object], :remote => true) do |f| %>
   <%= hidden_field_tag :edit_div, params[:edit_div] %>
+  <%= hidden_field_tag :short, params[:short] %>
   <div class="container">
+        <% if params[:agent_id] %>
+        <%= f.hidden_field :user_data_type, :value => 'Agent' %>
+        <%= f.hidden_field :user_data_id, :value => params[:agent_id] %>
+        <% end %>
   	<div class='span-8'>
 	  <%= f.field_container :full_name do %>
 	  	<%= f.label :full_name %><br />
