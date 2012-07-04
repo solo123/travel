@@ -44,7 +44,7 @@ Omei::Application.routes.draw do
     end
     resources :payments, :vouchers, :company_receivables
     resources :telephones, :emails, :addresses
-    resources :input_types
+    resources :input_types, :tour_types
   end
 
   match '/admin', :to => 'admin/home#index', :as => :admin

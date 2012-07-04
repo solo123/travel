@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120629070546) do
+ActiveRecord::Schema.define(:version => 20120704015834) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address_data_type"
@@ -475,6 +475,13 @@ ActiveRecord::Schema.define(:version => 20120629070546) do
     t.datetime "last_schedule_date"
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
+  end
+
+  create_table "tour_types", :force => true do |t|
+    t.string   "type_name"
+    t.integer  "status"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "tours", :force => true do |t|

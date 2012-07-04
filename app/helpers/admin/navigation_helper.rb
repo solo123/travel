@@ -203,10 +203,18 @@
     send "edit_admin_#{object.class.name.underscore.split('/').last}_url", object, options
   end
   def object_url(object, options = {})
-    send "admin_#{object.class.name.underscore.split('/').last}_path", object, options
+    if object.class.name == 'Spot'
+      send "admin_tour_spot_path", object, options
+    else
+      send "admin_#{object.class.name.underscore.split('/').last}_path", object, options
+    end
   end
   def objects_url(object)
-    send "admin_#{object.class.name.underscore.split('/').last.pluralize}_path"
+    if object.class.name == 'Spot'
+      send "admin_tour_spots_path"
+    else
+      send "admin_#{object.class.name.underscore.split('/').last.pluralize}_path"
+    end
   end
       
     end

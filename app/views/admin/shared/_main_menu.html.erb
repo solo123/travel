@@ -26,7 +26,12 @@
 		<ul>
 			<li><%= link_to t(:agents), admin_agents_path %></li>
 			<li><%= link_to t(:employees), admin_employee_infos_path %></li>
-			<li><%= link_to t(:input_types), admin_input_types_path %></li>
+      <li><a href='#'>Data Types</a>
+        <ul>
+  		    <li><%= link_to t(:input_types), admin_input_types_path %></li>
+          <li><%= link_to t(:tour_types), admin_tour_types_path %></li>
+        </ul>
+      </li>
 		</ul>
 	</li>
 </ul>

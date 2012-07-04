@@ -2,10 +2,8 @@
 	<%= render :partial => 'admin/shared/title', :locals => {:f => f} %>
   <div class="container">
   	<div class='span-8'>
-	  <%= f.field_container :tour_type do %>
-	  	<%= f.label :tour_type %><br />
-	  	<%= f.text_field :tour_type %>
-	  <% end %>
+      <%= f.label :tour_type %><br />
+      <%= f.select :tour_type, TourType.where(:status => 1).map{|t| [t.type_name, t.id]}, {}, :class => 'data-field' %>
 	  </div>
 	  <div class='span-8 last'>
 	  <%= f.field_container :days do %>

@@ -3,7 +3,7 @@
   <div class="container">
 		<div class="span-8">
 	  <%= f.field_container :weekly do %>
-	  	<%= s.label :weekly %><br />
+	  	<%= s.label :weekly %> (Sun..Sat = 0..6)<br />
 	  	<%= s.text_field :weekly %>
 	  <% end %>
 	  <%= f.field_container :is_auto_gen do %>

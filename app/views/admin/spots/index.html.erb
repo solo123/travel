@@ -17,14 +17,18 @@
 </div>
 
 <div class='route-title'>
-	<%= render :partial => 'route_title' %>
+  <% tour = Tour.find(params[:tour_id]) %>
+  <%= image_tag tour.title_photo.photo_t, :id => 'tour_icon' if tour.title_photo %>
+  <h1><%= "#{tour.title}/#{tour.title_cn}" %></h1>
+  &lt;== Tour Icon
+  <div class='clear'></div>
 </div>
 
-<div id="dialog" class='dialog-normal'></div>
+<div id="edit_div" class='dialog-normal'></div>
 
-<div id="spots">
-<% @spots.each do |sp| %>
-	<%= render :partial => 'spot', :locals => {:sp => sp}%> 
+<div id="list_spots">
+<% @collection.each do |sp| %>
+	<%= render :partial => 'row', :locals => {:obj => sp}%> 
 <% end %>
 </div>
 

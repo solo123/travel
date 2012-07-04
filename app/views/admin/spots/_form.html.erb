@@ -1,13 +1,13 @@
 <% 
-	@spot.build_description if !@spot.description
-	if @spot.id
+	@object.build_description if !@object.description
+	if @object.id
 		pth = "/admin/tours/#{params[:tour_id]}/spots/#{params[:id]}"
 	else
 		pth = "/admin/tours/#{params[:tour_id]}/spots"
 	end
 %>
 
-<%= form_for(@spot, :url => pth, :remote => true) do |f| %>
+<%= form_for(@object, :url => pth, :remote => true) do |f| %>
   	<div class="yui-g">
 	<%= f.fields_for :destination_id do %>
 		<%= f.label :destination_id %><br />

@@ -3,14 +3,12 @@ module Admin
   class ResourceController < AdminController
     def index
       return @collection if @collection.present?
-       load_collection
-     invoke_callbacks(:index, :after)
-     
+      load_collection
+      invoke_callbacks(:index, :after)
     end
     def show
        load_object
        invoke_callbacks(:show, :after)
-     
     end
     def edit
       load_object

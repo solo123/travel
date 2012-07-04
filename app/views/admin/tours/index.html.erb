@@ -4,7 +4,7 @@
   <ul class="actions">
   	<li>
   		<%= form_for( @search, :url => admin_tours_path ) do |f| %>
-      <%= f.select :tour_type_eq, [['All Tour Type', nil],['Bus Tour', 1],['Package',2],['Cruise', 3]], {}, :class => 'data-field' %>
+        <%= f.select :tour_type_eq, TourType.where(:status => 1).map{|t| [t.type_name, t.id]}.insert(0, ['All tours', nil]), {}, :class => 'data-field' %>
       <%= f.select :status_eq, [['All Status', nil],['show', 1], ['hide', 0]],{}, :class => 'data-field' %>
       <%= f.text_field :title_contains, :size => 15, :class => 'data-field' %>
   		<%= button 'search' %>
@@ -29,7 +29,7 @@
   <thead>
   <tr>
     <th><%= sort_link @search,:id, t(:id), {}, {:title => ''} %></th>
-	<th><%= sort_link @search,:title, t(:title), {}, {:title => 'admin_tours_listing_title'} %></th>
+  	<th><%= sort_link @search,:title, t(:title), {}, {:title => 'admin_tours_listing_title'} %></th>
 	<th><%= sort_link @search,:tour_type, t(:tour_type), {}, {:title => ''} %></th>
 	<th><%= sort_link @search,:days, t(:days), {}, {:title => ''} %></th>
 	<th>weekly</th>
