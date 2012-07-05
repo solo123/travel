@@ -4,7 +4,6 @@
 <head>
   <title>omei-admin</title>
   <%= favicon_link_tag %>
-
   <%= stylesheet_link_tag 'blueprint/print', 'media' => 'print' %>
   <!--[if lt IE 8]>
     <%= stylesheet_link_tag 'blueprint/ie' %>
@@ -20,11 +19,13 @@
 
   <div id='page_container'>
     <div id='page_head'>
+      <%= image_tag 'ae_logo.png', :class => 'logo' %>
       <div id="progress"><%= image_tag 'admin/progress.gif' %> <%= t(:loading) %>...</div>      
       <%= render '/admin/shared/main_menu' %>
 
     </div>
     <div id='page_breadcrumbs'>
+      <%= yield :breadcrumbs %>
     </div>
 
     <div id='page_main'>

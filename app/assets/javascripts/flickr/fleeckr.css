@@ -6,25 +6,20 @@
 	padding:9px;
 }
 .fleeckr-ed .fleeckr-image{
+  text-align: center;
 	float:left;
-	height:77px;
+	height:94px;
 	margin:4px;
 	width:77px;
+  border:solid 1px transparent;
+  padding:2px;
 }
-.fleeckr-ed .fleeckr-image a{
-	background:transparent;
-	border:0;
-	display:block;
-	padding:1px;
-	height:75px;
-	width:75px;
+.fleeckr-ed .fleeckr-image:hover {
+  border:solid 1px red; 
 }
+.fleeckr-ed .fleeckr-image a{ color: transparent; }
+.fleeckr-ed .fleeckr-image:hover a {color: red; }
 .fleeckr-ed .fleeckr-image img{
 	border:0;
-}
-.fleeckr-ed .fleeckr-image a{
-	border:solid 1px transparent;
-}
-.fleeckr-ed .fleeckr-image a:hover{
-	border:solid 1px #990000;
+  margin: 2px;
 }

@@ -1,4 +1,9 @@
-<%= render :partial => 'admin/shared/product_sub_menu' %>
+<%= content_for :breadscrumbs do %>
+	<%= link_to '<< Back', 'javascript:history.go(-1)' %> |
+	<%= link_to 'Tours', admin_tours_path %> &gt;
+	<%= link_to 'Tours icon', admin_tours_path+'/icons' %>
+	&gt; Routes
+<% end %>
 
 <div class='toolbar'>
   <ul class='actions'>
@@ -7,13 +12,6 @@
     </li>
   </ul>
   <br class='clear' />
-</div>
-
-<div class='crumb'>
-	<%= link_to '<< Back', 'javascript:history.go(-1)' %> |
-	<%= link_to 'Tours', admin_tours_path %> &gt;
-	<%= link_to 'Tours icon', admin_tours_path+'/icons' %>
-	&gt; Routes
 </div>
 
 <div class='route-title'>

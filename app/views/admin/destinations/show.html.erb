@@ -24,14 +24,12 @@ function refresh_thumbs(){
 	<% end %>
 <% end %>
 
-<h2>show [<%= @object.title if @object %>]</h2>
-<%#= render :partial => 'admin/shared/product_sub_menu' %>
 <% if @object %>
-<div class='crumb'>
-	<%= link_to 'Destinations', 'javascript:history.go(-1)' %> &gt;
-	<%= @object.title %>
-</div>
-<h1><%= @object.title %>, <%= @object.title_cn %></h1>
+  <%= content_for :breadcrumbs do %>
+	  <%= link_to 'Destinations', 'javascript:history.go(-1)' %> &gt;
+  	<%= @object.title %>
+  <% end %>
+  <h1><%= @object.title %>, <%= @object.title_cn %></h1>
 
 <% if @object.photo %>
 <div>
@@ -56,7 +54,7 @@ function refresh_thumbs(){
 
 <% else %>
 <p>
-	<%= link_to 'Upload photo', 'javascript:alert("create photoset.")' %>
+<%= link_to 'Create Photoset', object_url(@object) + '/create_photoset' %>
 </p>
 <% end %>
 

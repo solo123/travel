@@ -1,13 +1,14 @@
 <div class='obj.t' id="<%= dom_id obj %>">
-	<%= image_tag obj.destination.photo.photo_t if obj.destination && obj.destination.photo %>
+  <%= image_tag obj.destination.photo.photo_t, :style => 'float:left;' if obj.destination && obj.destination.photo %>
 	<div class='spot-title'>
 		<h2>
-			<%= obj.visit_order %> of Day <%= obj.visit_day %>:
+			Day <%= obj.visit_day %>:
+      <%= obj.visit_order %>)  
 			<%= obj.destination.title + ', ' + obj.destination.title_cn if obj.destination %>
+      | <%= link_to 'Edit', "spots/#{obj.id}/edit", :remote => true, :class => 'edit_button'   %>
 		</h2>
 		<div class='buttons'>
-			<%= link_to '<-- Use this image as tour icon.',"spots/#{obj.id}", :remote => true %><br />
-			<%= link_to 'Edit', "spots/#{obj.id}/edit", :remote => true, :class => 'edit_button'   %>
+			<%= link_to '<-- set tour icon',"spots/#{obj.id}", :remote => true %><br />
 		</div>
 	</div>
 	<div class='clear'></div>

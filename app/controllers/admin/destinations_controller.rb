@@ -26,6 +26,24 @@ module Admin
 	    end
 	    @photo_set = flickr.photosets.getList(:user_id => '65483249@N05')
 		end
+    def create_photoset
+      FlickRaw.api_key = '1e45d3cbe81db329e29dbbf8c966540b'
+	    FlickRaw.shared_secret = 'cf4894b1ad14d5e5'
+	    flickr.access_token = "72157628534789647-6b42dcbcaef680d7"
+	    flickr.access_secret = "c880327b3e43526c"
+
+	    d = Destination.find(params[:id])
+      d.build_photo if !d.photo
+      ph = d.photo
+      s = flickr.photosets.create(:title => "#{d.id}_#{d.title}", :primary_photo_id => 6028270808)
+      i = flickr.photos.getInfo(:photo_id => 6028270808)
+      ph.photoset = s.id
+      ph.photo_s = FlickRaw.url_s(i)
+      ph.photo_t = FlickRaw.url_t(i)
+      ph.photo_m = FlickRaw.url_m(i)
+      d.save
+      redirect_to :action => :show
+    end
 		def save_photos
 	    if params[:photo]
 	      params[:photo].each do |para|

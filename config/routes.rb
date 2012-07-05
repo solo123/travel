@@ -17,8 +17,15 @@ Omei::Application.routes.draw do
   end
 
   namespace :admin do
-    match 'destinations/photos' => 'destinations#photos'
-  	resources :destinations, :buses, :pages
+    resources :destinations do
+      collection do
+        get :photos
+      end
+      member do
+        get :create_photoset
+      end
+    end
+  	resources :buses, :pages
   	resources :tours do
       collection do
         get 'search'
