@@ -1,6 +1,5 @@
 Omei::Application.routes.draw do
   devise_for :employees
-
   devise_for :users
   root :to => 'home#index'
   match 'home(/:action)' => 'home'
@@ -34,10 +33,11 @@ Omei::Application.routes.draw do
   	end
     resources :schedules do
       collection do
-        get 'select', 'search'
+        get :select, :search, :generate
         put 'selected'
       end
     end
+    resources :schedule_assignments
     resources :user_infos do
       collection do
         get 'select', 'search', 'add_tel'

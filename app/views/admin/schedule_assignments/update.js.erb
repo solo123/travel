@@ -1,0 +1,5 @@
+$("#edit_div").dialog('close');
+$('#tabs')
+	.append("<%= escape_javascript(render :partial => 'schedules/seat_table', :locals => {:assignment => @assignment}) %>")
+	.tabs( "add",'#tabs-<%= @assignment.id %>', "Bus#<%= @assignment.title %>");
+

@@ -1,0 +1,9 @@
+<%
+  edit_div = params[:edit_div] ? params[:edit_div] : 'edit_div'
+%>
+$("#<%= edit_div %>")
+	.html("<%= escape_javascript(render(:partial => "form", :locals => {:post_path => objects_url(@object)}))%>")
+	.dialog('option', 'title', '* New <%= @object.class.name %> *')
+	.dialog('open');
+
+$('.html-editor').xheditor({tools: 'Blocktag,Bold,Italic,Underline,|,List,Link,Img,|,Source'});		

@@ -1,0 +1,41 @@
+<%= form_for( [:admin, @object], :remote => true) do |f| %>
+  <%= f.fields_for :price do |fp| %>
+  <div class="container">
+  	<div class='span-8'>
+	  <div>
+	  	<%= fp.label :price_adult %><br />
+	  	<%= fp.text_field :price_adult %>
+	  </div>
+
+	  <div>
+	  	<%= fp.label :price1 %><br />
+	  	<%= fp.text_field :price1 %>
+	  </div>
+
+	  <div>
+	  	<%= fp.label :price3 %><br />
+	  	<%= fp.text_field :price3 %>
+    </div>	  
+	  </div>
+	  <div class='span-8 last'>
+	  <div>
+	  	<%= fp.label :price_child %><br />
+	  	<%= fp.text_field :price_child %>
+	  </div>
+
+	  <div>
+	  	<%= fp.label :price2 %><br />
+	  	<%= fp.text_field :price2 %>
+	  </div>
+
+	  <div>
+	  	<%= fp.label :price4 %><br />
+	  	<%= fp.text_field :price4 %>
+	  </div>	  
+	  </div>
+	</div>
+  <% end %>
+  <div class="actions">
+    <%= f.submit 'Update Price' %>
+  </div>
+<% end %>

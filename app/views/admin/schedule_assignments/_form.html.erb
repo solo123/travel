@@ -1,4 +1,5 @@
-<%= form_for( [:admin, @assignment], :remote => true) do |f| %>
+<%= form_for([:admin, @object], :remote => true) do |f| %>
+    <%= f.hidden_field :schedule_id, :value => params[:schedule_id] %>
 		<%= f.label :title %>
 		<%= f.text_field :title %>
 		<%= f.label :bus %>

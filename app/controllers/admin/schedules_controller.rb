@@ -7,17 +7,17 @@ module Admin
   end
   def generate
     @today = Date.today
-    @default_days = Spree::Config[:max_reservation_days].to_i
+    @default_days = AppConfig[:max_reservation_days].to_i
     @messages = []
 
     if params[:tour]
-      tour = Infos::Tour.find(params[:tour])
+      tour = Tour.find(params[:tour])
       params[:ids].split(',').each do |day|
         tour.gen_schedule(day.to_date)
       end
       render :text => params[:tour] + ' done '
     else    
-      Infos::Tour.where(:status => 1).each do |tour|
+      Tour.where(:status => 1).each do |tour|
         gen_tour_schedule(tour, false)
       end
     end
@@ -26,7 +26,7 @@ module Admin
   def gen_tour_schedule(tour, gen_schedule)
       if tour.tour_setting && tour.tour_setting.is_auto_gen == 1 && (!tour.tour_setting.last_schedule_date || Date.parse(tour.tour_setting.last_schedule_date) < @today)
         tour_days = []
-        days = tour.tour_setting.available_days.to_i
+        days = tour.tour_setting.days_in_advance.to_i
         days = @default_days if days == 0
         (@today..@today + days).each do |day|
           tour_days << day 
@@ -35,8 +35,8 @@ module Admin
           ds = []
           tour_days.each do |d|
             range = d..d+1
-            if !Operates::Schedule.exists?(:tour_id => tour.id, :departure_date => range)            
-              Operates::Schedule.gen(tour,d) if gen_schedule
+            if !Schedule.exists?(:tour_id => tour.id, :departure_date => range)            
+              Schedule.gen(tour,d) if gen_schedule
               ds << d
             end
           end
@@ -46,10 +46,10 @@ module Admin
   end
   
   def add_bus
-    @operates_schedule = Operates::Schedule.find(params[:id])
-    cnt = @operates_schedule.assignments.count + 1
-    @operates_assignment = @operates_schedule.assignments.build
-    @operates_assignment.title = "#{cnt}"
+    load_object
+    cnt = @object.assignments.count + 1
+    @assignment = @object.assignments.build
+    @assignment.title = "#{cnt}"
   end
   def update_bus
     @operates_schedule = Operates::Schedule.find(params[:id])

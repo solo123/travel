@@ -1,0 +1,17 @@
+<%
+  edit_div = params[:edit_div] && params[:edit_div].length > 0 ? params[:edit_div] : 'edit_div'
+  class_name = @object.class.name.underscore.pluralize 
+%>
+  $("#list_<%= class_name %>")
+    .append("<%= escape_javascript(render(:partial => 'row', :locals => {:obj => @object})) %>");
+
+<% if params[:short] %>
+  $('#short_list_<%= class_name %>')
+    .append("<%= j render(:partial => 'row_short', :locals => {:obj => @object}) %>");
+<% end %>
+
+  if ($('#list_<%= class_name %>').length == 0 && $('#short_list_<%= class_name %>').length == 0){
+	alert("[<%= class_name %>] Add 1 new <%= @object.class.name %> data.");
+}
+
+$("#<%= edit_div %>").dialog('close');

@@ -1,0 +1,9 @@
+.image-div{
+  padding: 2px;
+  img {float:left;margin:2px;border:solid 1px #aaa;}
+  a {float:left; color:transparent;}
+  &:hover {
+    a {color:red;}
+    img {border:solid 1px red;}
+  }
+}

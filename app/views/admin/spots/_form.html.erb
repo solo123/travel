@@ -8,27 +8,26 @@
 %>
 
 <%= form_for(@object, :url => pth, :remote => true) do |f| %>
-  	<div class="yui-g">
-	<%= f.fields_for :destination_id do %>
-		<%= f.label :destination_id %><br />
-		<%= select(:spot, :destination_id, Destination.all.collect{|d| [d.title, d.id]}, {:prompt => 'Select Destination'}) %>  	
-	<% end %>
-	
-		</div>
+  <div class="container">
+  	<%= f.fields_for :destination_id do %>
+	    <%= f.label :destination_id %> : 
+   		<%= f.select(:destination_id, Destination.visible.collect{|d| [d.title, d.id]}, {:prompt => 'Select Destination'}) %>  	
+   	<% end %>
+	</div>
 
-  <div class="yui-g">
-	<div class='yui-u first'>
-	<%= f.fields_for :visit_day do %>
-		<%= f.label :visit_day %><br />
-		<%= f.text_field :visit_day %>
-	<% end %>
-	</div>
-	<div class='yui-u'>
-	<%= f.fields_for :visit_order do %>
-		<%= f.label :visit_order %><br />
-		<%= f.text_field :visit_order %>
-	<% end %>	
-	</div>
+  <div class="container">
+	  <div class='span-8'>
+    	<%= f.fields_for :visit_day do %>
+		    <%= f.label :visit_day %><br />
+    		<%= f.text_field :visit_day %>
+    	<% end %>
+	  </div>
+	  <div class='span-8 last'>
+      <%= f.fields_for :visit_order do %>
+        <%= f.label :visit_order %><br />
+        <%= f.text_field :visit_order %>
+      <% end %>	
+    </div>
 	</div>
 
   <%= f.fields_for :description do |desc| %>

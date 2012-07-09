@@ -1,39 +1,21 @@
-<%= content_for :head do %>
-<script type='text/javascript'>
-$(function(){
-	
-	$('#search_departure_date_greater_than_or_equal_to').datepicker({
-		showButtonPanel: true,
-		dateFormat: 'yy-mm-dd'
-	});
-	$('#search_departure_date_less_than_or_equal_to').datepicker({
-		showButtonPanel: true,
-		dateFormat: 'yy-mm-dd'
-	});	
-});
-</script>
-<% end %>
-
 <div class='toolbar'>
-    <%= form_for @search, :url => admin_schedules_path do |f| %>
-    <ul class="actions">
-    	<li>
-    	Departure 
-    	from: <%= f.text_field :departure_date_greater_than_or_equal_to, :size => 7 %> 
-    	to: <%= f.text_field :departure_date_less_than_or_equal_to, :size => 7 %>
-    	<%= button t('search') %>
-    	</li>
-    	<li>
-    	<%= button_link_to "Generate schedules", 'schedules/generate', { :icon => 'add', :id => 'generate_schedule'} %>
-    	</li>
-     
-    </ul>
+  <ul class="actions">
+    <li>
+    <%= form_for(@search, :url => admin_schedules_path) do |f| %>
+      Departure from: <%= f.text_field :departure_date_greater_than_or_equal_to, :size => 8, :class => 'date-picker' %> 
+      to: <%= f.text_field :departure_date_less_than_or_equal_to, :size => 8, :class => 'date-picker' %>
+      <%= button 'Search' %>
     <% end %>  
+    </li>
+    <li>
+    <%= button_link_to "Generate schedules", 'schedules/generate', { :icon => 'add', :id => 'generate_schedule'} %>
+    </li>
+
+  </ul>
   <br class='clear' />
 </div>
 
-
-<div id="new_photo"></div>
+<div id="edit_div"></div>
 
 <table class="data-list" id='list_schedules'>
   <thead>
@@ -55,5 +37,4 @@ $(function(){
 </tbody>
 </table>
 <%= will_paginate(@collection) %>
-
 

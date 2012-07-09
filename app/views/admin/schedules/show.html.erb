@@ -1,23 +1,22 @@
-<%= render :partial => 'admin/shared/schedule_sub_menu' %>
-<%= render :partial => 'schedule_title', :locals => {:s => @operates_schedule} %>
+<%= render :partial => 'schedule_title', :locals => {:s => @object} %>
 
 <div>
 	<div class='buttons'>
-		<%= button_link_to 'Add bus', admin_schedule_path(@operates_schedule) + '/add_bus', {'data-remote' => true, :icon => 'add'} %>
+    <%= button_link_to 'Add bus', new_admin_schedule_assignment_path + "?schedule_id=#{params[:id]}", {'data-remote' => true, :icon => 'add'} %>
 		<%= button_link_to 'Hold', 'javascript:hold();', {:icon => 'tick'} %>
 		<%= button_link_to 'Release', 'javascript:release();', {:icon => 'add'} %>
-		<%= button_link_to 'Order', new_admin_shop_order_path + "?op=quick&schedule_id=#{@operates_schedule.id}" , {'data-remote' => true, :icon => 'tick'} %>
+		<%= button_link_to 'Order', 'new_admin_shop_order_path' + "?op=quick&schedule_id=#{@object.id}" , {'data-remote' => true, :icon => 'tick'} %>
 		<div class='clear'></div>
 	</div>
 	
 	<div id="tabs">
 		<ul>
-		<% @operates_schedule.assignments.each do |assignment| %>
+		<% @object.assignments.each do |assignment| %>
 			<li><a href="#tabs-<%= assignment.id %>">Bus#<%= assignment.title %></a> <span class="ui-icon ui-icon-close">Remove Tab</span></li>
 		<% end %>
 		</ul>
-		<% @operates_schedule.assignments.each do |assignment| %>
-			<%= render :partial => 'seat_table', :locals => {:assignment => assignment} %>			
+		<% @object.assignments.each do |assignment| %>
+			<%= render :partial => 'seat_table', :locals => {:assignment => assignment} if assignment.seats %>			
 		<% end %>			
 	</div>
 </div>
@@ -34,7 +33,7 @@
       <th>Phone</th>
       <th>Status</th>
   </tr>
-<% @operates_schedule.orders.each do |order| %>
+<% @object.orders.each do |order| %>
   <tr id="<%= dom_id order %>" class='<%= cycle('row', 'alt-row') %>'>
       <td style="font-weight:bold;text-align:center;text-decoration:underline;">
       	<%= link_to order.id, admin_shop_order_path(order) + "/edit?p=order_seats", :remote => true %>
@@ -56,10 +55,10 @@
 	<div id='edit_div' class='dialog-normal'></div>
 
 	<div id="dialog_hold" title="Hold Seats">
-		<%= form_tag admin_schedule_path(@operates_schedule) + '/hold_seats',:remote => true, :id => 'hold_seat_form' do %>
+		<%= form_tag object_url(@object) + '/hold_seats',:remote => true, :id => 'hold_seat_form' do %>
 	<%= hidden_field_tag :seats %>
 	<%= hidden_field_tag :assignment_id %>
-	<%= hidden_field_tag :schedule_id, @operates_schedule.id %>
+	<%= hidden_field_tag :schedule_id, @object.id %>
 
 		<p>
 			Selected seats: <b id='seats_text'></b>
@@ -93,9 +92,7 @@
 	  </div>
 	  <input type='text' id='order_rooms' />
 	</div>
-	<div id='dialog_edit' title='Edit Schdule'>
-		<%= render 'form_schedule' %>
-	</div>
+  <div id='edit_div' title='Edit Schdule' class='dialog-normal'></div>
 <%= content_for :head do %>
 	<style type="text/css">
 		.diagram-exp .block {width:16px;height:16px;margin-right:4px;float:left;border:solid 1px grey;}
@@ -184,9 +181,6 @@
 		});
 	});
 
-	function edit_price(){
-		$('#dialog_edit').dialog('open');
-	}
 	function hold(){
 		if (validate_seats()){
 			$('#dialog_hold').dialog('open');

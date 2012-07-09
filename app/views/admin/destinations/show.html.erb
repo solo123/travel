@@ -32,16 +32,14 @@ function refresh_thumbs(){
   <h1><%= @object.title %>, <%= @object.title_cn %></h1>
 
 <% if @object.photo %>
-<div>
-	<%= image_tag @object.photo.photo_m, :id => 'dest_icon', :style => 'float:left;margin-right:10px;' %>
+	<%= image_tag @object.photo.photo_m, :id => 'dest_icon' %>
 
-	<div style='float:left;'>
-		<div style='float:left;width:48%;margin-right:10px;'><%= @object.description.en %></div>
-		<div style='float:left;width:48%;'><%= @object.description.cn %></div>
+	<div>
+		<div class='span-half'><%= @object.description.en %></div>
+		<div class='span-half'><%= @object.description.cn %></div>
 		<div class='clear'></div>
 	</div>
 	<div class='clear'></div>
-</div>
 <p>
 <%= link_to 'Photos on Flickr.com', 'http://www.flickr.com/photos/organize/?start_tab=one_set' + @object.photo.photoset, :target => '_blank' %> | 
 <%= link_to 'Upload', 'http://www.flickr.com/photos/upload/', :target => '_blank' %> |
