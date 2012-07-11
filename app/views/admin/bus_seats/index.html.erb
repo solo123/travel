@@ -1,10 +1,18 @@
+<%
+  schedule = Schedule.find(params[:schedule_id])
+  assignment = ScheduleAssignment.find(params[:schedule_assignment_id])
+%>
 <div id="tabs-<%= assignment.id %>">
+
 	<p>
 		Bus: <%= assignment.bus.name if assignment.bus %>
 		Driver: <%= assignment.driver.nickname if assignment.driver %> / 
 		<%= assignment.driver_assistance.nickname if assignment.driver_assistance %>
 		Tour guide: <%= assignment.tour_guide.nickname if assignment.tour_guide %> / 
 		<%= assignment.tour_guide_assistance.nickname if assignment.tour_guide_assistance %>
+    |
+    <%= link_to 'Edit', edit_admin_schedule_schedule_assignment_path(schedule, assignment), :remote => true %>
+    <%= link_to 'Delete', admin_schedule_schedule_assignment_path(schedule,assignment), :method => :delete, :remote => true %>
 	</p>
 	
 	<table width="380" cellspacing="0" cellpadding="4" border="0" style="border: solid 1px darkgreen; width:auto;">
@@ -18,6 +26,7 @@
 	</tbody></table>
 	
 	<div class='seat-table'>
+    <%= form_for assignment, :url => hold_seats_admin_schedule_schedule_assignment_path(assignment.schedule_id, assignment), :remote => true do |f| %>
 		<% (1..assignment.total_seats).each do |i| %>
 		<% if ((i-1) % 4) == 0 %>
 			<div class="clear"></div>
@@ -26,7 +35,10 @@
 		<% end %>
 			<%= render :partial => 'seat', :locals => {:i => i, :assignment => assignment} %>
 		<% end %>
-		<div class="clear"></div>
+    <div class="clear"></div>
+    <input type='hidden' value='' name='message1' />
+    <%= f.submit 'submit' %>
+  <% end %>
 	</div>
 </div>
 		

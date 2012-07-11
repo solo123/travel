@@ -1,16 +1,18 @@
-  <%= f.fields_for :description do |desc| %>
+<%= f.fields_for :description do |desc| %>
   <div class="container">
-  	<div class="span-8">
-  	<%= f.field_container :en do %>
-  		<%= desc.label :en %><br />
-  		<%= desc.text_area :en, :style => 'width:90%' %>
-  	<% end %>
-  	</div>
-  	<div class="span-8 last">
-  	<%= f.field_container :cn do %>
-  		<%= desc.label :cn %><br />
-  		<%= desc.text_area :cn %>
-  	<% end %>
+    <div class="span-8">
+      <%= f.field_container :en do %>
+        <%= desc.label :en %><br />
+        <%= desc.text_area :en, :style => 'width: 98%', :class => 'html-editor' %>
+      <% end %>
+    </div>
+    <div class="span-8 last">
+      <%= f.field_container :cn do %>
+        <%= desc.label :cn %><br />
+        <%= desc.text_area :cn, :style => 'width: 98%', :class => 'html-editor' %>
+      <% end %>
     </div>
   </div>
-  <% end %>
+<% end %>
+
+

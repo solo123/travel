@@ -1,0 +1,27 @@
+<div class='toolbar'>
+  <ul class='actions'>
+    <li>
+    <%= button_link_to 'Add', new_admin_position_path, {:remote => true, :icon => 'add', :id => 'admin_new_position'} %>
+    </li>
+  </ul>
+  <br class='clear' />
+</div>
+
+<h1><%= raw "#{t("actions.listing")} #{t("positions")}" %></h1>
+<div id='edit_div' class='dialog-normal'></div>
+<table id='list_positions' class="data-list">
+  <thead>
+    <tr>
+        <th><%= t("id") %></th>
+        <th><%= t("title") %></th>
+        <th><%= t('status') %></th>
+        <th><%= t(:created_at) %></th>
+        <th>op</th>
+    </tr>
+  </thead>
+<% @collection.each do |c| %>
+  <%= render :partial => 'row', :locals => {:obj => c} %>
+<% end %>
+</table>
+<%= will_paginate(@collection) %>
+

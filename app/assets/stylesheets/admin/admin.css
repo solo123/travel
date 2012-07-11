@@ -4,5 +4,5 @@
  *= require jqueryui/ui
  *= require superfish/superfish
  *= require_self
- *= require_tree .
+ *= require_tree ./shared
  */

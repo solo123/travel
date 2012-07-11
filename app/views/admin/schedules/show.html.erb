@@ -1,29 +1,30 @@
-<%= render :partial => 'schedule_title', :locals => {:s => @object} %>
-
+<div id='schedule_title'>
+  <%= render :partial => 'schedule_title', :locals => {:s => @object} %>
+</div>
 <div>
-	<div class='buttons'>
-    <%= button_link_to 'Add bus', new_admin_schedule_assignment_path + "?schedule_id=#{params[:id]}", {'data-remote' => true, :icon => 'add'} %>
-		<%= button_link_to 'Hold', 'javascript:hold();', {:icon => 'tick'} %>
-		<%= button_link_to 'Release', 'javascript:release();', {:icon => 'add'} %>
-		<%= button_link_to 'Order', 'new_admin_shop_order_path' + "?op=quick&schedule_id=#{@object.id}" , {'data-remote' => true, :icon => 'tick'} %>
-		<div class='clear'></div>
-	</div>
-	
-	<div id="tabs">
-		<ul>
-		<% @object.assignments.each do |assignment| %>
-			<li><a href="#tabs-<%= assignment.id %>">Bus#<%= assignment.title %></a> <span class="ui-icon ui-icon-close">Remove Tab</span></li>
-		<% end %>
-		</ul>
-		<% @object.assignments.each do |assignment| %>
-			<%= render :partial => 'seat_table', :locals => {:assignment => assignment} if assignment.seats %>			
-		<% end %>			
-	</div>
+  <div class='toolbar'>
+    <ul class='actions'>
+      <li>
+      <%= button_link_to 'Add bus', new_admin_schedule_schedule_assignment_path(@object) + "?schedule_id=#{params[:id]}", { :remote => true, :icon => 'add'} %></li>
+      <li><%= button_link_to 'Hold', 'javascript:hold()', {:icon => 'tick'} %></li>
+      <li><%= button_link_to 'Release', 'javascript:release();', {:icon => 'add'} %></li>
+      <li><%= button_link_to 'Order', 'new_admin_shop_order_path' + "?op=quick&schedule_id=#{@object.id}" , {'data-remote' => true, :icon => 'tick'} %></li>
+    </ul>
+    <br class='clear' />
+  </div>
+
+  <div id="tabs">
+    <ul>
+      <% @object.assignments.each do |assignment| %>
+        <li><%= link_to assignment.title, admin_schedule_schedule_assignment_bus_seats_path(@object, assignment) %><span class='ui-icon ui-icon-close' tag='<%= assignment.id %>'>Remove Tab</span></li> </li>
+      <% end %>
+    </ul>
+  </div>
 </div>
 
 <div>
-<table class="index">
-  <tr>
+  <table class="index">
+    <tr>
       <th><%= t("order_id") %></th>
       <th>Type</th>
       <th>Related id</th>
@@ -32,229 +33,223 @@
       <th>Customer</th>
       <th>Phone</th>
       <th>Status</th>
-  </tr>
-<% @object.orders.each do |order| %>
-  <tr id="<%= dom_id order %>" class='<%= cycle('row', 'alt-row') %>'>
-      <td style="font-weight:bold;text-align:center;text-decoration:underline;">
-      	<%= link_to order.id, admin_shop_order_path(order) + "/edit?p=order_seats", :remote => true %>
-      </td>
-      <td><%= order.order_source_type %></td>
-      <td><%= order.order_source_id %></td>
-      <td></td>
-      <td></td>
-      <td><%= order.customer_name %></td>
-      <td>phone</td>
-      <td><%= order.state %></td>
-  </tr>
-<% end %>
-</table>
+    </tr>
+    <% @object.orders.each do |order| %>
+      <tr id="<%= dom_id order %>" class='<%= cycle('row', 'alt-row') %>'>
+        <td style="font-weight:bold;text-align:center;text-decoration:underline;">
+          <%= link_to order.id, admin_shop_order_path(order) + "/edit?p=order_seats", :remote => true %>
+        </td>
+        <td><%= order.order_source_type %></td>
+        <td><%= order.order_source_id %></td>
+        <td></td>
+        <td></td>
+        <td><%= order.customer_name %></td>
+        <td>phone</td>
+        <td><%= order.state %></td>
+      </tr>
+    <% end %>
+  </table>
 </div>
 
 
-	<div id="dialog" title="Tab data"></div>
-	<div id='edit_div' class='dialog-normal'></div>
+<div id="dialog" title="Tab data"></div>
+<div id='edit_div' class='dialog-normal'></div>
 
-	<div id="dialog_hold" title="Hold Seats">
-		<%= form_tag object_url(@object) + '/hold_seats',:remote => true, :id => 'hold_seat_form' do %>
-	<%= hidden_field_tag :seats %>
-	<%= hidden_field_tag :assignment_id %>
-	<%= hidden_field_tag :schedule_id, @object.id %>
+<div id="dialog_hold" title="Hold Seats">
+  <%= form_tag 'hold_seats',:remote => true do %>
+    <%= hidden_field_tag :seats %>
+    <%= hidden_field_tag :assignment_id %>
+    <%= hidden_field_tag :schedule_id, @object.id %>
 
-		<p>
-			Selected seats: <b id='seats_text'></b>
-		</p>
-		<p>
-			<%= label_tag 'message1', 'Message' %><br />
-			<%= text_field_tag :message1 %>
-		</p>
-			<%= submit_tag 'Hold' %>
-		<% end %>
-	</div>
-	<div id="dialog_release" title="Release seats?">
-		<p>Release Seats: <b id='release_seats_text'></b></p>
-		<p>Are you sure?</p>
-	</div>
-	<div id="dialog_order" title="Order">
-		<p>
-			Price: 123.00, 150.00, 160.00, 170.00
-		</p>
-		Rooms: <%= link_to "Add room", 'javascript:add_room()', :id => 'btn_add_room' %><br />
-		<div id='rooms'>
-			<div class='room'>
-				<span>Room 1#</span>
-				<select id="num" name="num_per_room[1]">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-				</select> person.
-			</div>
-	  </div>
-	  <input type='text' id='order_rooms' />
-	</div>
-  <div id='edit_div' title='Edit Schdule' class='dialog-normal'></div>
+    <p>
+    Selected seats: <b id='seats_text'></b>
+    </p>
+    <p>
+    <%= label_tag 'message1', 'Message' %><br />
+    <%= text_field_tag :message1 %>
+    </p>
+    <%= submit_tag 'Hold' %>
+  <% end %>
+</div>
+<div id="dialog_release" title="Release seats?">
+  <p>Release Seats: <b id='release_seats_text'></b></p>
+  <p>Are you sure?</p>
+</div>
+<div id="dialog_order" title="Order">
+  <p>
+  Price: 123.00, 150.00, 160.00, 170.00
+  </p>
+  Rooms: <%= link_to "Add room", 'javascript:add_room()', :id => 'btn_add_room' %><br />
+  <div id='rooms'>
+    <div class='room'>
+      <span>Room 1#</span>
+      <select id="num" name="num_per_room[1]">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select> person.
+    </div>
+  </div>
+  <input type='text' id='order_rooms' />
+</div>
+<div id='edit_div' title='Edit Schdule' class='dialog-normal'></div>
 <%= content_for :head do %>
-	<style type="text/css">
-		.diagram-exp .block {width:16px;height:16px;margin-right:4px;float:left;border:solid 1px grey;}
-		.blnk { background-color:#339966; }
-		.hold { background-color:#ffff80; }
-		.sold { background-color:#ff99cc; }
-		.paid { background-color:#ffcc99; }
-	
-		.seat-table {border:solid 1px green;margin:2px;}
-		.seat-table .seat {
-			width:23%;float:left;
-			border:solid 2px #ccc;
-			padding:4px;margin:1px;
-			position: relative;}
-		.seat-table .error {
-			border:solid 2px red;
-		}
-		.seat-table .seat-r{width:23%;float:right;border:solid 1px blue;padding:4px;margin:1px;}
-		.seat-table .clear {clear:both;}
-		.seat-table .space {width:3%;float:left;}
-		.seat-table .seat-check {float: left;position: absolute;bottom:0px;}
-		.seat-table .seat-pickup {float:left;}
-		.seat-table .seat-info {text-align: right;}
-		
-		.seat-table .seat:hover {border:solid 2px blue;}
+  <style type="text/css">
+    .diagram-exp .block {width:16px;height:16px;margin-right:4px;float:left;border:solid 1px grey;}
+    .blnk { background-color:#339966; }
+    .hold { background-color:#ffff80; }
+    .sold { background-color:#ff99cc; }
+    .paid { background-color:#ffcc99; }
 
-	#dialog label, #dialog input { display:block; }
-	#dialog label { margin-top: 0.5em; }
-	#dialog input, #dialog textarea { width: 95%; }
-	#tabs { margin-top: 1em; }
-	#tabs li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
-	#add_tab { cursor: pointer; }
-	</style>
-	<script type="text/javascript">
-	$(function() {
-		// tabs init with a custom tab template and an "add" callback filling in the content
-		var $tabs = $( "#tabs").tabs({
-			tabTemplate: "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close'>Remove Tab</span></li>",
-		});
+    .seat-table {border:solid 1px green;margin:2px;}
+    .seat-table .seat {
+      width:23%;float:left;
+      border:solid 2px #ccc;
+      padding:4px;margin:1px;
+      position: relative;}
+    .seat-table .error {
+      border:solid 2px red;
+    }
+    .seat-table .seat-r{width:23%;float:right;border:solid 1px blue;padding:4px;margin:1px;}
+    .seat-table .clear {clear:both;}
+    .seat-table .space {width:3%;float:left;}
+    .seat-table .seat-check {float: left;position: absolute;bottom:0px;}
+    .seat-table .seat-pickup {float:left;}
+    .seat-table .seat-info {text-align: right;}
+
+    .seat-table .seat:hover {border:solid 2px blue;}
+
+    #dialog label, #dialog input { display:block; }
+    #dialog label { margin-top: 0.5em; }
+    #dialog input, #dialog textarea { width: 95%; }
+    #tabs { margin-top: 1em; }
+    #tabs li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
+    #add_tab { cursor: pointer; }
+  </style>
 
 
+  <script type="text/javascript">
+    $(function() {
+        // tabs init with a custom tab template and an "add" callback filling in the content
+        var $tabs = $( "#tabs").tabs({
+tabTemplate: "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close'>Remove Tab</span></li>"
+        });
 
-		// modal dialog init: custom buttons and a "close" callback reseting the form inside
-		$( "#dialog, #dialog_hold, #dialog_edit" ).dialog({
-			autoOpen: false,
-			modal: true
-		});
+        // modal dialog init: custom buttons and a "close" callback reseting the form inside
+        $( "#dialog, #dialog_hold, #dialog_edit" ).dialog({
+autoOpen: false,
+modal: true
+});
 
-		$( "#dialog_release" ).dialog({
-			autoOpen: false,
-			resizable: false,
-			height:140,
-			modal: true,
-			buttons: {
-				"Release seats": function(data) {
-					$( this ).dialog( "close" );
-					$.post( $('#schedule_id').val() + '/release_seats', 
-						{seats: $('#seats').val(), assignment_id: $('#assignment_id').val()});
-				},
-				Cancel: function() {
-					$( this ).dialog( "close" );
-				}
-			}
-		});		
-		$( "#dialog_order" ).dialog({
-			autoOpen: false,
-			resizable: false,
-			height:140,
-			modal: true,
-			buttons: {
-				"New Order": function(data) {
-					$( this ).dialog( "close" );
-					$.post( $('#schedule_id').val() + '/new_order', 
-						{rooms: $('#order_rooms').val(), assignment_id: $('#assignment_id').val()});
-				},
-				Cancel: function() {
-					$( this ).dialog( "close" );
-				}
-			}
-		});
-		// close icon: removing the tab on click
-		// note: closable tabs gonna be an option in the future - see http://dev.jqueryui.com/ticket/3924
-		$( "#tabs span.ui-icon-close" ).live( "click", function() {
-			var index = $( "li", $tabs ).index( $( this ).parent() );
-			$tabs.tabs( "remove", index );
-		});
-	});
+        $( "#dialog_release" ).dialog({
+autoOpen: false,
+resizable: false,
+height:140,
+modal: true,
+buttons: {
+"Release seats": function(data) {
+$( this ).dialog( "close" );
+$.post( $('#schedule_id').val() + '/release_seats', 
+  {seats: $('#seats').val(), assignment_id: $('#assignment_id').val()});
+},
+Cancel: function() {
+$( this ).dialog( "close" );
+}
+}
+});		
+$( "#dialog_order" ).dialog({
+autoOpen: false,
+resizable: false,
+height:140,
+modal: true,
+buttons: {
+"New Order": function(data) {
+$( this ).dialog( "close" );
+$.post( $('#schedule_id').val() + '/new_order', 
+  {rooms: $('#order_rooms').val(), assignment_id: $('#assignment_id').val()});
+},
+Cancel: function() {
+$( this ).dialog( "close" );
+}
+}
+});
+// close icon: removing the tab on click
+// note: closable tabs gonna be an option in the future - see http://dev.jqueryui.com/ticket/3924
+$( "#tabs span.ui-icon-close" ).live( "click", function() {
+    var index = $( "li", $tabs ).index( $( this ).parent() );
+    if (confirm('This bus assignment can delete only when seats are EMPTY. \nAre you sure do delete it?')){
+    $.ajax({ url: location.href + '/schedule_assignments/' + $(this).attr('tag'), type: 'DELETE'});
+    $tabs.tabs( "remove", index );
+    }
+    });
+});
 
-	function hold(){
-		if (validate_seats()){
-			$('#dialog_hold').dialog('open');
-		}	
-	}
-	function release(){
-		if (validate_hold_seats()) $('#dialog_release').dialog('open');
-	}
-	function new_order(){
-		if (validate_new_order()) $('#dialog_order').dialog('open');
-	}
-	function validate_seats(){
-		var tab = $('.ui-tabs-panel:not(.ui-tabs-hide)');
-		if (tab.find('input[type="checkbox"]:checked').length == 0){
-			alert('Please select seats.');
-			return false;
-		}
-		
-		var result = '';
-		tab.find('input[type="checkbox"]:checked').each(function(){ if(!$(this).parent().parent().hasClass('blnk')) result += $(this).next().text() + ', '; });
-		if (result.length > 0) {
-			alert('Seats: ' + result + 'been taken. Please check again.');
-			return false;
-		}
-		
-		result = tab.find('input[type="checkbox"]:checked').map(function(){ return $(this).next().text(); }).get().join(',');
-		$('#seats').val(result);
-		$('#assignment_id').val(tab.attr('id').substr(5));
-		$('#seats_text').text(result);
-		return true;
-	}
-	function validate_hold_seats(){
-		var tab = $('.ui-tabs-panel:not(.ui-tabs-hide)');
-		if (tab.find('input[type="checkbox"]:checked').length == 0){
-			alert('Please select hold seats.');
-			return false;
-		}
-		
-		var result = '';
-		tab.find('input[type="checkbox"]:checked').each(function(){ if(!$(this).parent().parent().hasClass('hold')) result += $(this).next().text() + ', '; });
-		if (result.length > 0) {
-			alert('Seats: ' + result + ' not hold. Please check again.');
-			return false;
-		}
-		
-		result = tab.find('input[type="checkbox"]:checked').map(function(){ return $(this).next().text(); }).get().join(',');
-		$('#seats').val(result);
-		$('#assignment_id').val(tab.attr('id').substr(5));
-		$('#release_seats_text').text(result);
-		return true;
-	}
-	function validate_new_order(){
-		var tab = $('.ui-tabs-panel:not(.ui-tabs-hide)');
-		$('#assignment_id').val(tab.attr('id').substr(5));
-		return true;		
-	}
-	function add_room(){
-  	var room = "<div class='room'>" +
-  	"Room <span class='room_id'>?</span>#" +
-    "<select name='num'>" +
-      "<option value='1'>1</option>" +
-      "<option value='2'>2</option>" +
-      "<option value='3'>3</option>" +
-      "<option value='4'>4</option>" +
-    "</select> person." +
-    "<a href='javascript:void(0)' class='btn_remove_room'>remove</a>" +
-  "</div>";
-  	$('#rooms').append(room);
+function release(){
+  if (validate_hold_seats()) $('#dialog_release').dialog('open');
+}
+function new_order(){
+  if (validate_new_order()) $('#dialog_order').dialog('open');
+}
+function validate_seats(){
+  var tab = $('.ui-tabs-panel:not(.ui-tabs-hide)');
+  if (tab.find('input[type="checkbox"]:checked').length == 0){
+    alert('Please select seats.');
+    return false;
   }
 
+  var result = '';
+  tab.find('input[type="checkbox"]:checked').each(function(){ if(!$(this).parent().parent().hasClass('blnk')) result += $(this).next().text() + ', '; });
+  if (result.length > 0) {
+    alert('Seats: ' + result + 'been taken. Please check again.');
+    return false;
+  }
 
-  	function after_order_saved(){
-  		alert('order saved now!');
-  		$("#edit_div").dialog('close');
-  	}
-	</script>	
+ return true;
+}
+function validate_hold_seats(){
+  var tab = $('.ui-tabs-panel:not(.ui-tabs-hide)');
+  if (tab.find('input[type="checkbox"]:checked').length == 0){
+    alert('Please select hold seats.');
+    return false;
+  }
+
+  var result = '';
+  tab.find('input[type="checkbox"]:checked').each(function(){ if(!$(this).parent().parent().hasClass('hold')) result += $(this).next().text() + ', '; });
+  if (result.length > 0) {
+    alert('Seats: ' + result + ' not hold. Please check again.');
+    return false;
+  }
+
+  result = tab.find('input[type="checkbox"]:checked').map(function(){ return $(this).next().text(); }).get().join(',');
+  $('#seats').val(result);
+  $('#assignment_id').val(tab.attr('id').substr(5));
+  $('#release_seats_text').text(result);
+  return true;
+}
+function validate_new_order(){
+  var tab = $('.ui-tabs-panel:not(.ui-tabs-hide)');
+  $('#assignment_id').val(tab.attr('id').substr(5));
+  return true;		
+}
+function add_room(){
+  var room = "<div class='room'>" +
+    "Room <span class='room_id'>?</span>#" +
+    "<select name='num'>" +
+    "<option value='1'>1</option>" +
+    "<option value='2'>2</option>" +
+    "<option value='3'>3</option>" +
+    "<option value='4'>4</option>" +
+    "</select> person." +
+    "<a href='javascript:void(0)' class='btn_remove_room'>remove</a>" +
+    "</div>";
+  $('#rooms').append(room);
+}
+
+
+function after_order_saved(){
+  alert('order saved now!');
+  $("#edit_div").dialog('close');
+}
+</script>	
 <% end %>

@@ -36,8 +36,13 @@ Omei::Application.routes.draw do
         get :select, :search, :generate
         put 'selected'
       end
+      resources :schedule_assignments do
+        resources :bus_seats
+        member do
+          put :hold_seats
+        end
+      end
     end
-    resources :schedule_assignments
     resources :user_infos do
       collection do
         get 'select', 'search', 'add_tel'
@@ -51,7 +56,7 @@ Omei::Application.routes.draw do
     end
     resources :payments, :vouchers, :company_receivables
     resources :telephones, :emails, :addresses
-    resources :input_types, :tour_types
+    resources :input_types, :tour_types, :positions
   end
 
   match '/admin', :to => 'admin/home#index', :as => :admin

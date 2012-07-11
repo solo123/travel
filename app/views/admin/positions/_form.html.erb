@@ -1,0 +1,15 @@
+<%= form_for( [:admin, @object], :remote => true) do |f| %>
+  <div class="container">
+    <div class='span-8'>
+      <%= f.field_container :title do %>
+        <%= f.label :title %><br />
+        <%= f.text_field :title %>
+      <% end %>
+      <%= render :partial => 'admin/shared/status', :locals => {:f => f} %> 
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,5 +1,4 @@
 $("#edit_div").dialog('close');
-$('#tabs')
-	.append("<%= escape_javascript(render :partial => 'schedules/seat_table', :locals => {:assignment => @assignment}) %>")
-	.tabs( "add",'#tabs-<%= @assignment.id %>', "Bus#<%= @assignment.title %>");
-
+var idx = $('#tabs').tabs('option','selected');
+$('#tabs').tabs( "load", idx);
+$('#tabs ul:first li:eq(' + idx + ') a').text("<%= @object.title %>");

@@ -1,0 +1,26 @@
+@import 'def_colors';
+
+.schedule-title {
+  margin-bottom: 10px;
+ .s-title-banner{
+    border:solid 1px $bd2;
+    background-color: $bg2;
+    .s-id {
+      float:left;
+      font-size: 2em;
+      font-weight:bold;
+      color: white;
+      background-color: $bg3;
+      padding:8px;
+      width: 100px;
+      text-align:center;
+      .s-status { font-size: 60%; font-weight:normal;}
+    }
+    .s-title { font-weight:bold; font-size:1.2em; text-align: center;padding-top:8px; }
+    .s-date {float:right; padding: 8px;}
+  }
+  .s-prompt-banner{
+    .s-price {float:left;}
+    .s-info {float:right;}
+  }
+}
