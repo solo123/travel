@@ -16,7 +16,7 @@
   <div id="tabs">
     <ul>
       <% @object.assignments.each do |assignment| %>
-        <li><%= link_to assignment.title, admin_schedule_schedule_assignment_bus_seats_path(@object, assignment) %><span class='ui-icon ui-icon-close' tag='<%= assignment.id %>'>Remove Tab</span></li> </li>
+        <li><%= link_to "#{assignment.id}:#{assignment.title}", admin_schedule_schedule_assignment_bus_seats_path(@object, assignment) %><span class='ui-icon ui-icon-close'>Remove Tab</span></li> </li>
       <% end %>
     </ul>
   </div>
@@ -126,22 +126,15 @@
     #tabs { margin-top: 1em; }
     #tabs li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
     #add_tab { cursor: pointer; }
+    .small-button{font-size: 0.72em !important;}
+    .small-button .ui-button-text {line-height: 1; padding-left: 22px;}
+
   </style>
 
+  <%= javascript_include_tag 'admin/schedule_assignments' %>
 
   <script type="text/javascript">
     $(function() {
-        // tabs init with a custom tab template and an "add" callback filling in the content
-        var $tabs = $( "#tabs").tabs({
-tabTemplate: "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close'>Remove Tab</span></li>"
-        });
-
-        // modal dialog init: custom buttons and a "close" callback reseting the form inside
-        $( "#dialog, #dialog_hold, #dialog_edit" ).dialog({
-autoOpen: false,
-modal: true
-});
-
         $( "#dialog_release" ).dialog({
 autoOpen: false,
 resizable: false,
@@ -174,58 +167,11 @@ $( this ).dialog( "close" );
 }
 }
 });
+});
 // close icon: removing the tab on click
 // note: closable tabs gonna be an option in the future - see http://dev.jqueryui.com/ticket/3924
-$( "#tabs span.ui-icon-close" ).live( "click", function() {
-    var index = $( "li", $tabs ).index( $( this ).parent() );
-    if (confirm('This bus assignment can delete only when seats are EMPTY. \nAre you sure do delete it?')){
-    $.ajax({ url: location.href + '/schedule_assignments/' + $(this).attr('tag'), type: 'DELETE'});
-    $tabs.tabs( "remove", index );
-    }
-    });
-});
-
-function release(){
-  if (validate_hold_seats()) $('#dialog_release').dialog('open');
-}
 function new_order(){
   if (validate_new_order()) $('#dialog_order').dialog('open');
-}
-function validate_seats(){
-  var tab = $('.ui-tabs-panel:not(.ui-tabs-hide)');
-  if (tab.find('input[type="checkbox"]:checked').length == 0){
-    alert('Please select seats.');
-    return false;
-  }
-
-  var result = '';
-  tab.find('input[type="checkbox"]:checked').each(function(){ if(!$(this).parent().parent().hasClass('blnk')) result += $(this).next().text() + ', '; });
-  if (result.length > 0) {
-    alert('Seats: ' + result + 'been taken. Please check again.');
-    return false;
-  }
-
- return true;
-}
-function validate_hold_seats(){
-  var tab = $('.ui-tabs-panel:not(.ui-tabs-hide)');
-  if (tab.find('input[type="checkbox"]:checked').length == 0){
-    alert('Please select hold seats.');
-    return false;
-  }
-
-  var result = '';
-  tab.find('input[type="checkbox"]:checked').each(function(){ if(!$(this).parent().parent().hasClass('hold')) result += $(this).next().text() + ', '; });
-  if (result.length > 0) {
-    alert('Seats: ' + result + ' not hold. Please check again.');
-    return false;
-  }
-
-  result = tab.find('input[type="checkbox"]:checked').map(function(){ return $(this).next().text(); }).get().join(',');
-  $('#seats').val(result);
-  $('#assignment_id').val(tab.attr('id').substr(5));
-  $('#release_seats_text').text(result);
-  return true;
 }
 function validate_new_order(){
   var tab = $('.ui-tabs-panel:not(.ui-tabs-hide)');

@@ -1,15 +1,23 @@
 module Admin
   class ScheduleAssignmentsController < ResourceController
+    create.after :add_shift
+    update.after :add_shift
+
+    def add_shift
+      @object.add_shift
+    end
     def destroy
       load_object
       if @object.seats.count == 0
+        @object.del_shift
         @object.delete
       else
         flash[:alert] = 'not empty'
       end
     end
-    def hold_seats
+    def seats      
       load_object
+      if params[:operate] == 'hold'
       params[:seats].each do |seat_input|
         seat = @object.seats.build
         seat.seat_number = seat_input[0]
@@ -18,6 +26,10 @@ module Admin
         seat.message2 = "#employee.nickname<br />137-234-23434"
         seat.state = 'hold'
         seat.save
+      end
+      elsif params[:operate] == 'release'
+        params[:seats].each do |seat_input|
+        end
       end
     end
     def release_seats

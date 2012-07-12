@@ -114,6 +114,11 @@
         icon_name ? image_tag("admin/icons/#{icon_name}.png") : ''
       end
 
+      def small_edit_link(url, options = {})
+        options[:class] = 'small-button'
+        link_to('Edit', url, options)
+      end
+
       def button(text, icon_name = nil, button_type = 'submit', options={})
         content_tag('button', content_tag('span', icon(icon_name) + ' ' + text), options.merge(:type => button_type))
       end

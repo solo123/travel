@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  bus_id: 1
+  schedule_assignment_id: 1
+  date: 2012-07-12 14:41:07
+
+two:
+  bus_id: 1
+  schedule_assignment_id: 1
+  date: 2012-07-12 14:41:07

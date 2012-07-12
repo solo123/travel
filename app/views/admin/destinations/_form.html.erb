@@ -3,7 +3,7 @@
 		@object.build_description
 	end
 %>
-<%= form_for( @object, :url => post_path, :remote => true) do |f| %>
+<%= form_for( [:admin, @object], :remote => true) do |f| %>
 	<%= render :partial => 'admin/shared/title', :locals => {:f => f} %>
 	<%= render :partial => 'admin/shared/description', :locals => {:f => f} %>
 	<%#= render :partial => 'city', :locals => { :f => f } %>

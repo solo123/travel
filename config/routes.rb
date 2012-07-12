@@ -39,7 +39,7 @@ Omei::Application.routes.draw do
       resources :schedule_assignments do
         resources :bus_seats
         member do
-          put :hold_seats
+          put :seats
         end
       end
     end

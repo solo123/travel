@@ -18,13 +18,13 @@
 <table class="data-list" id='list_buses'>
   <thead>
   <tr>
+    <th>ID</th>
     <th><%= sort_link @search, :name, t("name") %></th>
     <th><%= sort_link @search, :bus_type, t("bus_type") %></th>
     <th><%= sort_link @search, :seats, t("seats") %></th>
     <th><%= t(:plate_number) %></th>
     <th><%= t(:vin_number) %></th>
     <th><%= sort_link @search, :inspection_date, t(:inspection_date) %></th>
-    <th><%= t(:remark) %></th>
     <th><%= t(:is_own) %></th>
     <th><%= t(:status) %></th>
     <th><%= t(:created_at) %></th>

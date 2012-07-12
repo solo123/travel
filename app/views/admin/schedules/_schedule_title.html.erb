@@ -21,7 +21,7 @@
       2人:<b><%= s.price.price2 %></b> / 
       3人:<b><%= s.price.price3 %></b> / 
       4人:<b><%= s.price.price4 %></b> 
-      <%= link_to 'Edit', object_url(@object) + '/edit', :remote => true %>
+      <%= small_edit_link object_url(@object) + '/edit', :remote => true %>
     </div>
     <div class="s-info">
       预定人数: <b><%= s.book_customers %></b> / 

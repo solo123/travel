@@ -1,4 +1,4 @@
-<%= form_for( @object, :url => post_path, :remote => true) do |f| %>
+<%= form_for( [:admin, @object], :remote => true) do |f| %>
 	<%= render :partial => 'admin/shared/title', :locals => {:f => f} %>
   <div class="container">
   	<div class='span-8'>
