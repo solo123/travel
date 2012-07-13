@@ -1,10 +1,6 @@
 module Admin
   class SchedulesController < ResourceController
   
-  def select
-#    @datelist = @tour.schedules.map {|s| '[' + s.departure_date.strftime('%Y.%m.%d')+ ']'}.join()
-#    @max_date = (@tour.schedules.last.departure_date.to_date - Date.today).to_i
-  end
   def generate
     @today = Date.today
     @default_days = AppConfig[:max_reservation_days].to_i
@@ -45,16 +41,6 @@ module Admin
       end
   end
   
- 
-  def search
-    r = []
-    Tour.where("title like '%#{params[:term]}%'").limit(100).order('title').each do |t|
-      r << {:value => "#{t.id}: #{t.title}/#{t.title_cn}", :id => t.id}
-    end
-    render :text => r.to_json
-
-  end
-
   def selected
     s = Schedule.where(:tour_id => params[:tour_id]).where(:departure_date => params[:departure_date]).first
     render :text => s ? "set_schedule(#{s.id});" : "alert('not found');"

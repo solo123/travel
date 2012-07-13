@@ -1,0 +1,33 @@
+    .diagram-exp .block {width:16px;height:16px;margin-right:4px;float:left;border:solid 1px grey;}
+    .blnk { background-color:#339966; }
+    .hold { background-color:#ffff80; }
+    .sold { background-color:#ff99cc; }
+    .paid { background-color:#ffcc99; }
+
+    .seat-table {border:solid 1px green;margin:2px;}
+    .seat-table .seat {
+      width:23%;float:left;
+      border:solid 2px #ccc;
+      padding:4px;margin:1px;
+      position: relative;}
+    .seat-table .error {
+      border:solid 2px red;
+    }
+    .seat-table .seat-r{width:23%;float:right;border:solid 1px blue;padding:4px;margin:1px;}
+    .seat-table .clear {clear:both;}
+    .seat-table .space {width:3%;float:left;}
+    .seat-table .seat-check {float: left;position: absolute;bottom:0px;}
+    .seat-table .seat-pickup {float:left;}
+    .seat-table .seat-info {text-align: right;}
+
+    .seat-table .seat:hover {border:solid 2px blue;}
+
+    #dialog label, #dialog input { display:block; }
+    #dialog label { margin-top: 0.5em; }
+    #dialog input, #dialog textarea { width: 95%; }
+    #tabs { margin-top: 1em; }
+    #tabs li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
+    #add_tab { cursor: pointer; }
+    .small-button{font-size: 0.72em !important;}
+    .small-button .ui-button-text {line-height: 1; padding-left: 22px;}
+

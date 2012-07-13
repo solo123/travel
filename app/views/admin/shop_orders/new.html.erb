@@ -4,8 +4,25 @@
 <div>
 	<%= f.select :order_type, %w[tour hotel] %>
 </div>
-<div>
-	
+
+
+<div id="dialog_order" title="Order">
+  <p>
+  Price: 123.00, 150.00, 160.00, 170.00
+  </p>
+  Rooms: <%= link_to "Add room", 'javascript:add_room()', :id => 'btn_add_room' %><br />
+  <div id='rooms'>
+    <div class='room'>
+      <span>Room 1#</span>
+      <select id="num" name="num_per_room[1]">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select> person.
+    </div>
+  </div>
+  <input type='text' id='order_rooms' />
 </div>
 
 <div>

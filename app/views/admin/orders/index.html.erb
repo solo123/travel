@@ -1,19 +1,12 @@
-<% content_for :head do %>
-<script type='text/javascript'>
-function set_schedule(schedule_id){
-  $('#order_order_source_type').val('Schedule');
-  $('#order_order_source_id').val(schedule_id);
-  $('#select_schedule_div').dialog('close');
-}
-function set_member(){
-  $('#order_order_customer_attributes_customer_id').val($('#member_id').val());
-  $('#order_order_customer_attributes_full_name').val($('#member_select').val());
-
-  $('#select_customer_div').dialog('close');
-}
-</script>
+<%= content_for :head do %>
+  <%= javascript_tag do %>
+    function set_schedule(id){
+      $('#order_order_source_type').val('Schedule');
+      $('#order_order_source_id').val(id);
+      $('#select_schedule_div').dialog('close');
+    }
+  <% end %>
 <% end %>
-
 <div class="toolbar">
   <ul class="actions">
     <li>

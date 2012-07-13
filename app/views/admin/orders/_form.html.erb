@@ -7,7 +7,7 @@
     <%= f.field_container :order_source_type do %>
       <%= f.label :order_source_type %><br />
       <%= f.text_field :order_source_type %>
-      <%= button_link_to 'Select Schdule', '/admin/schedules/select', {:icon => 'add', 'data-remote' => true} %>
+      <%= button_link_to 'Select Schdule', '/admin/schedules/select', {:icon => 'add', :remote => true} %>
     <% end %>
     <%= f.field_container :order_source_id do %>
       <%= f.label :order_source_id %><br />
