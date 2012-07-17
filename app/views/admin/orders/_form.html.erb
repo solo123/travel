@@ -34,16 +34,30 @@
             @object.order_items.build
          end        
       %>
-      <%= f.fields_for :order_items do |item| %>
-        <div>
-          <p>Room number:<%= item.text_field :room_number %></p>
-          <p>Adult:<%= item.text_field :num_adult %></p>
-          <p>Child:<%= item.text_field :num_child %></p>
-          <p>Amount:<%= item.text_field :amount %></p>
-        </div>
-      <% end %>
+      <table border='1' padding='2'>
+        <thead>
+          <tr>
+            <th>Room</th>
+            <th>Adult</th>
+            <th>Child</th>
+            <th>Amount</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= f.fields_for :order_items do |item| %>
+            <tr>
+              <td><%= item.text_field :room_number, :size => 4 %></td>
+              <td><%= item.text_field :num_adult, :size => 2 %></td>
+              <td><%= item.text_field :num_child, :size => 2 %></td>
+              <td><%= item.text_field :amount, :size => 3 %></td>
+              <td>op</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= link_to 'Add Room', 'javascript:alert("add!")' %>
     </div>
-  </div>
   <div class="actions">
     <%= f.submit %>
   </div>  
