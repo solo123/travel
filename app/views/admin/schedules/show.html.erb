@@ -1,3 +1,6 @@
+<%= content_for :head do %>
+  <%= javascript_include_tag 'admin/schedules/assignments' %>
+<% end %>
 <div id='schedule_title'>
   <%= render :partial => 'schedule_title', :locals => {:s => @object} %>
 </div>
@@ -5,21 +8,31 @@
   <div class='toolbar'>
     <ul class='actions'>
       <li>
-      <%= button_link_to 'Add bus', new_admin_schedule_schedule_assignment_path(@object) + "?schedule_id=#{params[:id]}", { :remote => true, :icon => 'add'} %></li>
-      <li><%= button_link_to 'Hold', 'javascript:hold()', {:icon => 'tick'} %></li>
-      <li><%= button_link_to 'Release', 'javascript:release();', {:icon => 'add'} %></li>
-      <li><%= button_link_to 'Order', new_admin_shop_order_path + "?op=quick&schedule_id=#{@object.id}" , {:remote => true, :icon => 'tick'} %></li>
+      <%= link_button 'Add bus', new_admin_schedule_schedule_assignment_path(@object) + "?schedule_id=#{params[:id]}", { :remote => true, :ui_icon => 'ui-icon-plus'} %></li>
+      <li><%= link_button 'Hold', 'javascript:hold()', {:ui_icon => 'ui-icon-check'} %></li>
+      <li><%= link_button 'Release', 'javascript:release();', {:ui_icon => 'ui-icon-close'} %></li>
+      <li><%= link_button 'Order', new_admin_order_path + "?op=quick&schedule_id=#{@object.id}" , {:remote => true, :ui_icon => 'ui-icon-cart'} %></li>
     </ul>
+
+
     <br class='clear' />
   </div>
 
   <div id="tabs">
-    <ul>
+    <ul class='tabs'>
       <% @object.assignments.each do |assignment| %>
-        <li><%= link_to "#{assignment.id}:#{assignment.title}", admin_schedule_schedule_assignment_bus_seats_path(@object, assignment) %><span class='ui-icon ui-icon-close'>Remove Tab</span></li> </li>
+        <li><%= link_to "#{assignment.id}:#{assignment.title}", admin_schedule_schedule_assignment_bus_seats_path(@object, assignment) %></li>
       <% end %>
     </ul>
   </div>
+  <!-- single pane. it is always visible -->
+  <div class="panes">
+    <div style="display:block"></div>
+    <% (@object.assignments.count - 1).times do %>
+      <div style='display:none'></div>
+    <% end %>
+  </div>
+
 </div>
 
 <div>
@@ -53,38 +66,3 @@
 
 <div id='edit_div' class='dialog-normal'></div>
 
-<%= content_for :head do %>
-  <%= javascript_include_tag 'admin/schedule_assignments' %>
-
-  <script type="text/javascript">
-// close icon: removing the tab on click
-// note: closable tabs gonna be an option in the future - see http://dev.jqueryui.com/ticket/3924
-function new_order(){
-  if (validate_new_order()) $('#dialog_order').dialog('open');
-}
-function validate_new_order(){
-  var tab = $('.ui-tabs-panel:not(.ui-tabs-hide)');
-  $('#assignment_id').val(tab.attr('id').substr(5));
-  return true;		
-}
-function add_room(){
-  var room = "<div class='room'>" +
-    "Room <span class='room_id'>?</span>#" +
-    "<select name='num'>" +
-    "<option value='1'>1</option>" +
-    "<option value='2'>2</option>" +
-    "<option value='3'>3</option>" +
-    "<option value='4'>4</option>" +
-    "</select> person." +
-    "<a href='javascript:void(0)' class='btn_remove_room'>remove</a>" +
-    "</div>";
-  $('#rooms').append(room);
-}
-
-
-function after_order_saved(){
-  alert('order saved now!');
-  $("#edit_div").dialog('close');
-}
-</script>	
-<% end %>

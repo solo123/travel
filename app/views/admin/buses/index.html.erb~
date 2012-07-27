@@ -1,0 +1,47 @@
+<div class="toolbar">
+  <ul class="actions">
+    <li>
+      <%= form_for( @search, :url => admin_destinations_path ) do |f| %>
+      <%= f.label :name_contains, "Name" %> <%= f.text_field :name_contains, :size => 15 %> &nbsp;
+      <%= button 'Search' %>
+      <% end %>
+    </li>
+    <li>
+      <%= button_link_to 'Add Bus', 'buses/new', {:icon => 'add', 'data-remote' => true} %>
+      <a href='buses/new' rel='#overlay'>Add</a>
+    </li>
+  </ul>
+  <br class="clear">
+</div>
+
+<h1>Bus</h1>
+<div id='edit_div' class='dialog-normal'></div>
+
+<div class="apple_overlay" id="overlay">
+  <div class="contentWrap"></div>
+</div>
+
+<table class="data-list" id='list_buses'>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th><%= sort_link @search, :name, t("name") %></th>
+    <th><%= sort_link @search, :bus_type, t("bus_type") %></th>
+    <th><%= sort_link @search, :seats, t("seats") %></th>
+    <th><%= t(:plate_number) %></th>
+    <th><%= t(:vin_number) %></th>
+    <th><%= sort_link @search, :inspection_date, t(:inspection_date) %></th>
+    <th><%= t(:is_own) %></th>
+    <th><%= t(:status) %></th>
+    <th><%= t(:created_at) %></th>
+    <th><%= t(:op) %></th>
+  </tr>
+  </thead>
+  <tbody>
+<% @collection.each do |obj| %>
+  <%= render :partial => 'row', :locals => {:obj => obj} %>
+<% end %>
+  </tbody>
+</table>
+<%= will_paginate(@collection) %>
+

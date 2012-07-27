@@ -1,0 +1,34 @@
+<div class="schedule-title">
+  <div class='s-title-banner'>
+    <div class="s-id">
+      <%= s.id %><br />
+    </div>
+    <div class="s-date">
+      出發: <b><%= s.departure_date.strftime("%Y-%m-%d") %></b><br />
+      返回: <b><%= s.return_date.strftime("%Y-%m-%d") %></b>
+    </div>
+
+    <div class="s-title">
+      <%= s.tour.title_cn%> <%= s.tour.days %>日游<br />
+      <%= s.tour.title %> 
+    </div>
+    <div class='clear'></div>
+  </div>
+  <div class='s-prompt-banner'>
+    <div class="s-price">
+      价格: 
+      1人:<b><%= s.price.price1 %></b> / 
+      2人:<b><%= s.price.price2 %></b> / 
+      3人:<b><%= s.price.price3 %></b> / 
+      4人:<b><%= s.price.price4 %></b> 
+      <%= link_button 'Edit', object_url(@object) + '/edit', {:remote => true, :icon => 'ui-icon-pencil'} %>
+    </div>
+    <div class="s-info">
+      预定人数: <b><%= s.book_customers %></b> / 
+      已付款人数:<b><%= s.actual_customers %></b> / 
+      客房总数:<b><%= s.actual_rooms %></b>
+    </div>
+    <div class='clear'></div>
+  </div>
+</div>
+

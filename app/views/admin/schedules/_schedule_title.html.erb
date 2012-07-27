@@ -21,7 +21,7 @@
       2人:<b><%= s.price.price2 %></b> / 
       3人:<b><%= s.price.price3 %></b> / 
       4人:<b><%= s.price.price4 %></b> 
-      <%= small_edit_link object_url(@object) + '/edit', :remote => true %>
+      <%= link_button 'Edit', object_url(@object) + '/edit', {:remote => true, :ui_icon => 'ui-icon-pencil'} %>
     </div>
     <div class="s-info">
       预定人数: <b><%= s.book_customers %></b> / 

@@ -5,13 +5,25 @@
 	  	<%= f.label :name %><br />
 	  	<%= f.text_field :name %>
 	  <% end %>
-	  <%= f.field_container :bus_type do %>
-	  	<%= f.label :bus_type %><br />
-	  	<%= f.text_field :bus_type %>
-	  <% end %>
+      <%= f.field_container :bus_type do %>
+        <%= f.label :bus_type %><br />
+        <%= f.select(:bus_type, InputType.where(:type_name => 'bus-type').order(:type_text).collect{|d| [d.type_text, d.type_text]}, {:prompt => 'Select Bus Type'}) %>  	
+      <% end %>
 	  <%= f.field_container :seats do %>
 	  	<%= f.label :seats %><br />
 	  	<%= f.text_field :seats %>
+	  <% end %>
+	  <%= f.field_container :seats_per_row do %>
+	  	<%= f.label :seats_per_row %><br />
+	  	<%= f.text_field :seats_per_row %>
+	  <% end %>
+	  <%= f.field_container :passengeway do %>
+	  	<%= f.label :passengeway %><br />
+	  	<%= f.text_field :passengeway %>
+	  <% end %>
+	  <%= f.field_container :unavailable_seats do %>
+	  	<%= f.label :unavailable_seats %><br />
+	  	<%= f.text_field :unavailable_seats %>
 	  <% end %>
 	  </div>
 	  <div class='span-8 last'>

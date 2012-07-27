@@ -143,17 +143,6 @@ class CreateInfos < ActiveRecord::Migration
     	t.timestamps
     end
 
-    create_table :buses do |t|
-      t.string :name
-      t.string :bus_type
-      t.integer :seats
-      t.string :plate_number
-      t.string :vin_number
-      t.date :inspection_date
-      t.integer :is_own
-      t.integer :status, :default => 0
-      t.timestamps
-    end
   end
 
 end

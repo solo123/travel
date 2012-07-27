@@ -1,0 +1,49 @@
+<%= form_for( [:admin, @object], :remote => true) do |f| %>
+  <div class="container">
+  	<div class='span-8'>
+	  <%= f.field_container :name do %>
+	  	<%= f.label :name %><br />
+	  	<%= f.text_field :name %>
+	  <% end %>
+      <%= f.field_container :bus_type do %>
+        <%= f.label :bus_type %><br />
+        <%= f.select(:bus_type, InputType.where(:type_name => 'bus-type').order(:type_text).collect{|d| [d.type_text, d.type_text]}, {:prompt => 'Select Bus Type'}) %>  	
+      <% end %>
+	  <%= f.field_container :seats do %>
+	  	<%= f.label :seats %><br />
+	  	<%= f.text_field :seats %>
+	  <% end %>
+	  <%= f.field_container :seats_per_row do %>
+	  	<%= f.label :seats_per_row %><br />
+	  	<%= f.text_field :seats_per_row %>
+	  <% end %>
+	  <%= f.field_container :passengeway do %>
+	  	<%= f.label :passengeway %><br />
+	  	<%= f.text_field :passengeway %>
+	  <% end %>
+	  <%= f.field_container :unvailable_seats do %>
+	  	<%= f.label :unvailable_seats %><br />
+	  	<%= f.text_field :unvailable_seats %>
+	  <% end %>
+	  </div>
+	  <div class='span-8 last'>
+	  <%= f.field_container :plate_number do %>
+	  	<%= f.label :plate_number %><br />
+	  	<%= f.text_field :plate_number %>
+	  <% end %>
+	  <%= f.field_container :vin_number do %>
+	  	<%= f.label :vin_number %><br />
+	  	<%= f.text_field :vin_number %>
+	  <% end %>
+	  <%= f.field_container :inspection_date do %>
+	  	<%= f.label :inspection_date %><br />
+	  	<%= f.text_field :inspection_date %>
+    <% end %>
+	  <%= render :partial => 'admin/shared/status', :locals => {:f => f} %>  
+    </div>   
+	</div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

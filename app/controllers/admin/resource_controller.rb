@@ -1,6 +1,8 @@
 require 'core/action_callbacks'
 module Admin
   class ResourceController < AdminController
+    respond_to :html, :js
+
     def index
       return @collection if @collection.present?
       load_collection
@@ -13,18 +15,15 @@ module Admin
     def edit
       load_object
       invoke_callbacks(:edit, :after)
-      #render 'admin/shared/edit'
     end
     def new
       @object = object_name.classify.constantize.new
       invoke_callbacks(:new_action, :after)
-      #render 'admin/shared/new'
     end
     def update
       load_object
       @object.update_attributes(params[object_name.singularize.parameterize('_')])
       invoke_callbacks(:update, :after)
-      #render 'admin/shared/update'
     end
     def create
       @object = object_name.classify.constantize.new(params[object_name.singularize.parameterize('_')])
@@ -34,7 +33,6 @@ module Admin
       else
         flash[:error] = @object.errors.full_messages.to_sentence
       end
-      #render 'admin/shared/create'
     end
     def destroy
       load_object
@@ -44,7 +42,6 @@ module Admin
         @object.status = 1
       end
       @object.save
-      #render 'admin/shared/destroy'
     end
     
     protected

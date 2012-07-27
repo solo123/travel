@@ -1,40 +1,5 @@
   module Admin
     module NavigationHelper
-      # Make an admin tab that coveres one or more resources supplied by symbols
-      # Option hash may follow. Valid options are
-      #   * :label to override link text, otherwise based on the first resource name (translated)
-      #   * :route to override automatically determining the default route
-      #   * :match_path as an alternative way to control when the tab is active, /products would match /admin/products, /admin/products/5/variants etc.
-      def tab(*args)
-        options = {:label => args.first.to_s}
-        if args.last.is_a?(Hash)
-          options = options.merge(args.pop)
-        end
-        options[:route] ||=  "admin_#{args.first}"
-
-        destination_url = options[:url] || "#{options[:route]}_path"
-
-        titleized_label = t(options[:label], :default => options[:label]).titleize
-
-        link = link_to(titleized_label, destination_url)
-
-        css_classes = []
-
-        selected = if options[:match_path]
-          # TODO: `request.fullpath` for engines mounted at '/' returns '//'
-          # which seems an issue with Rails routing.- revisit issue #910
-          request.fullpath.gsub('//', '/').starts_with?("#{root_path}admin#{options[:match_path]}")
-        else
-          args.include?(controller.controller_name.to_sym)
-        end
-        css_classes << 'selected' if selected
-
-        if options[:css_class]
-          css_classes << options[:css_class]
-        end
-        content_tag('li', link, :class => css_classes.join(' '))
-      end
-
       def link_to_clone(resource, options={})
         link_to_with_icon('exclamation', t(:clone), clone_admin_product_url(resource), options)
       end
@@ -82,26 +47,26 @@
         fn = %Q{
           var answer = confirm("#{t(:are_you_sure)}");
           if (!!answer) { #{link_to_function_delete_ajax(options)} };
-        }
-        link_to_function options[:name], fn, html_options
-      end
+          }
+          link_to_function options[:name], fn, html_options
+        end
 
       def link_to_function_delete(options, html_options)
         link_to_function options[:name], "jConfirm('#{options[:caption]}', '#{options[:title]}', function(r) {
-          if(r){ #{link_to_function_delete_ajax(options)} }
-        });", html_options
+            if(r){ #{link_to_function_delete_ajax(options)} }
+              });", html_options
       end
 
       def link_to_function_delete_ajax(options)
         %Q{
-          $.ajax({
-            type: 'POST',
-            url: '#{options[:url]}',
-            data: ({_method: 'delete', authenticity_token: AUTH_TOKEN}),
-            dataType:'#{options[:dataType]}',
-            success: #{options[:success]},
-            error: #{options[:error]}
-          });
+    $.ajax({
+      type: 'POST',
+      url: '#{options[:url]}',
+      data: ({_method: 'delete', authenticity_token: AUTH_TOKEN}),
+      dataType:'#{options[:dataType]}',
+      success: #{options[:success]},
+      error: #{options[:error]}
+      });
         }
       end
 
@@ -140,21 +105,13 @@
         end
       end
 
+      def link_button(text, url, html_options = {})
+        link_to(text_for_button_link(text, html_options), url, {:class => 'small-button'}.update(html_options))
+      end
+
       def button_link_to_function(text, function, html_options = {})
         link_to_function(text_for_button_link(text, html_options), function, html_options_for_button_link(html_options))
       end
-
-      # RAILS 3 TODO - no longer needed
-      # def button_link_to_remote(text, url, html_options = {})
-      #   html_options.reverse_merge! :remote => true
-      #   link_to(text_for_button_link(text, html_options), url, html_options_for_button_link(html_options))
-      # end
-      #
-      # def link_to_remote(name, options = {}, html_options = {})
-      #   options[:before] ||= "jQuery(this).parent().hide(); jQuery('#busy_indicator').show();"
-      #   options[:complete] ||= "jQuery('#busy_indicator').hide()"
-      #   link_to_function(name, remote_function(options), html_options || options.delete(:html))
-      # end
 
       def text_for_button_link(text, html_options)
         s = ''
@@ -162,19 +119,25 @@
           s << icon(html_options.delete(:icon)) + ' '
         end
         s << text
-        content_tag('span', raw(s))
+        raw(s)
+        #content_tag('span', raw(s))
       end
 
       def html_options_for_button_link(html_options)
-        options = { :class => 'button' }.update(html_options)
+        color = ''
+        if html_options[:color]
+          color = ' ' + html_options.delete(:color)
+        end
+        options = { :class => 'button medium' + color }.update(html_options)
+
       end
 
       def configurations_menu_item(link_text, url, description = '')
         %(<tr>
           <td>#{link_to(link_text, url)}</td>
           <td>#{description}</td>
-        </tr>
-        ).html_safe
+          </tr>
+         ).html_safe
       end
 
       def configurations_sidebar_menu_item(link_text, url, options = {})
@@ -184,43 +147,44 @@
         end
       end
 
-  def link_to_show(resource, options={})
-    link_to('Show', object_url(resource), options)
-  end
+      def link_to_show(resource, options={})
+        link_to('Show', object_url(resource), options)
+      end
 
-  def link_to_new(resource)
-    link_to('Add', t("new"), edit_object_url(resource))
-  end
+      def link_to_new(resource)
+        link_to('Add', t("new"), edit_object_url(resource))
+      end
 
-  def link_to_edit(resource, options={})
-    options[:remote] = true
-    link_to('Edit', edit_object_url(resource), options)
-  end
+      def link_to_edit(resource, options={})
+        options[:remote] = true
+        link_to('Edit', edit_object_url(resource), options)
+      end
 
-  def link_to_hide(resource, options={})
-    options[:remote] = true
-    options['data-method'] = 'delete'
-    options['data-confirm'] ||= 'Are you sure?'
-    link_to('Hide', object_url(resource), options)
-  end
+      def link_to_hide(resource, options={})
+        options[:remote] = true
+        options['data-method'] = 'delete'
+        options['data-confirm'] ||= 'Are you sure?'
+        link_to('Hide', object_url(resource), options)
+      end
 
-  def edit_object_url(object, options = {})
-    send "edit_admin_#{object.class.name.underscore.split('/').last}_url", object, options
-  end
-  def object_url(object, options = {})
-    if object.class.name == 'Spot'
-      send "admin_tour_spot_path", object, options
-    else
-      send "admin_#{object.class.name.underscore.split('/').last}_path", object, options
-    end
-  end
-  def objects_url(object)
-    if object.class.name == 'Spot'
-      send "admin_tour_spots_path"
-    else
-      send "admin_#{object.class.name.underscore.split('/').last.pluralize}_path"
-    end
-  end
-      
+      def edit_object_url(object, options = {})
+        send "edit_admin_#{object.class.name.underscore.split('/').last}_url", object, options
+      end
+      def object_url(object, options = {})
+        if object.class.name == 'Spot'
+          send "admin_tour_spot_path", object, options
+        else
+          send "admin_#{object.class.name.underscore.split('/').last}_path", object, options
+        end
+      end
+      def objects_url(object)
+        if object.class.name == 'Spot'
+          send "admin_tour_spots_path"
+        else
+          send "admin_#{object.class.name.underscore.split('/').last.pluralize}_path"
+        end
+      end
+
+
     end
   end

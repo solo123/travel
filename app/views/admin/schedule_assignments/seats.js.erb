@@ -1,2 +1,2 @@
-var idx = $('#tabs').tabs('option','selected');
-$('#tabs').tabs("load", idx);
+var api = $('.tabs').data('tabs');
+api.getCurrentPane().load(api.getCurrentTab().attr('href'));

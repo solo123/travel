@@ -1,0 +1,2 @@
+$('#div_schedule_title').html("<%=j render('admin/orders/schedule_title', :schedule => @object) %>");
+$('#select_schedule_div').dialog('close');

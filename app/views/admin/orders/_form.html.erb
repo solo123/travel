@@ -4,15 +4,12 @@
     <p>
       order_number: <%= @object.order_number %>
     </p>
-    <%= f.field_container :order_source_type do %>
-      <%= f.label :order_source_type %><br />
-      <%= f.text_field :order_source_type %>
-      <%= button_link_to 'Select Schdule', '/admin/schedules/select', {:icon => 'add', :remote => true} %>
-    <% end %>
-    <%= f.field_container :order_source_id do %>
-      <%= f.label :order_source_id %><br />
-      <%= f.text_field :order_source_id %>
-    <% end %>
+    <%= f.hidden_field :order_source_type %>
+    <%= f.hidden_field :order_source_id %>
+    <div id='div_schedule_title'>
+      <%= render 'schedule_title', :schedule => @object.order_source %>
+    </div>
+    <%= button_link_to 'Select Schdule', '/admin/schedules/select?page=order', {:icon => 'add', :remote => true} %>
     <%= f.fields_for :order_customer do |customer| %>
       <p>
         <%= customer.label :customer_id %><br />
@@ -34,7 +31,7 @@
             @object.order_items.build
          end        
       %>
-      <table border='1' padding='2'>
+      <table id='rooms' border='1' padding='2'>
         <thead>
           <tr>
             <th>Room</th>
@@ -46,17 +43,11 @@
         </thead>
         <tbody>
           <%= f.fields_for :order_items do |item| %>
-            <tr>
-              <td><%= item.text_field :room_number, :size => 4 %></td>
-              <td><%= item.text_field :num_adult, :size => 2 %></td>
-              <td><%= item.text_field :num_child, :size => 2 %></td>
-              <td><%= item.text_field :amount, :size => 3 %></td>
-              <td>op</td>
-            </tr>
+            <%= render 'form_room', :f => item %>
           <% end %>
         </tbody>
       </table>
-      <%= link_to 'Add Room', 'javascript:alert("add!")' %>
+      <p><%= link_to "Add room", 'javascript:add_room();' %></p>
     </div>
   <div class="actions">
     <%= f.submit %>

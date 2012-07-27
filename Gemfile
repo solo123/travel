@@ -6,7 +6,7 @@ gem 'rails', '3.2.6'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
-gem 'mysql2'
+#gem 'mysql2'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -36,9 +36,9 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
-gem 'ruby-debug19'
+#gem 'ruby-debug19'
 
-gem 'therubyracer'
+#gem 'therubyracer'
 gem 'devise', '2.1.0'
 gem 'meta_search'
 gem 'will_paginate', '~> 3.0'

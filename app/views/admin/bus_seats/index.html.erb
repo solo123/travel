@@ -1,6 +1,13 @@
 <%
   schedule = Schedule.find(params[:schedule_id])
   assignment = ScheduleAssignment.find(params[:schedule_assignment_id])
+
+  total_seats = assignment.total_seats
+  seats_per_row = 4
+  passangeway = 2
+  total_rows = (total_seats + seats_per_row - 1) / seats_per_row
+
+  i = 1
 %>
 <div id="tabs-<%= assignment.id %>">
 
@@ -11,7 +18,7 @@
 		Tour guide: <%= assignment.tour_guide.nickname if assignment.tour_guide %> / 
 		<%= assignment.tour_guide_assistance.nickname if assignment.tour_guide_assistance %>
     |
-    <%= link_to 'Edit', edit_admin_schedule_schedule_assignment_path(schedule, assignment), :remote => true, :class => 'small-button' %>
+    <%= link_button 'Edit', edit_admin_schedule_schedule_assignment_path(schedule, assignment), {:remote => true, :ui_icon => 'ui-icon-pencil'} %>
 	</p>
 	
 	<table width="380" cellspacing="0" cellpadding="4" border="0" style="border: solid 1px darkgreen; width:auto;">
@@ -26,18 +33,30 @@
 	
 	<div class='seat-table'>
     <%= form_for assignment, :url => seats_admin_schedule_schedule_assignment_path(assignment.schedule_id, assignment), :remote => true do |f| %>
-		<% (1..assignment.total_seats).each do |i| %>
-		<% if ((i-1) % 4) == 0 %>
-			<div class="clear"></div>
-		<% elsif ((i-1) % 2) == 0 %>
-			<div class="space">&nbsp;</div>
-		<% end %>
-			<%= render :partial => 'seat', :locals => {:i => i, :assignment => assignment} %>
-		<% end %>
-    <div class="clear"></div>
-    <input type='hidden' value='' name='message1' />
-    <input type='hidden' value='' name='operate' />
-    <%= f.submit 'submit' %>
+      <table class='seat-table'>
+        <thead>
+          <tr>
+            <% seats_per_row.times do |cnt| %>
+              <td width='25%'></td>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody> 
+          <% i = 1 %>
+          <% total_rows.times do %>
+            <tr>
+              <% seats_per_row.times do |cnt| %>
+                <%= render :partial => 'seat', :locals => {:i => i, :assignment => assignment}%>
+                <% i += 1 %>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <input type='hidden' value='' name='message1' />
+      <input type='hidden' value='' name='operate' />
+      <%= f.submit 'submit' %>
   <% end %>
 	</div>
 </div>

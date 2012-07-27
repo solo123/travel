@@ -48,7 +48,12 @@ Omei::Application.routes.draw do
         get 'select', 'search', 'add_tel'
       end
     end
-    resources :orders, :employees, :employee_infos
+    resources :orders do
+      collection do
+        get :add_room
+      end
+    end
+    resources :employees, :employee_infos
     resources :agents do
       collection do
         get 'add_contact'

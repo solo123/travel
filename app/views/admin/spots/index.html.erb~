@@ -1,0 +1,35 @@
+<%= content_for :breadscrumbs do %>
+	<%= link_to '<< Back', 'javascript:history.go(-1)' %> |
+	<%= link_to 'Tours', admin_tours_path %> &gt;
+	<%= link_to 'Tours icon', admin_tours_path+'/icons' %>
+	&gt; Routes
+<% end %>
+
+<div class='toolbar'>
+  <ul class='actions'>
+    <li id="new_spot_link">
+      <%= button_link_to 'Add Spot', new_admin_tour_spot_path, {:remote => true, :icon => 'add', :id => 'admin_add_spot'} %>    
+      </li>
+      <li>
+         <a href='#' class='button blue'><img alt="Add" src="/assets/admin/icons/add.png">add</a>
+      </li>
+  </ul>
+  <br class='clear' />
+</div>
+
+<div class='route-title'>
+  <% tour = Tour.find(params[:tour_id]) %>
+  <%= image_tag tour.title_photo.photo_t, :id => 'tour_icon' if tour.title_photo %>
+  <h1><%= "#{tour.title}/#{tour.title_cn}" %></h1>
+  &lt;== Tour Icon
+  <div class='clear'></div>
+</div>
+
+<div id="edit_div" class='dialog-normal'></div>
+
+<div id="list_spots">
+<% @collection.each do |sp| %>
+	<%= render :partial => 'row', :locals => {:obj => sp}%> 
+<% end %>
+</div>
+

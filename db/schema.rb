@@ -99,13 +99,16 @@ ActiveRecord::Schema.define(:version => 20120712064107) do
     t.string   "name"
     t.string   "bus_type"
     t.integer  "seats"
+    t.integer  "seats_per_row"
+    t.integer  "passengeway"
+    t.string   "unavailable_seats"
     t.string   "plate_number"
     t.string   "vin_number"
     t.date     "inspection_date"
     t.integer  "is_own"
-    t.integer  "status",          :default => 0
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.integer  "status",            :default => 0
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   create_table "cities", :force => true do |t|

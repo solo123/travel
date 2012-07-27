@@ -1,0 +1,4 @@
+$('#div_schedule_title').html("<%=j render('admin/orders/schedule_title', :schedule => @object) %>");
+$('#order_order_source_type').val('Schedule');
+$('#order_order_source_id').val(<%= @object.id %>);
+$('#select_schedule_div').dialog('close');
