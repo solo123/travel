@@ -192,8 +192,10 @@ ActiveRecord::Schema.define(:version => 20120712064107) do
   create_table "input_types", :force => true do |t|
     t.string   "type_name"
     t.string   "type_text"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "type_value"
+    t.integer  "status",     :default => 0
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "operations", :force => true do |t|

@@ -6,12 +6,20 @@
       <%= f.text_field :type_name %>
 	  <% end %>
 
+	  <%= f.field_container :status do %>
+	  	<%= f.label :status %><br />
+	  	<%= f.text_field :status %>
+	  <% end %>
+	  </div>
+	  <div class='span-8 last'>
 	  <%= f.field_container :type_text do %>
 	  	<%= f.label :type_text %><br />
 	  	<%= f.text_field :type_text %>
 	  <% end %>
-	  </div>
-	  <div class='span-8 last'>
+	  <%= f.field_container :type_value do %>
+	  	<%= f.label :type_value %><br />
+	  	<%= f.text_field :type_value %>
+	  <% end %>
 	 	</div>
 	</div>
 
