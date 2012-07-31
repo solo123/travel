@@ -51,7 +51,7 @@ function update_photos(){
 <div>
 <%= button_link_to 'Update', 'javascript:stop_running=false;update_photos();' %>
 <%= button_link_to 'Reset all', 'photos_reset' %>
-</div><br />
+</div>
 <table id="photoset_table" style="width:auto;" class='data-list'>
 <thead>
 <tr>

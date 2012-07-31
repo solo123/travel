@@ -1,6 +1,6 @@
 <%= form_for( [:admin, @object], :remote => true) do |f| %>
-  <div class="container">
-  	<div class='span-8'>
+  <div class="yui-g">
+  	<div class='yui-u first'>
 	  <%= f.field_container :agent_id do %>
 	  	<%= f.label :agent_id %><br />
 
@@ -16,7 +16,7 @@
 	  	<%= f.text_field :employ_date %>
 	  <% end %>
 	  </div>
-	  <div class='span-8 last'>
+	  <div class='yui-u'>
 	  <%= f.field_container :ssn do %>
 	  	<%= f.label :ssn %><br />
 	  	<%= f.text_field :ssn %>

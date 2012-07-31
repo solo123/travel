@@ -8,10 +8,7 @@
 <div class='toolbar'>
   <ul class='actions'>
     <li id="new_spot_link">
-      <%= button_link_to 'Add Spot', new_admin_tour_spot_path, {:remote => true, :icon => 'add', :id => 'admin_add_spot'} %>    
-      </li>
-      <li>
-         <a href='#' class='button blue'><img alt="Add" src="/assets/admin/icons/add.png">add</a>
+    <%= button_link_to 'Add Spot', new_admin_tour_spot_path, {:remote => true, :icon => 'add', :id => 'admin_add_spot' } %>    
       </li>
   </ul>
   <br class='clear' />

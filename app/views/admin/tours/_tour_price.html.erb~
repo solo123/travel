@@ -2,7 +2,7 @@
 <%= f.fields_for :tour_price do |s| %>
   <fieldset>
     <legend>PRICE</legend>
-  <div class="container">
+  <div class="container hot-zone">
 		<div class="span-8">
 	  <%= f.field_container :price_adult do %>
 	  	<%= s.label :price_adult %><br />

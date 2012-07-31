@@ -1,7 +1,5 @@
 <% @object.build_tour_setting if !@object.tour_setting %>
 <%= f.fields_for :tour_setting do |s| %>
-  <fieldset>
-    <legend>Attrs</legend>
   <div class="container">
 		<div class="span-8">
 	  <%= f.field_container :weekly do %>
@@ -23,6 +21,5 @@
 	  	<%= s.select :is_float_price, [['cannot change price', 0],['can change price', 1]], {} %>
 	  <% end %>
 		</div>
-  </div>
-</fieldset>
+	</div>
 <% end %>

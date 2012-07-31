@@ -5,7 +5,7 @@
       <td><%= obj.employ_date %></td>
       <td><%= obj.ssn %></td>
       <td><%= obj.birthday %></td>
-      <td><%= obj.status %></td>
+      <td><%= obj.locked_at %></td>
     <td class="actions">
       <%= link_to_show obj %> |
       <%= link_to_edit obj %> |

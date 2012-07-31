@@ -128,7 +128,7 @@
         if html_options[:color]
           color = ' ' + html_options.delete(:color)
         end
-        options = { :class => 'button medium' + color }.update(html_options)
+        options = { :class => 'button green medium' + color }.update(html_options)
 
       end
 

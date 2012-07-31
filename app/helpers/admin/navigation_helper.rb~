@@ -128,7 +128,8 @@
         if html_options[:color]
           color = ' ' + html_options.delete(:color)
         end
-        options = { :class => 'button' + color }.update(html_options)
+        options = { :class => 'button medium' + color }.update(html_options)
+
       end
 
       def configurations_menu_item(link_text, url, description = '')

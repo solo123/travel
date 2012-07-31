@@ -12,7 +12,7 @@
         <%= f.label :bus %><br />
         <%= f.select(:bus_id, Bus.where(:status => 1).collect{|d| [d.name, d.id]}, {:prompt => 'Select Bus'}) %>  	
       <% end %>
-      <%= render :partial => 'admin/shared/select_employee', :locals => {:f => f, :field_name => :driver_id} %>
+      <%= render 'admin/shared/select_employee', :locals => {:f => f, :field_name => :driver_id} %>
       <%= f.field_container :driver_assistance do %>
         <%= f.label :driver_assistance %><br />
         <%= f.text_field :driver_assistance_id %>

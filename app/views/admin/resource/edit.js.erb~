@@ -3,4 +3,4 @@ $("#edit_div")
 	.dialog('option', 'title', 'Edit <%= @object.class.name %> <%= @object.id%>#')
 	.dialog('open');
 $('.html-editor').xheditor({tools: 'Blocktag,Bold,Italic,Underline,|,List,Link,Img,|,Source'});	
-$('input[type=submit]').addClass('button green');
+$('input[type=submit']).addClass('button green');

@@ -12,7 +12,7 @@ function set_small_buttons(){
   });
 }
 $(function(){ 
-	$('.dialog-normal').dialog({ autoOpen: false, width: 700});
+	$('.dialog-normal').dialog({ autoOpen: false, width: 700, dialogClass: 'shadow'});
 	$('ul.sf-menu').superfish(); 
   $('.date-picker').datepicker({ showButtonPanel: true, dateFormat: 'yy-mm-dd' });
   set_small_buttons();

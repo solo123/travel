@@ -1,0 +1,4 @@
+      <%= f.field_container field_name do %>
+        <%= f.label field_name %><br />
+        <%= f.select(field_name, EmployeeInfo.where(:status => 1).collect{|d| [d.nickname, d.id]}, {:prompt => 'Select ' + field_name.to_s }) %>  	
+      <% end %>

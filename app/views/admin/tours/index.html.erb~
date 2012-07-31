@@ -9,10 +9,10 @@
 			<% end %>
   	</li>
     <li>
-    <%= button_link_to 'New Tour', 'tours/new', {:remote => true, :icon => 'add', :id => 'admin_new_tour'} %>
+    <%= link_button 'New Tour', 'tours/new', {:remote => true, :icon => 'add', :id => 'admin_new_tour'} %>
     </li>
     <li>
-    <%= button_link_to 'Icons', 'tours/icons', {:icon => 'flickr16', :id => 'admin_tour_icons'} %>
+    <%= link_button 'Icons', 'tours/icons', {:icon => 'flickr16', :id => 'admin_tour_icons'} %>
     </li>
   </ul>
   <div class='clear'></div>

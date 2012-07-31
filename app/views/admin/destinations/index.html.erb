@@ -7,10 +7,10 @@
 			<% end %>
   	</li>
     <li>
-    	<%= link_button 'New Destination', 'destinations/new', {:icon => 'add', 'data-remote' => true} %>
+    	<%= button_link_to 'New Destination', 'destinations/new', {:icon => 'add', 'data-remote' => true} %>
     </li>
     <li>
-      <%= link_button 'Reload Photos', 'destinations/photos', {:icon => 'flickr16'} %>
+    <%= button_link_to 'Reload Photos', 'destinations/photos', {:icon => 'flickr16'} %>
     </li>
   </ul>
   <br class="clear">
