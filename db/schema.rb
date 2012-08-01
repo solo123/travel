@@ -161,6 +161,7 @@ ActiveRecord::Schema.define(:version => 20120712064107) do
     t.string   "ssn"
     t.string   "pin"
     t.date     "birthday"
+    t.string   "roles"
     t.integer  "status",       :default => 0
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
@@ -383,13 +384,6 @@ ActiveRecord::Schema.define(:version => 20120712064107) do
     t.datetime "updated_at",      :null => false
   end
 
-  create_table "positions", :force => true do |t|
-    t.string   "title"
-    t.integer  "status"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "preferences", :force => true do |t|
     t.string   "key"
     t.string   "value_type"
@@ -493,13 +487,6 @@ ActiveRecord::Schema.define(:version => 20120712064107) do
     t.datetime "last_schedule_date"
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
-  end
-
-  create_table "tour_types", :force => true do |t|
-    t.string   "type_name"
-    t.integer  "status"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "tours", :force => true do |t|

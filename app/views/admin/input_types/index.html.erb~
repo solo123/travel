@@ -2,7 +2,7 @@
   <ul class='actions'>
   	<li>
 			<%= form_for(@search, :url => admin_input_types_path ) do |f| %>
-        <%= f.select :type_name_eq, InputType.group(:type_name).map{|t| [t.type_name, t.type_name]}.insert(0, ['Select Type', '']), {}, :class => 'data-field', :onchange => 'this.form.submit();' %>
+        <%= f.select :type_name_eq, InputType.group(:type_name).map{|t| [t.type_name, t.type_name]}, {}, :class => 'data-field', :onchange => 'this.form.submit();' %>
 			<% end %>
   	</li>
     <li>

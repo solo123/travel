@@ -25,7 +25,12 @@
 	  	<%= f.label :birthday %><br />
 	  	<%= f.text_field :birthday %>
 	  <% end %>
-
+    <%= f.label :roles %><br />
+    <%= f.text_field :roles %>
+    <% InputType.get_list('roles').each do |role| %>
+      <%= check_box_tag "role[#{role.type_text}]", :id => dom_id(role) %>
+      <%= label_tag dom_id(role), role.type_text %>
+    <% end %>
 		<%= render :partial => 'admin/shared/status', :locals => {:f => f} %> 
 	 	</div>
 	</div>

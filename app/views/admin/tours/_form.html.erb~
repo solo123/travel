@@ -3,7 +3,7 @@
   <div class="container">
   	<div class='span-8'>
       <%= f.label :tour_type %><br />
-      <%= f.select :tour_type, InputType.get_list('tour').map{|t| [t.type_text, t.type_value]}, {}, :class => 'data-field' %>
+      <%= f.select :tour_type, TourType.where(:status => 1).map{|t| [t.type_name, t.id]}, {}, :class => 'data-field' %>
 	  </div>
 	  <div class='span-8 last'>
 	  <%= f.field_container :days do %>

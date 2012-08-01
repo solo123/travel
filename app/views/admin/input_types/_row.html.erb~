@@ -1,4 +1,4 @@
-  <tr id="<%= dom_id obj %>" <%= 'class=\'deleted\'' if !obj.status || obj.status < 1 %>>
+  <tr id="<%= dom_id obj %>" >
       <td><%= obj.id %></td>
       <td><%= obj.type_name %></td>
       <td><%= obj.type_text %></td>

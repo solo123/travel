@@ -1,6 +1,6 @@
 <%= form_for( [:admin, @object], :remote => true) do |f| %>
-  <div class="yui-g">
-  	<div class='yui-u first'>
+  <div class="container">
+  	<div class='span-8'>
 	  <%= f.field_container :agent_id do %>
 	  	<%= f.label :agent_id %><br />
 
@@ -16,7 +16,7 @@
 	  	<%= f.text_field :employ_date %>
 	  <% end %>
 	  </div>
-	  <div class='yui-u'>
+	  <div class='span-8 last'>
 	  <%= f.field_container :ssn do %>
 	  	<%= f.label :ssn %><br />
 	  	<%= f.text_field :ssn %>
@@ -25,7 +25,11 @@
 	  	<%= f.label :birthday %><br />
 	  	<%= f.text_field :birthday %>
 	  <% end %>
-
+    <%= f.label :roles %><br />
+    <%= f.text_field :roles %>
+    <% InputType.get_list('roles').each do |role| %>
+      <%= check_box_tag "role[#{role.type_text}]", :id => dom_id(role) %>
+    <% end %>
 		<%= render :partial => 'admin/shared/status', :locals => {:f => f} %> 
 	 	</div>
 	</div>

@@ -21,9 +21,9 @@
 	  	<%= f.label :passengeway %><br />
 	  	<%= f.text_field :passengeway %>
 	  <% end %>
-	  <%= f.field_container :unvailable_seats do %>
-	  	<%= f.label :unvailable_seats %><br />
-	  	<%= f.text_field :unvailable_seats %>
+	  <%= f.field_container :unavailable_seats do %>
+	  	<%= f.label :unavailable_seats %><br />
+	  	<%= f.text_field :unavailable_seats %>
 	  <% end %>
 	  </div>
 	  <div class='span-8 last'>

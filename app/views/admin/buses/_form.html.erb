@@ -7,7 +7,7 @@
 	  <% end %>
       <%= f.field_container :bus_type do %>
         <%= f.label :bus_type %><br />
-        <%= f.select(:bus_type, InputType.where(:type_name => 'bus-type').order(:type_text).collect{|d| [d.type_text, d.type_text]}, {:prompt => 'Select Bus Type'}) %>  	
+        <%= f.select(:bus_type, InputType.get_list('bus').collect{|d| [d.type_text, d.type_value]}, {:prompt => 'Select Bus Type'}) %>  	
       <% end %>
 	  <%= f.field_container :seats do %>
 	  	<%= f.label :seats %><br />

@@ -38,3 +38,4 @@ input {background-color: $bg1; font-size:110%; padding:3px;}
 input[type=text]{border:solid 1px #bbb;}
 input[type=text]:focus {border:solid 1px red;background-color:lightyellow;}
 p{margin:3px 0;}
+.actions{margin: 8px 0;}
