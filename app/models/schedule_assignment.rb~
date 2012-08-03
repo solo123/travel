@@ -14,8 +14,8 @@ class ScheduleAssignment < ActiveRecord::Base
   before_destroy :del_bus_shifts
 
   def total_seats
-    if self.bus
-      self.bus.seats
+    if bus_id
+      10
     else
       57
     end

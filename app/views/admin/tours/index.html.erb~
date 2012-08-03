@@ -1,18 +1,23 @@
+<%= content_for :breadcrumbs do %>
+  <%= link_to '<< Back', 'javascript:history.go(-1);' %> |
+  Data &gt;
+  Tours
+<% end %>
 <div class="toolbar">
   <ul class="actions">
   	<li>
   		<%= form_for( @search, :url => admin_tours_path ) do |f| %>
-        <%= f.select :tour_type_eq, TourType.where(:status => 1).map{|t| [t.type_name, t.id]}.insert(0, ['All tours', nil]), {}, :class => 'data-field' %>
+        <%= f.select :tour_type_eq, InputType.get_list('tour').map{|t| [t.type_name, t.type_value]}.insert(0, ['All tours', nil]), {}, :class => 'data-field' %>
       <%= f.select :status_eq, [['All Status', nil],['show', 1], ['hide', 0]],{}, :class => 'data-field' %>
       <%= f.text_field :title_contains, :size => 15, :class => 'data-field' %>
   		<%= button 'search' %>
 			<% end %>
   	</li>
     <li>
-    <%= link_button 'New Tour', 'tours/new', {:remote => true, :icon => 'add', :id => 'admin_new_tour'} %>
+    <%= button_link_to 'New Tour', 'tours/new', {:remote => true, :icon => 'add', :id => 'admin_new_tour'} %>
     </li>
     <li>
-    <%= link_button 'Icons', 'tours/icons', {:icon => 'flickr16', :id => 'admin_tour_icons'} %>
+    <%= button_link_to 'Icons', 'tours/icons', {:icon => 'flickr16', :id => 'admin_tour_icons'} %>
     </li>
   </ul>
   <div class='clear'></div>

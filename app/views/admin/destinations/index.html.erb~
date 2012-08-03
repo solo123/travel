@@ -1,3 +1,8 @@
+<%= content_for :breadcrumbs do %>
+  <%= link_to '<< Back', 'javascript:history.go(-1);' %> |
+  Data &gt;
+  Destinations
+<% end %>
 <div class="toolbar">
   <ul class="actions">
   	<li>
@@ -7,7 +12,7 @@
 			<% end %>
   	</li>
     <li>
-    	<%= link_button 'New Destination', 'destinations/new', {:icon => 'add', 'data-remote' => true} %>
+    	<%= button_link_to 'New Destination', 'destinations/new', {:icon => 'add', 'data-remote' => true} %>
     </li>
     <li>
     <%= button_link_to 'Reload Photos', 'destinations/photos', {:icon => 'flickr16'} %>

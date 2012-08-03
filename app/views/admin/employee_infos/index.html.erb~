@@ -16,11 +16,10 @@
   <br class='clear' />
 </div>
 
-<h1><%= raw "#{t('actions.listing')} #{t('photos')}" %></h1>
-
 <div id="edit_div" class='dialog-normal'></div>
 
-<table class="data-list" id='list_employees'>
+<%= will_paginate(@collection) %>
+<table class="data-list" id='list_employee_infos'>
   <thead>
   <tr>
       <th><%= t("id") %></th>

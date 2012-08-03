@@ -8,10 +8,10 @@
   <div class='toolbar'>
     <ul class='actions'>
       <li>
-      <%= link_button 'Add bus', new_admin_schedule_schedule_assignment_path(@object) + "?schedule_id=#{params[:id]}", { :remote => true, :ui_icon => 'ui-icon-plus'} %></li>
-      <li><%= link_button 'Hold', 'javascript:hold()', {:ui_icon => 'ui-icon-check'} %></li>
-      <li><%= link_button 'Release', 'javascript:release();', {:ui_icon => 'ui-icon-close'} %></li>
-      <li><%= link_button 'Order', new_admin_order_path + "?op=quick&schedule_id=#{@object.id}" , {:remote => true, :ui_icon => 'ui-icon-cart'} %></li>
+      <%= button_link_to 'Add bus', new_admin_schedule_schedule_assignment_path(@object) + "?schedule_id=#{params[:id]}", { :remote => true, :icon => 'bus'} %></li>
+      <li><%= button_link_to 'Hold', 'javascript:hold()', {:icon => 'hold'} %></li>
+      <li><%= button_link_to 'Release', 'javascript:release();', {:icon => 'undo'} %></li>
+      <li><%= button_link_to 'Order', 'javascript:order();', {:icon => 'cart'} %></li>
     </ul>
 
 

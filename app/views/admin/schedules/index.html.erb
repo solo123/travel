@@ -1,3 +1,7 @@
+<%= content_for :breadcrumbs do %>
+  Data &gt;
+  Schedules
+<% end %>
 <div class='toolbar'>
   <ul class="actions">
     <li>
@@ -17,6 +21,7 @@
 
 <div id="edit_div"></div>
 
+<%= will_paginate(@collection) %>
 <table class="data-list" id='list_schedules'>
   <thead>
   <tr>

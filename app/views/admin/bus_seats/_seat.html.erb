@@ -17,8 +17,8 @@
     <div class="seat-check">
       <% unless css == 'unav' %>
         <input type="checkbox" name="seats[<%= i %>]" id="cb_<%= i %>">
+        <label for="cb_<%= i %>"><%= i %></label>
       <% end %>
-      <label for="cb_<%= i %>"><%= i %></label>
     </div>
     <div class="seat-pickup">
       <% if seat && seat.state == 'hold' %>

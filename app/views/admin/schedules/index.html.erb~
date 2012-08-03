@@ -8,7 +8,7 @@
     <% end %>  
     </li>
     <li>
-    <%= link_button "Generate schedules", 'schedules/generate', { :icon => 'add', :id => 'generate_schedule'} %>
+    <%= button_link_to "Generate schedules", 'schedules/generate', { :icon => 'add', :id => 'generate_schedule'} %>
     </li>
 
   </ul>

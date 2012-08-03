@@ -21,6 +21,17 @@ function release(){
 	}
 }
 
+function order(){
+  if (validate_order_seats()){
+    $.ajax({
+      type: "GET",
+      url: "/admin/orders/new",
+      dataType: 'script',
+      data: 'assignment_id=1&seats=1,2,3'
+    });
+  }
+}
+
 function validate_seats(){
   var pane = $('.panes > div:visible');
 	if (pane.find('input[type="checkbox"]:checked').length == 0){
@@ -53,6 +64,25 @@ function validate_hold_seats(){
 	return true;
 }
 
+function validate_order_seats(){
+  var pane = $('.panes > div:visible');
+	if (pane.find('input[type="checkbox"]:checked').length == 0){
+		alert('Please select seats.');
+		return false;
+	}
+
+	var result = '';
+	pane.find('input[type="checkbox"]:checked').each(function(){
+    var pnode = $(this).parent().parent();
+    if(pnode.hasClass('sold')) result += $(this).next().text() + ', '; 
+  });
+	if (result.length > 0) {
+		alert('Seats: ' + result + ' already been order. \n\nPlease check again.');
+		return false;
+	}
+
+	return true;
+}
 // auto-run commands
 $(function(){
 
@@ -64,15 +94,6 @@ $(function(){
     }
   });
 
-/*
-	$( "#tabs span.ui-icon-close" ).live( "click", function() {
-		var index = $( "li", $tabs ).index( $( this ).parent() );
-		if (confirm('This bus assignment can delete only when seats are EMPTY. \nAre you sure do delete it?')){
-			var ass_id = $(this).parent().find('a').text().split(':')[0];
-			$.ajax({ url: location.href + '/schedule_assignments/' + ass_id, type: 'DELETE'});
-		}
-	});
-*/
 });
 
 

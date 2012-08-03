@@ -21,6 +21,14 @@ function release(){
 	}
 }
 
+function order(){
+  if (validate_hold_seats()){
+      var pane = $('.panes > div:visible');
+			pane.find('input[name=operate]').val('order');
+		  pane.find('form').submit();
+  }
+}
+
 function validate_seats(){
   var pane = $('.panes > div:visible');
 	if (pane.find('input[type="checkbox"]:checked').length == 0){
@@ -45,27 +53,16 @@ function validate_hold_seats(){
 	}
 
 	var result = '';
-	tab.find('input[type="checkbox"]:checked').each(function(){ if(!$(this).parent().parent().hasClass('hold')) result += $(this).next().text() + ', '; });
+	pane.find('input[type="checkbox"]:checked').each(function(){ if(!$(this).parent().parent().hasClass('hold')) result += $(this).next().text() + ', '; });
 	if (result.length > 0) {
 		alert('Seats: ' + result + ' not hold. Please check again.');
 		return false;
 	}
-
-	result = tab.find('input[type="checkbox"]:checked').map(function(){ return $(this).next().text(); }).get().join(',');
-	$('#seats').val(result);
-	$('#assignment_id').val(tab.attr('id').substr(5));
-	$('#release_seats_text').text(result);
 	return true;
 }
 
 // auto-run commands
 $(function(){
-  /*
-	var $tabs = $( "#tabs").tabs({
-		tabTemplate: "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close'>Remove Tab</span></li>",
-			load: function(event, ui){ set_small_buttons(); }
-	});
-  */
 
   $("ul.tabs").tabs("div.panes > div", {
     effect: 'fade',
