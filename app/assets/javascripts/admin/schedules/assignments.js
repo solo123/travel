@@ -83,17 +83,21 @@ function validate_order_seats(){
 
 	return true;
 }
-// auto-run commands
-$(function(){
 
+function tabs_load(){
+	var len = $('div.panes > div').length - 1;
   $("ul.tabs").tabs("div.panes > div", {
     effect: 'fade',
+	  initialIndex: len,
     onBeforeClick: function(event, i){
       var pane = this.getPanes().eq(i);
       pane.load(this.getTabs().eq(i).attr('href'));
     }
   });
-
+}
+// auto-run commands
+$(function(){
+  tabs_load();
 });
 
 

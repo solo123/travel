@@ -27,8 +27,7 @@
   </div>
   <!-- single pane. it is always visible -->
   <div class="panes">
-    <div style="display:block"></div>
-    <% (@object.assignments.count - 1).times do %>
+    <% @object.assignments.count.times do %>
       <div style='display:none'></div>
     <% end %>
   </div>

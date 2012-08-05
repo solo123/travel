@@ -24,6 +24,8 @@
 		<%= assignment.tour_guide_assistance.nickname if assignment.tour_guide_assistance %>
     |
     <%= link_button 'Edit', edit_admin_schedule_schedule_assignment_path(schedule, assignment), {:remote => true, :ui_icon => 'ui-icon-pencil'} %>
+    |
+    <%= link_button 'Delete', admin_schedule_schedule_assignment_path(schedule, assignment), :method => :delete, :confirm => 'Are you sure to delete?', :remote => true %>
 	</p>
 	
 	<table width="380" cellspacing="0" cellpadding="4" border="0" style="border: solid 1px darkgreen; width:auto;">

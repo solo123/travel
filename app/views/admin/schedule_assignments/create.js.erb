@@ -1,4 +1,6 @@
-$("#edit_div").dialog('close');
-$('#tabs')
-.tabs( "add",'<%= admin_schedule_schedule_assignment_bus_seats_path(@object.schedule_id, @object) %>', '<%=@object.id%>:<%= @object.title %>');
+var api = $('.tabs').data('tabs');
+$(".tabs").append('<li><%= link_to "#{@object.id}:#{@object.title}", admin_schedule_schedule_assignment_bus_seats_path(@object.schedule_id, @object) %>"</li>');
+$(".panes").append('<div style="display:none;"></div>');
+tabs_load();
 
+$("#edit_div").dialog('close');

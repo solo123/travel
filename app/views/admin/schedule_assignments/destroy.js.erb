@@ -1,8 +1,6 @@
 <% if flash[:alert] %>
   alert('CANNOT delete when seats not clear!\n\nPlease clear seat tables before delete.');
 <% else %>
-  $tabs = $('#tabs');
-  var index = $("li", $tabs).index($(this).parent());
-  $tabs.tabs("remove", index);
+  window.location.reload();
 <% end %>
 
