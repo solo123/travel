@@ -36,9 +36,9 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
-gem 'ruby-debug19'
+#gem 'ruby-debug19'
 
-gem 'therubyracer'
+#gem 'therubyracer'
 gem 'devise', '2.1.0'
 gem 'meta_search'
 gem 'will_paginate', '~> 3.0'
