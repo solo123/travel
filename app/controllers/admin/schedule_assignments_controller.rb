@@ -24,6 +24,16 @@ module Admin
       elsif params[:operate] == 'release'
         seats = params[:seats].map{|s| s[0]}.join(',')
         @object.seats.where("seat_number in (#{seats})").delete_all
+      elsif params[:operate] == 'order_seats'
+        params[:seats].each do |seat_input|
+          seat = @object.seats.build
+          seat.seat_number = seat_input[0]
+          seat.order_id = params[:order_id]
+          seat.message1 = ""
+          seat.message2 = "!!order!!"
+          seat.state = 'order'
+          seat.save
+        end
       end
     end
 

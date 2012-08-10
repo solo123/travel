@@ -95,6 +95,15 @@ function tabs_load(){
     }
   });
 }
+
+function assign_seat(order_id){
+  if (validate_seats()){
+	  var pane = $('.panes > div:visible');
+    pane.find('input[name=order_id]').val(order_id);
+    pane.find('input[name=operate]').val('order_seats');
+    pane.find('form').submit();
+  }
+}
 // auto-run commands
 $(function(){
   tabs_load();

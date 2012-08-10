@@ -2,6 +2,10 @@ module Admin
   class OrdersController < ResourceController
     new_action.after :new_params
 
+    def seats
+      render :text => 'alert("Seat NOW");'
+    end
+
     private
     def new_params
       if !@object.order_source && params[:assignment_id]
@@ -12,7 +16,7 @@ module Admin
       if params[:seats]
         rn = params[:seats].split(',').count
         while rn > 0 do
-          item = @object.build_order_item
+          item = @object.order_items.build
           item.num_adult = rn > 2 ? 2 : rn
           rn = rn - 2
         end

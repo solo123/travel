@@ -27,7 +27,7 @@
       <%= raw seat.message1 if seat %>
     </div>
     <div class="seat-info">
-      <%= seat.order_id + '<br />' if seat && seat.order_id && seat.order_id > 0 %>
+      <%= raw seat.order_id.to_s + '<br />' if seat && seat.order_id && seat.order_id > 0 %>
       <%= raw seat.message2 if seat %>
       &nbsp;
     </div>

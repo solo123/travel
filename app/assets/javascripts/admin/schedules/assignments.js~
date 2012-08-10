@@ -22,10 +22,13 @@ function release(){
 }
 
 function order(){
-  if (validate_hold_seats()){
-      var pane = $('.panes > div:visible');
-			pane.find('input[name=operate]').val('order');
-		  pane.find('form').submit();
+  if (validate_order_seats()){
+    $.ajax({
+      type: "GET",
+      url: "/admin/orders/new",
+      dataType: 'script',
+      data: 'assignment_id=1&seats=1,2,3'
+    });
   }
 }
 
@@ -61,26 +64,49 @@ function validate_hold_seats(){
 	return true;
 }
 
-// auto-run commands
-$(function(){
+function validate_order_seats(){
+  var pane = $('.panes > div:visible');
+	if (pane.find('input[type="checkbox"]:checked').length == 0){
+		alert('Please select seats.');
+		return false;
+	}
 
+	var result = '';
+	pane.find('input[type="checkbox"]:checked').each(function(){
+    var pnode = $(this).parent().parent();
+    if(pnode.hasClass('sold')) result += $(this).next().text() + ', '; 
+  });
+	if (result.length > 0) {
+		alert('Seats: ' + result + ' already been order. \n\nPlease check again.');
+		return false;
+	}
+
+	return true;
+}
+
+function tabs_load(){
+	var len = $('div.panes > div').length - 1;
   $("ul.tabs").tabs("div.panes > div", {
     effect: 'fade',
+	  initialIndex: len,
     onBeforeClick: function(event, i){
       var pane = this.getPanes().eq(i);
       pane.load(this.getTabs().eq(i).attr('href'));
     }
   });
+}
 
-/*
-	$( "#tabs span.ui-icon-close" ).live( "click", function() {
-		var index = $( "li", $tabs ).index( $( this ).parent() );
-		if (confirm('This bus assignment can delete only when seats are EMPTY. \nAre you sure do delete it?')){
-			var ass_id = $(this).parent().find('a').text().split(':')[0];
-			$.ajax({ url: location.href + '/schedule_assignments/' + ass_id, type: 'DELETE'});
-		}
-	});
-*/
+function assign_seat(order_id){
+  if (validate_seats()){
+      var pane = $('.panes > div:visible');
+      pane.find('input[name=order_id]').val(order_id);
+      pane.find('input[name=operate]').val('order_seats');
+      pane.find('form').submit();
+  }
+}
+// auto-run commands
+$(function(){
+  tabs_load();
 });
 
 
