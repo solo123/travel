@@ -34,7 +34,7 @@ Omei::Application.routes.draw do
     resources :schedules do
       collection do
         get :select, :search, :generate
-        put :selected
+        put 'selected'
       end
       resources :schedule_assignments do
         resources :bus_seats
@@ -51,6 +51,9 @@ Omei::Application.routes.draw do
     resources :orders do
       collection do
         get :add_room
+      end
+      member do
+        put :seats
       end
     end
     resources :employees, :employee_infos

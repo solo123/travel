@@ -24,6 +24,8 @@
 		<%= assignment.tour_guide_assistance.nickname if assignment.tour_guide_assistance %>
     |
     <%= link_button 'Edit', edit_admin_schedule_schedule_assignment_path(schedule, assignment), {:remote => true, :ui_icon => 'ui-icon-pencil'} %>
+    |
+    <%= link_button 'Delete', admin_schedule_schedule_assignment_path(schedule, assignment), :method => :delete, :confirm => 'Are you sure to delete?', :remote => true %>
 	</p>
 	
 	<table width="380" cellspacing="0" cellpadding="4" border="0" style="border: solid 1px darkgreen; width:auto;">
@@ -31,8 +33,8 @@
 	    <td nowrap="nowrap" align="center" class="edit_en">圖示:(<a href="ScheduleOrders.aspx">相关订单</a>)</td>
 	    <td nowrap="nowrap" align="center" class="edit_en"><div class="block blnk">&nbsp;</div> Avilible</td>
 	    <td nowrap="nowrap" align="center" class="edit_en"><div class="block hold">&nbsp;</div> Hold</td>
-	    <td nowrap="nowrap" align="center" class="edit_en"><div class="block sold">&nbsp;</div> Sold balance</td>
-	    <td nowrap="nowrap" align="center" class="edit_en"><div class="block paid">&nbsp;</div> Full pay</td>
+	    <td nowrap="nowrap" align="center" class="edit_en"><div class="block sold">&nbsp;</div> Sold</td>
+	    <td nowrap="nowrap" align="center" class="edit_en"><div class="block paid">&nbsp;</div> Full paid </td>
 	  </tr>
 	</tbody></table>
 	
@@ -44,7 +46,7 @@
             <% seats_per_row.times do |cnt| %>
               <td width='<%= width %>%'></td>
               <% if cnt + 1 == passengeway %>
-                <td width="20"></td>
+                <td></td>
               <% end %>
             <% end %>
           </tr>
@@ -65,8 +67,9 @@
         </tbody>
       </table>
 
-      <input type='hidden' value='' name='message1' />
-      <input type='hidden' value='' name='operate' />
+      <%= hidden_field_tag 'message1' %>
+      <%= hidden_field_tag 'operate' %>
+      <%= hidden_field_tag 'order_id' %>
   <% end %>
 	</div>
 </div>

@@ -17,8 +17,8 @@
     <div class="seat-check">
       <% unless css == 'unav' %>
         <input type="checkbox" name="seats[<%= i %>]" id="cb_<%= i %>">
+        <label for="cb_<%= i %>"><%= i %></label>
       <% end %>
-      <label for="cb_<%= i %>"><%= i %></label>
     </div>
     <div class="seat-pickup">
       <% if seat && seat.state == 'hold' %>
@@ -27,7 +27,7 @@
       <%= raw seat.message1 if seat %>
     </div>
     <div class="seat-info">
-      <%= seat.order_id + '<br />' if seat && seat.order_id && seat.order_id > 0 %>
+      <%= seat.order_id.to_s + '<br />' if seat && seat.order_id && seat.order_id > 0 %>
       <%= raw seat.message2 if seat %>
       &nbsp;
     </div>
