@@ -27,9 +27,19 @@ function order(){
       type: "GET",
       url: "/admin/orders/new",
       dataType: 'script',
-      data: 'assignment_id=1&seats=1,2,3'
+      data: 'assignment_id=' + get_current_assignment_id() + '&seats=' + get_selected_seats()
     });
   }
+}
+
+function get_current_assignment_id(){
+	var pane = $('.panes > div:visible');
+	return pane.find('div').attr('id').substring(5);
+}
+function get_selected_seats(){
+	var pane = $('.panes > div:visible');
+	var ss = pane.find('input[type="checkbox"]:checked').map(function(){return this.id.substring(3);}).get().join(',');
+	return ss;
 }
 
 function validate_seats(){
