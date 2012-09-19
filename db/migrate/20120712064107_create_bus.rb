@@ -2,6 +2,7 @@ class CreateBus < ActiveRecord::Migration
   def change
     create_table :buses do |t|
       t.string :name
+      t.integer :company_id
       t.string :bus_type
       t.integer :seats
       t.integer :seats_per_row

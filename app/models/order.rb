@@ -1,5 +1,6 @@
 class Order < ActiveRecord::Base
-	belongs_to :order_source, :polymorphic => true
+  has_one :schedule
+  has_one :schedule_assignment
 	has_one :order_option
 	has_one :order_customer
 	has_one :order_operate

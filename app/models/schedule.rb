@@ -3,7 +3,7 @@ class Schedule < ActiveRecord::Base
   has_many :assignments, :class_name => 'ScheduleAssignment'
   accepts_nested_attributes_for :assignments, :reject_if => :all_blank
   
-  has_many :orders, :as => 'order_source'
+  has_many :orders
 
   has_one :price, :class_name => 'SchedulePrice'
   accepts_nested_attributes_for :price

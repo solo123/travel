@@ -1,15 +1,16 @@
 <div class='toolbar'>
   <ul class='actions'>
     <li>
-    <%= button_link_to 'Add Company', new_admin_company_path, {:remote => true, :icon => 'add', :id => 'admin_new_company'} %>
+    <%= button_link_to 'Add Agent', new_admin_agent_path, {:remote => true, :icon => 'add', :id => 'admin_new_agent'} %>
     </li>
   </ul>
   <br class='clear' />
 </div>
 
-<h1><%= raw "#{t("actions.listing")} #{t("companies")}" %></h1>
+<h1><%= raw "#{t("actions.listing")} #{t("agents")}" %></h1>
 <div id='edit_div' class='dialog-normal'></div>
-<table class="data-list" id='companies'>
+<div id='add_contact_div' class='dialog-normal'></div>
+<table id='list_agents' class="data-list">
   <thead>
     <tr>
         <th><%= t("id") %></th>
@@ -19,9 +20,7 @@
         <th><%= t('icon') %></th>
         <th><%= t('website') %></th>
         <th><%= t('status') %></th>
-        <th>op</th>
-      <th>
-      </th>
+        <th><%= t('op') %></th>
     </tr>
   </thead>
 <% @collection.each do |c| %>

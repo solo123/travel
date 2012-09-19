@@ -110,28 +110,7 @@ class CreateInfos < ActiveRecord::Migration
       t.integer :usage_type
       t.timestamps
     end
-    create_table :agents do |t|
-    	t.string :short_name
-    	t.string :company_name
-    	t.integer :company_type
-    	t.string :icon_url
-    	t.string :website
-    	t.integer :status, :default => 0
-    	t.timestamps
-    end
-    create_table :agent_accounts do |t|
-      t.integer :agent_id
-      t.decimal :discount, :precision => 8, :scale => 2, :default => 0
-      t.decimal :max_credit, :precision => 8, :scale => 2, :default => 0
-      t.decimal :balance,  :precision => 8, :scale => 2, :default => 0
-      t.timestamps
-    end
-    create_table :contacts do |t|
-      t.integer :agent_id
-      t.string :contact_name
-      t.timestamps
-    end
-    create_table :user_infos do |t|
+   create_table :user_infos do |t|
       t.string :user_data_type
     	t.integer :user_data_id
     	t.string :full_name

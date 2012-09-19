@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120712064107) do
+ActiveRecord::Schema.define(:version => 20120918135348) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address_data_type"
@@ -36,15 +36,6 @@ ActiveRecord::Schema.define(:version => 20120712064107) do
     t.datetime "updated_at",                     :null => false
   end
 
-  create_table "agent_accounts", :force => true do |t|
-    t.integer  "agent_id"
-    t.decimal  "discount",   :precision => 8, :scale => 2, :default => 0.0
-    t.decimal  "max_credit", :precision => 8, :scale => 2, :default => 0.0
-    t.decimal  "balance",    :precision => 8, :scale => 2, :default => 0.0
-    t.datetime "created_at",                                                :null => false
-    t.datetime "updated_at",                                                :null => false
-  end
-
   create_table "agent_invoices", :force => true do |t|
     t.integer  "agent_id"
     t.decimal  "amount",     :precision => 8, :scale => 2, :default => 0.0
@@ -56,17 +47,6 @@ ActiveRecord::Schema.define(:version => 20120712064107) do
     t.integer  "status",                                   :default => 0
     t.datetime "created_at",                                                :null => false
     t.datetime "updated_at",                                                :null => false
-  end
-
-  create_table "agents", :force => true do |t|
-    t.string   "short_name"
-    t.string   "company_name"
-    t.integer  "company_type"
-    t.string   "icon_url"
-    t.string   "website"
-    t.integer  "status",       :default => 0
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
   end
 
   create_table "bookmarks", :force => true do |t|
@@ -97,6 +77,7 @@ ActiveRecord::Schema.define(:version => 20120712064107) do
 
   create_table "buses", :force => true do |t|
     t.string   "name"
+    t.integer  "company_id"
     t.string   "bus_type"
     t.integer  "seats"
     t.integer  "seats_per_row"
@@ -118,8 +99,28 @@ ActiveRecord::Schema.define(:version => 20120712064107) do
     t.integer "status",  :default => 0
   end
 
+  create_table "companies", :force => true do |t|
+    t.string   "short_name"
+    t.string   "company_name"
+    t.integer  "company_type"
+    t.string   "icon_url"
+    t.string   "website"
+    t.integer  "status",       :default => 0
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+  end
+
+  create_table "company_accounts", :force => true do |t|
+    t.integer  "company_id"
+    t.decimal  "discount",   :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "max_credit", :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "balance",    :precision => 8, :scale => 2, :default => 0.0
+    t.datetime "created_at",                                                :null => false
+    t.datetime "updated_at",                                                :null => false
+  end
+
   create_table "contacts", :force => true do |t|
-    t.integer  "agent_id"
+    t.integer  "company_id"
     t.string   "contact_name"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
@@ -263,13 +264,13 @@ ActiveRecord::Schema.define(:version => 20120712064107) do
 
   create_table "orders", :force => true do |t|
     t.string   "order_number"
-    t.string   "order_source_type"
-    t.integer  "order_source_id"
+    t.integer  "schedule_id"
+    t.integer  "schedule_assignment_id"
     t.string   "order_method"
     t.datetime "completed_at"
     t.integer  "status"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
   end
 
   create_table "pages", :force => true do |t|

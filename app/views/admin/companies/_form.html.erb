@@ -1,4 +1,4 @@
-<%= form_for( @object, :url => post_path, :remote => true) do |f| %>
+<%= form_for( [:admin, @object], :remote => true) do |f| %>
   <div class="container">
   	<div class='span-8'>
 	  <%= f.field_container :short_name do %>
@@ -9,26 +9,43 @@
 	  	<%= f.label :company_name %><br />
 	  	<%= f.text_field :company_name %>
 	  <% end %>
-	  <%= f.field_container :description do %>
-	  	<%= f.label :description %><br />
-	  	<%= f.text_area :description, :style => 'width:90%', :class => 'html-editor' %>
-	  <% end %>
-	  </div>
-	  <div class='span-8 last'>
-	  <%= f.field_container :icon_url do %>
-	  	<%= f.label :icon_url %><br />
-	  	<%= f.text_field :icon_url %>
-	  <% end %>
 	  <%= f.field_container :website do %>
 	  	<%= f.label :website %><br />
 	  	<%= f.text_field :website %>
 	  <% end %>
-	  <%= f.field_container :status do %>
-	  	<%= f.label :status %><br />
-	  	<%= f.text_field :status %>
+	  <%= f.field_container :icon_url do %>
+	  	<%= f.label :icon_url %><br />
+	  	<%= f.text_field :icon_url %>
 	  <% end %>
+		<%= render :partial => 'admin/shared/status', :locals => {:f => f} %> 
+	  </div>
+          <% if @object.id %>
+	  <div class='span-8 last'>
+		  <div>
+		  	<b>Accounts:</b><br />
+		  	<% if @object.agent_account %>
+		  	<table>
+		  		<tr><td>Discount:</td><td><%= @object.agent_account.discount %></td></tr>
+		  		<tr><td>Max credit:</td><td><%= @object.agent_account.max_credit %></td></tr>
+		  		<tr><td>Balance:</td><td><%= @object.agent_account.balance %></td></tr>
+		  	</table>
+		  	<% end %>
+
+        <b>Contacts: </b> | <%= link_to 'add', "user_infos/new?edit_div=add_contact_div&agent_id=#{@object.id}&short=1", :remote => true  %> <br />
+        <table id='short_list_user_infos'>
+          
+          <% @object.contacts.each do |c| %>
+            <tr>
+              <td><%= c.to_s %></td>
+              <td><%= link_to_hide c, 'data-confirm' => 'Are you sure to delete this contact?' %></td>
+            </tr>
+		  	<% end %>
+        </table>
+		  </div>
 	 	</div>
+        <% end %>
 	</div>
+      
 
   <div class="actions">
     <%= f.submit %>

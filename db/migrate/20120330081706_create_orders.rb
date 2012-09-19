@@ -2,8 +2,8 @@ class CreateOrders < ActiveRecord::Migration
   def change
 		create_table :orders do |t|
       t.string :order_number
-      t.string :order_source_type
-      t.integer :order_source_id
+      t.integer :schedule_id
+      t.integer :schedule_assignment_id
       t.string :order_method
       t.datetime :completed_at
       t.integer :status
