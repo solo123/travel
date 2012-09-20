@@ -54,7 +54,7 @@ Omei::Application.routes.draw do
       end
     end
     resources :employees, :employee_infos
-    resources :agents do
+    resources :companies do
       collection do
         get 'add_contact'
       end

@@ -5,6 +5,10 @@
 	  	<%= f.label :name %><br />
 	  	<%= f.text_field :name %>
 	  <% end %>
+    <%= f.field_container :company_id do %>
+      <%= f.label :company %><br />
+      <%= f.select(:company_id, Company.all.collect{|c| [c.short_name, c.id]}, {:prompt => 'Select Company'}) %>
+    <% end %>
       <%= f.field_container :bus_type do %>
         <%= f.label :bus_type %><br />
         <%= f.select(:bus_type, InputType.get_list('bus').collect{|d| [d.type_text, d.type_value]}, {:prompt => 'Select Bus Type'}) %>  	
