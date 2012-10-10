@@ -4,12 +4,14 @@ module Admin
 
     private
     def new_params
-      if !@object.order_source && params[:assignment_id]
+      if !@object.schedule_assignment && params[:assignment_id]
         sa = ScheduleAssignment.find(params[:assignment_id])
-        @object.order_source = sa.schedule
+        @object.schedule_assignment = sa
+        @object.schedule = sa.schedule
       end
 
       if params[:seats]
+        @object.seats = params[:seats]
         rn = params[:seats].split(',').count
         while rn > 0 do
           item = @object.order_items.build

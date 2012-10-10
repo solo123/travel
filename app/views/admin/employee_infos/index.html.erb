@@ -10,7 +10,7 @@
   <ul class='actions'>
     <li>
       <%= form_for( @search, :url => admin_employee_infos_path ) do |f| %>
-      <%= f.select :agent_id_eq, Agent.all.map { |c| [c.short_name, c.id] }.insert(0, ['All Company', nil]), {}, :class => 'data-field', :onchange => 'this.form.submit()'  %>
+      <%= f.select :company_id_eq, Company.all.map { |c| [c.short_name, c.id] }.insert(0, ['All Company', nil]), {}, :class => 'data-field', :onchange => 'this.form.submit()'  %>
       <%= f.select :status_eq, [['All Status', nil],['active', 1], ['leaved', 0]],{}, :class => 'data-field', :onchange => 'this.form.submit()' %>
       <%= f.text_field :nickname_contains, :size => 15, :class => 'data-field' %>
       <%= button 'search' %>
@@ -30,7 +30,7 @@
   <thead>
   <tr>
       <th><%= t("id") %></th>
-      <th><%= t("agent") %></th>
+      <th><%= t("Company") %></th>
       <th><%= t("name") %></th>
       <th><%= t('employ_date')%></th>
       <th><%= t('ssn') %></th>

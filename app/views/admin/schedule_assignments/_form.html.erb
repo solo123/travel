@@ -4,10 +4,6 @@
       <% if params[:schedule_id] %>
         <%= f.hidden_field :schedule_id, :value => params[:schedule_id] %>
       <% end %>
-     <%= f.field_container :title do %>
-        <%= f.label :title %><br />
-        <%= f.text_field :title %>
-      <% end %>
       <%= f.field_container :bus do %>
         <%= f.label :bus %><br />
         <%= f.select(:bus_id, Bus.where(:status => 1).collect{|d| [d.name, d.id]}, {:prompt => 'Select Bus'}) %>  	

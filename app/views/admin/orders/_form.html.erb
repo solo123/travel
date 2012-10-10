@@ -4,11 +4,11 @@
     <p>
       order_number: <%= @object.order_number %>
     </p>
-    <%= f.hidden_field :order_source_type %>
-    <%= f.hidden_field :order_source_id %>
+    <%= f.hidden_field :schedule_id %>
+    <%= f.hidden_field :schedule_assignment_id %>
     <%= f.hidden_field :seats %>
     <div id='div_schedule_title'>
-      <%= render 'schedule_title', :schedule => @object.order_source %>
+      <%= render 'schedule_title', :schedule => @object.schedule %>
     </div>
     <%= button_link_to 'Select Schdule', '/admin/schedules/select?page=order', {:icon => 'add', :remote => true} %>
     <%= f.fields_for :order_customer do |customer| %>

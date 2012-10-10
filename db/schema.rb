@@ -155,7 +155,7 @@ ActiveRecord::Schema.define(:version => 20120918135348) do
 
   create_table "employee_infos", :force => true do |t|
     t.integer  "employee_id"
-    t.integer  "agent_id"
+    t.integer  "company_id"
     t.integer  "user_info_id"
     t.string   "nickname"
     t.date     "employ_date"

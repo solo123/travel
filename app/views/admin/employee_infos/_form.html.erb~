@@ -1,10 +1,10 @@
 <%= form_for( [:admin, @object], :remote => true) do |f| %>
   <div class="container">
   	<div class='span-8'>
-	  <%= f.field_container :agent_id do %>
-	  	<%= f.label :agent_id %><br />
+	  <%= f.field_container :company_id do %>
+	  	<%= f.label :company_id %><br />
 
-			<%= f.select :agent_id, Agent.all.map { |c| [c.short_name, c.id] }, {}, :class => 'data-field' %>
+			<%= f.select :company_id, Company.all.map { |c| [c.short_name, c.id] }, {}, :class => 'data-field' %>
 
 	  <% end %>
 	  <%= f.field_container :nickname do %>
@@ -27,7 +27,7 @@
 	  <% end %>
     <%= f.field_container :roles do %>
       <%= f.label :roles %><br />
-      <%= f.text_field :roles %>
+      <%= f.hidden_field :roles %>
       <% InputType.get_list('roles').each do |role| %>
         <%= check_box_tag "role[#{role.type_text}]", role.type_value, @object.roles.include?(role.type_value), {:id => dom_id(role), :onchange => 'roles_changed();'} %>
         <%= label_tag dom_id(role), role.type_text %>
