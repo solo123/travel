@@ -10,6 +10,7 @@
   <td><%= obj.status %></td>
   <td><%= obj.created_at %></td>
   <td class="actions">
+    <%= link_to 'Shifts', admin_bus_path(obj) + '/shifts' %> | 
     <%= link_to_edit obj %> |
     <%= link_to_hide obj, 'data-confirm' => 'Are you sure to hide/show this Position?' %>
   </td>

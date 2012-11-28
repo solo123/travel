@@ -1,5 +1,5 @@
 $("#dialog")
-	.html("<%= escape_javascript(render(:partial => "new_payment"))%>");
+	.html("<%= escape_javascript(render(:partial => "form"))%>");
 
 $('#tabs-payment').tabs({
 	selected: 0,
@@ -19,8 +19,8 @@ init_pay_check();
 function init_pay_cash(){
 	$('#balance,#payment_amount,#balance_after,#pay_cash_amount,#pay_cash_change').addClass('pay_fonts');
 	$('#payment_amount,#pay_cash_amount').css('font-size', '30px').css('width','100px');
-	$('#cash_casher_id').val(<%= @current_employee.id %>);
-	$('#button_casher_by_me').click(function(){ $('#cash_casher_id').val(<%= @current_employee.id %>); });
+	$('#cash_casher_id').val(<%= 3  %>);
+	$('#button_casher_by_me').click(function(){ $('#cash_casher_id').val(<%= 3  %>); });
 	$('#pay_cash_amount').focus();
 		
 	$('#pay_cash_amount').keyup(function(){

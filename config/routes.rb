@@ -24,13 +24,18 @@ Omei::Application.routes.draw do
         get :create_photoset
       end
     end
-  	resources :buses, :pages
-  	resources :tours do
+    resources :pages
+    resources :buses do
+      member do
+        get :shifts
+      end
+    end
+    resources :tours do
       collection do
         get 'search'
       end
-  		resources :spots
-  	end
+      resources :spots
+    end
     resources :schedules do
       collection do
         get :select, :search, :generate
@@ -62,6 +67,7 @@ Omei::Application.routes.draw do
     resources :payments, :vouchers, :company_receivables
     resources :telephones, :emails, :addresses
     resources :input_types, :tour_types, :positions
+    resources :schedule_assignment_costs, :schedule_assignment_balances
   end
 
   match '/admin', :to => 'admin/home#index', :as => :admin

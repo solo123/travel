@@ -66,9 +66,10 @@ class Order < ActiveRecord::Base
     end
     op = self.order_price
     op.num_rooms = self.order_items.count
-    op.num_adult = self.order_items.sum(:num_total)
+    op.num_total = self.order_items.sum(:num_total)
     op.total_amount = self.order_items.sum(:amount)
     op.actual_amount = op.total_amount + op.adjustment_amount
     op.balance_amount = op.total_amount + op.adjustment_amount - op.payment_amount
+    op.save
   end
 end

@@ -1,28 +1,70 @@
-<div class='toolbar order-links'>
-  <%= hook :admin_order_show_buttons do %>
-    <%= button_link_to t("cancel"), fire_admin_order_url(@order.number, {:e => "cancel"}), :icon => 'delete', :confirm => t('are_you_sure') if @order.can_cancel? %>
-    <%= button_link_to t("edit"), edit_admin_order_url(@order.number), :icon => 'edit' %>
-  <% end %>
-</div>
+<div class='order'>
+  <div class='order-head'>
+    <div class='schedule-head'>
 
-<%= render :partial => 'admin/shared/order_tabs', :locals => {:current => "Order Details"} %>
+      <% if @object.schedule %>
+        <%= @object.schedule.tour.title %><br />
+        <%= @object.schedule.tour.title_cn %><br />
 
-<%= hook :admin_order_show_addresses do %>
-  <% if @order.bill_address %>
-    <div class='adr'>
-      <h4><%= t("bill_address") %></h4>
-      <%= render :partial => 'admin/shared/address', :locals => {:address => @order.bill_address} %>
+        <div class="s-date">
+          出發: <b><%= @object.schedule.departure_date.strftime("%Y-%m-%d") %></b><br />
+          返回: <b><%= @object.schedule.return_date.strftime("%Y-%m-%d") %></b>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-  <% if @order.ship_address %>
-    <div class='adr'>
-      <h4><%= t("ship_address") %></h4>
-      <%= render :partial => 'admin/shared/address', :locals => {:address => @order.ship_address} %>
+    <div class='client-head'>
+      <% if @object.order_customer %>
+        <p>Client: <%= @object.order_customer.full_name %></p>
+        <% if @object.order_customer.user_info %>
+          <p>login name: <%= @object.order_customer.user_info.login_name %></p>
+        <% end %>
+      <% end %>
     </div>
+    <div class='order-brief'>
+      <p>Order method: <%= @object.order_method %></p>
+      <p>Created at: <%= @object.created_at %></p>
+      <p>Updated at: <%= @object.updated_at %></p>
+      <p>Completed at: <%= @object.completed_at %></p>
+      <p>Status: <%= @object.status %></p>
+    </div>
+  </div>
+  <div class='order-items'>
+    <% if @object.order_price %>
+      <p>Rooms: <%= @object.order_price.num_rooms %></p>
+      <p>Num total: <%= @object.order_price.num_total %></p>
+      <p>Amount: <%= @object.order_price.total_amount %></p>
+      <p>adjustment_amount: <%= @object.order_price.adjustment_amount %></p>
+      <p>Actual amount: <%= @object.order_price.actual_amount %></p>
+      <p>Balance: <%= @object.order_price.balance_amount %></p>
+      <p>Last updated:<%= @object.order_price.updated_at %></p>
+    <% end %> 
+    <table>
+      <thead>
+        <tr>
+          <th>room</th>
+          <th>Adult</th>
+          <th>Child</th>
+          <th>total</th>
+          <th>amount</th>
+        </tr>
+      </thead>
+      <tbody>
+    <% @object.order_items.each do |item| %>
+      <tr>
+        <td>room</td>
+        <td>adult: <%= item.num_adult %></td>
+        <td>child: <%= item.num_child %></td>
+        <td>total: <%= item.num_total %></td>
+        <td>amount: <%= item.amount %></td>
+      </tr>
     <% end %>
-  <hr />
-<% end %>
-
-<%= hook :admin_order_show_details do %>
-  <%= render :partial => 'admin/shared/order_details', :locals => {:order => @order} %>
-<% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class='operation-log'>
+  </div>
+  <div class='payment-list'>
+  </div>
+  <div class='order-foot'>
+  </div>
+</div>

@@ -6,23 +6,14 @@
       <% end %>
       <%= f.field_container :bus do %>
         <%= f.label :bus %><br />
-        <%= f.select(:bus_id, Bus.where(:status => 1).collect{|d| [d.name, d.id]}, {:prompt => 'Select Bus'}) %>  	
+        <%= f.select(:bus_id, Bus.where(:status => 1).collect{|d| [d.name, d.id]}, {:include_blank => true}) %>  	
       <% end %>
       <%= render :partial => 'admin/shared/select_employee', :locals => {:f => f, :field_name => :driver_id} %>
-      <%= f.field_container :driver_assistance do %>
-        <%= f.label :driver_assistance %><br />
-        <%= f.text_field :driver_assistance_id %>
-      <% end %>
+      <%= render :partial => 'admin/shared/select_employee', :locals => {:f => f, :field_name => :driver_assistance_id} %>
     </div>
     <div class='span-8 last'>
-      <%= f.field_container :tour_guide do %>
-        <%= f.label :tour_guide %><br />
-        <%= f.text_field :tour_guide_id %>
-      <% end %>
-      <%= f.field_container :tour_guide_assistance do %>
-        <%= f.label :tour_guide_assistance %><br />
-        <%= f.text_field :tour_guide_assistance_id %>
-      <% end %>
+      <%= render :partial => 'admin/shared/select_employee', :locals => {:f => f, :field_name => :tour_guide_id} %>
+      <%= render :partial => 'admin/shared/select_employee', :locals => {:f => f, :field_name => :tour_guide_assistance_id} %>
     </div>
   </div>
   <div class="actions">

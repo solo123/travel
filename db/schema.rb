@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120918135348) do
+ActiveRecord::Schema.define(:version => 20121018015738) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address_data_type"
@@ -166,6 +166,12 @@ ActiveRecord::Schema.define(:version => 20120918135348) do
     t.integer  "status",       :default => 0
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
+  end
+
+  create_table "employee_shifts", :force => true do |t|
+    t.integer "employee_id"
+    t.integer "schedule_assignment_id"
+    t.date    "date"
   end
 
   create_table "employees", :force => true do |t|
@@ -408,6 +414,25 @@ ActiveRecord::Schema.define(:version => 20120918135348) do
     t.integer  "status",      :default => 0
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
+  end
+
+  create_table "schedule_assignment_balances", :force => true do |t|
+    t.integer  "schedule_id"
+    t.integer  "schedule_assignment_id"
+    t.decimal  "income",                 :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "cost",                   :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "balance",                :precision => 8, :scale => 2, :default => 0.0
+    t.datetime "created_at",                                                            :null => false
+    t.datetime "updated_at",                                                            :null => false
+  end
+
+  create_table "schedule_assignment_costs", :force => true do |t|
+    t.integer  "schedule_assignment_id"
+    t.integer  "cost_type"
+    t.decimal  "amount",                 :precision => 8, :scale => 2, :default => 0.0
+    t.integer  "edit_by"
+    t.datetime "created_at",                                                            :null => false
+    t.datetime "updated_at",                                                            :null => false
   end
 
   create_table "schedule_assignments", :force => true do |t|

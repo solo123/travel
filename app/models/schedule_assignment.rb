@@ -9,9 +9,9 @@ class ScheduleAssignment < ActiveRecord::Base
   has_many :seats, :class_name => 'BusSeat'
   has_many :bus_shifts
 
-  after_create :add_bus_shifts
-  after_update :add_bus_shifts
-  before_destroy :del_bus_shifts
+  after_create :add_shifts
+  after_update :add_shifts
+  before_destroy :del_shifts
 
   def total_seats
     if self.bus
@@ -22,22 +22,36 @@ class ScheduleAssignment < ActiveRecord::Base
   end
 
   private
-  def add_bus_shifts
+  def add_shifts
+    return unless self.changed? && self.schedule
     s = self.schedule
-    if s && self.bus
-      unless self.bus_shifts.empty? || self.bus_shifts.first.bus_id == self.bus_id
-        self.bus_shifts.delete_all
+    if self.bus_id_changed?
+      self.bus_shifts.delete_all
+      s.departure_date.upto(s.return_date).each do |d|
+        bs = BusShift.new(:bus_id => self.bus_id, :schedule_assignment_id => self.id, :date => d)
+        bs.save
       end
-      if self.bus_shifts.empty?
+    end
+    unless (self.changed & %w(driver_id driver_assistance_id tour_guide_id tour_guide_assistance_id) ).empty?
+      EmployeeShift.where(:schedule_assignment_id => self._id).delete_all
+      rs = []
+      rs << self.driver_id if self.driver_id
+      rs << self.driver_assistance_id if self.driver_assistance_id
+      rs << self.tour_guide_id if self.tour_guide_id
+      rs << self.tour_guide_assistance_id if self.tour_guide_assistance_id
+      unless rs.empty?
         s.departure_date.upto(s.return_date).each do |d|
-          bs = BusShift.new(:bus_id => self.bus_id, :schedule_assignment_id => self.id, :date => d)
-          bs.save
+          rs.each do |r|
+            es = EmployeeShift.new(:schedule_assignment_id => self.id, :employee_id => r, :date => d )
+            es.save
+          end
         end
       end
     end
   end
-  def del_bus_shifts
+  def del_shifts
     self.bus_shifts.delete_all
+    EmployeeShift.where(:schedule_id => self.schedule_id).delete_all
   end
 
 end

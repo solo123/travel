@@ -1,38 +1,39 @@
 <ul id='main_menu' class='sf-menu'>
-	<li><a href='#'>Data</a>
-		<ul>
-			<li><%= link_to t(:destinations), admin_destinations_path %></li>
-			<li><%= link_to t(:tours), admin_tours_path %></li>
-			<li><%= link_to t(:schedules), admin_schedules_path %></li>
-			<li><%= link_to t(:buses), admin_buses_path %></li>
-			<li><%= link_to t(:pages), admin_pages_path %></li>
-		</ul>
-	</li>
-	<li><a href='#'>Orders</a>
-		<ul>
-			<li><%= link_to t(:orders), admin_orders_path %></li>
-			<li><%= link_to t(:user_infos), admin_user_infos_path %></li>
-		</ul>
-	</li>
-	<li><a href='#'>Accounts</a>
-		<ul>
-			<li><%= link_to t(:payments), admin_payments_path %></li>
-			<li><%= link_to t(:vouchers), admin_vouchers_path %></li>
-			<li><%= link_to t(:company_receivables), admin_company_receivables_path %></li>
-		</ul>
-	</li>
-	<li><a href='#'>Reports</a></li>
-	<li><a href='#'>System</a>
-		<ul>
-			<li><%= link_to t(:companies), admin_companies_path %></li>
-			<li><%= link_to t(:employees), admin_employee_infos_path %></li>
-      <li><a href='#'>Data Types</a>
-        <ul>
-  		    <li><%= link_to t(:input_types), admin_input_types_path %></li>
-          <li><%= link_to t(:tour_types), admin_tour_types_path %></li>
-          <li><%= link_to t(:positions), admin_positions_path %></li>
-        </ul>
-      </li>
-		</ul>
-	</li>
+  <li><a href='#'>Data</a>
+  <ul>
+    <li><%= link_to t(:destinations), admin_destinations_path %></li>
+    <li><%= link_to t(:tours), admin_tours_path %></li>
+    <li><%= link_to t(:schedules), admin_schedules_path %></li>
+    <li><%= link_to t(:buses), admin_buses_path %></li>
+    <li><%= link_to t(:pages), admin_pages_path %></li>
+  </ul>
+  </li>
+  <li><a href='#'>Orders</a>
+  <ul>
+    <li><%= link_to t(:orders), admin_orders_path %></li>
+    <li><%= link_to t(:user_infos), admin_user_infos_path %></li>
+  </ul>
+  </li>
+  <li><a href='#'>Accounts</a>
+  <ul>
+    <li><%= link_to t(:payments), admin_payments_path %></li>
+    <li><%= link_to t(:vouchers), admin_vouchers_path %></li>
+    <li><%= link_to t(:company_receivables), admin_company_receivables_path %></li>
+    <li><%= link_to t(:schedule_balances), admin_schedule_assignment_balances_path %></li>
+  </ul>
+  </li>
+  <li><a href='#'>Reports</a></li>
+  <li><a href='#'>System</a>
+  <ul>
+    <li><%= link_to t(:companies), admin_companies_path %></li>
+    <li><%= link_to t(:employees), admin_employee_infos_path %></li>
+    <li><a href='#'>Data Types</a>
+    <ul>
+      <li><%= link_to t(:input_types), admin_input_types_path %></li>
+      <li><%= link_to t(:tour_types), admin_tour_types_path %></li>
+      <li><%= link_to t(:positions), admin_positions_path %></li>
+    </ul>
+    </li>
+  </ul>
+  </li>
 </ul>

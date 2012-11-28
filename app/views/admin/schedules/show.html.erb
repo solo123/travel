@@ -46,7 +46,10 @@
       <th>Phone</th>
       <th>Status</th>
     </tr>
-    <% @object.orders.each do |order| %>
+    <% @object.orders.each do |order| 
+         order.recaculate_price unless order.order_price
+         next if order.order_price.num_total == order.seats.count
+  %>
       <tr id="<%= dom_id order %>" class='<%= cycle('row', 'alt-row') %>'>
         <td style="font-weight:bold;text-align:center;text-decoration:underline;">
           <%= link_to order.id, admin_order_path(order) + "/edit?p=order_seats", :remote => true %>

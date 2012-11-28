@@ -1,0 +1,12 @@
+<h1>Shifts: Bus #<%= params[:id] %></h1>
+<table>
+  <tbody>
+    <% @shifts.each do |s| %>
+    <tr>
+      <td><%= s.id %></td>
+      <td><%= s.schedule_assignment_id %></td>
+      <td><%= s.date %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
