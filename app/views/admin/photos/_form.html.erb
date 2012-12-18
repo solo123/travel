@@ -1,0 +1,6 @@
+<%= form_for @object, :url => object_url(@parent) + '/photos', :html => { :multipart => true } do |f| %>
+  <%= f.file_field :pic %>
+  <div class="actions">
+    <%= f.submit 'upload' %>
+  </div>
+<% end %>

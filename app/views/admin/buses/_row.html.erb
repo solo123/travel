@@ -12,6 +12,7 @@
   <td class="actions">
     <%= link_to 'Shifts', admin_bus_path(obj) + '/shifts' %> | 
     <%= link_to_edit obj %> |
+    <%= link_to 'Photos', admin_bus_photos_path(obj), {:target => 'edit-win'} %> |
     <%= link_to_hide obj, 'data-confirm' => 'Are you sure to hide/show this Position?' %>
   </td>
 </tr>

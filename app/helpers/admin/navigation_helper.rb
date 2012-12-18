@@ -105,6 +105,10 @@
         end
       end
 
+      def icon_link_to(text, url, html_options = {})
+          link_to(text_for_button_link(text, html_options), url, html_options)
+      end
+
       def link_button(text, url, html_options = {})
         link_to(text_for_button_link(text, html_options), url, {:class => 'small-button'}.update(html_options))
       end

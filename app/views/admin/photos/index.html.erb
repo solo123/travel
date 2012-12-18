@@ -1,0 +1,23 @@
+<%= content_for :breadcrumbs do %>
+  Data &gt;
+  <%= link_to @parent.class.name.pluralize.humanize, objects_url(@parent) %> &gt;
+  Photos
+<% end %>
+<%= render :partial => objects_url(@parent) + '/photos', :locals => {:obj => @parent} %>
+<div id='upload_div' class='dialog-normal'></div>
+
+<div style='clear:both;margin-top:10px;'> 
+<%= button_link_to 'Add Photo', 'photos/new', {:icon => 'add', 'data-remote' => true} %>
+</div>
+<div class='thumbs'>
+  <% @collection.each do |p| %>
+    <div class='thumb'>
+      <a href='<%= p.pic.url(:large) %>'><%= image_tag p.pic.url(:thumb) %></a>
+      <div class='buttons'>
+        <%= icon_link_to '', object_url(@parent) + "/photos/#{p.id}/cover", {:icon => 'accept'} %> 
+        <%= icon_link_to '', object_url(@parent) + "/photos/#{p.id}", {:icon => 'delete', 'data-confirm' => 'Are you sure to Delete this photo?', 'data-method' => 'delete'} %> 
+     </div>
+    </div>
+  <% end %>
+  <div class='clear'></div>
+</div>

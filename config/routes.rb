@@ -17,15 +17,19 @@ Omei::Application.routes.draw do
 
   namespace :admin do
     resources :destinations do
-      collection do
-        get :photos
-      end
-      member do
-        get :create_photoset
+      resources :photos do
+        member do
+          get :cover
+        end
       end
     end
     resources :pages
     resources :buses do
+      resources :photos do
+        member do
+          get :cover
+        end
+      end
       member do
         get :shifts
       end

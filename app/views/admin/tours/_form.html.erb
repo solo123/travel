@@ -1,5 +1,17 @@
 <%= form_for( [:admin, @object], :remote => true) do |f| %>
-	<%= render :partial => 'admin/shared/title', :locals => {:f => f} %>
+<!-- the tabs -->
+<ul class="tabs">
+	<li><a href="#">Description</a></li>
+	<li><a href="#">Attributes</a></li>
+	<li><a href="#">Prices</a></li>
+</ul>
+ 
+<!-- tab "panes" -->
+<div class="panes">
+  <div style='height:250px;'>
+	<%= render :partial => 'admin/shared/description', :locals => {:f => f} %>
+  </div>
+  <div style='height:250px;'>
   <div class="container">
   	<div class='span-8'>
       <%= f.label :tour_type %><br />
@@ -13,9 +25,13 @@
 	  </div>
 	</div>
 	<%= render :partial => 'tour_setting', :locals => {:f => f} %>
+  </div>
+  <div style='height:250px;'>
 	<%= render :partial => 'tour_price', :locals => {:f => f} %>
 	<%= render :partial => 'admin/shared/status', :locals => {:f => f} %>	
-
+  </div>
+</div>
+<br />
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -1,6 +1,7 @@
 <tr id="<%= dom_id obj%>" <%= 'class=\'deleted\'' if !obj.status || obj.status < 1 %>>
 	<td><%= obj.id %></td>
-	<td><%= obj.title %><br /><%= obj.title_cn %></td>
+        <td><%= image_tag(obj.title_photo.pic.url(:thumb), :size => '40x40' ) if obj.title_photo %></td>
+	<td><%= obj.description.title %><br /><%= obj.description.title_cn %></td>
 	<td><%= obj.tour_type_name %></td>
 	<td><%= obj.days %></td>
 	<td><%= obj.tour_setting.weekly if obj.tour_setting %></td>

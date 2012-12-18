@@ -1,42 +1,61 @@
-class Admin::PhotosController < Admin::ResourceController
-
-  create.after :create_after
-
-  def create_after
-    if params[:destination_id]
-      @destination = Destination.find(params[:destination_id])
-      @destination.photos << @photo
-    end
+module Admin
+class PhotosController < AdminController
+  respond_to :html
+  
+  def index
+    load_collection
   end
+  def show
+    load_object
+  end
+  def new
+    @parent = Destination.find(params[:destination_id]) if params[:destination_id]
+    @parent = Bus.find(params[:bus_id]) if params[:bus_id] 
+    @object = @parent.photos.build
+  end
+  def edit
+    load_object
+  end
+  def update
+    load_object
+    @object = update_attributes(params[:photo])
+  end
+  def create
+    @object = Photo.new(params[:photo])
+    @object.save
+    @parent = Destination.find(params[:destination_id]) if params[:destination_id]
+    @parent = Bus.find(params[:bus_id]) if params[:bus_id]
+    @parent.photos << @object
+    redirect_to :action => :index
+  end
+  def destroy
+    load_object
+    @object.destroy
+    redirect_to :action => :index
+  end
+
   def location_after_save
     admin_destination_photos_url(@destination)
   end
   
   def cover
-    @destination = Destination.find(params[:destination_id])
-    @destination.photo_id = params[:photo_id]
-    @destination.save
+    load_object
+    @parent.title_photo_id = params[:id]
+    @parent.save
+    redirect_to :action => :index
   end
-    
-	private
-	def load_data
-		if params[:destination_id]
-    	@destination = Destination.find(params[:destination_id])
+
+
+  protected
+    def load_collection
+      @parent = Destination.find(params[:destination_id]) if params[:destination_id]
+      @parent = Bus.find(params[:bus_id]) if params[:bus_id]
+      @collection = @parent.photos if @parent
     end
-  end
-	def collection
-    return @collection if @collection.present?
-    if params[:destination_id]
-      @destination = Destination.find(params[:destination_id])
-      @collection = @destination.photos
+    def load_object
+      @parent = Destination.find(params[:destination_id]) if params[:destination_id]
+      @parent = Bus.find(params[:bus_id]) if params[:bus_id]
+      @object = Photo.find(params[:id])
     end
-    
-    # pagination_options = {
-                            # :per_page  => Spree::Config[:admin_products_per_page],
-                            # :page      => params[:page]}
-#                             
-    # @search = Photo.search(params[:search])
-    # @collection = @search.paginate(pagination_options)
-  end
-	
+end
 end

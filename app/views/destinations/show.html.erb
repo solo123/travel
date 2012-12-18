@@ -1,45 +1,40 @@
-<%= content_for :head do %>
-	
-	<%= stylesheet_link_tag 'flickr/fleeckr', 'flickr/colorbox' %>
-	<%= javascript_include_tag 'flickr/jquery.fleeckr', 'flickr/jquery.colorbox-min' %>
-
-<% if @destination.photo && @destination.photo.photoset %>
-<script type="text/javascript"> 
-$(function(){
-	$("#flickr").jfleeckr({
-		apikey: '1e45d3cbe81db329e29dbbf8c966540b',
-		extra: 'photoset_id=<%= @destination.photo.photoset %>',
-		method: 'flickr.photosets.getPhotos'
-	}, function(data){
-		$('#flickr a').colorbox({transition:"fade", width:"100%", height:"80%"});
-	});
-});
-</script>
+<% content_for :head do %>
+  <%= javascript_include_tag 'galleria/galleria-1.2.8.min' %>
+  <script type='text/javascript'>
+    $(function(){
+        Galleria.loadTheme('/assets/galleria/themes/classic/galleria.classic.min.js');
+        Galleria.run('#gallery');
+    });
+  </script>
+  <style>
+    #gallery{ width: 900px; height: 700px; }
+  </style>
 <% end %>
-<% end %>
-
 <% content_for :breadcrumbs do %>
-    <li><a href="/home/index">Home</a></li>
-    <li>&raquo;</li>
-    <li><a href="/destinations">Destinations</a></li>
-    <li>&raquo;</li>
-    <li><%= @destination.title %></li>
-<% end %>
+      <li><a href="/home/index">Home</a></li>
+      <li>&raquo;</li>
+      <li><a href="/destinations">Destinations</a></li>
+      <li>&raquo;</li>
+      <li><%= @destination.title %></li>
+    <% end %>
 
+    <%= render 'related_tours' %>
+    <h2><%= @destination.title %></h2>
+    <div id="photo_dest">
+      <div id="photo_primary" style="margin-right:16px;padding:3px;float:left;">
+      <%= image_tag @destination.title_photo.pic.url(:small) if @destination.title_photo %>
+      </div>
+      <div style="font-size:1em;line-height: 1.62;margin-bottom:12px;">
+        <%=h @destination.description.en if @destination.description %>
+      </div>
+      <div class="clear"></div>
+    </div>
 
-
-<%= render 'related_tours' %>
-<h2><%= @destination.title %></h2>
-<div id="photo_dest">
-	<%= image_tag @destination.photo.photo_t if @destination.photo %>
-	<div id="photo_primary" style="width:240px;height:180px;margin-right:16px;padding:3px;float:left;"></div>
-	<div style="font-size:1em;line-height: 1.62;margin-bottom:12px;">
-		<%=h @destination.description.en if @destination.description %>
-	</div>
-	<div class="clear"></div>
-</div>
-
-<h2>Photo Gallery</h2>
-
-	<div id="flickr"></div> 
+    <h2>Photo Gallery</h2>
+    <div id="gallery">
+      <% @destination.photos.each do |p| %>
+        <a href="<%= p.pic.url(:large) %>"><img src="<%= p.pic.url(:thumb) %>" data-title="First" data-description="First image" /></a>
+      <% end %>
+    </div>
+    
 

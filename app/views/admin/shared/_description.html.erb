@@ -1,4 +1,18 @@
 <%= f.fields_for :description do |desc| %>
+	<div class="container">
+		<div class="span-8">
+	  <%= f.field_container :title do %>
+	    <%= desc.label :title %><br />
+	    <%= desc.text_field :title %>
+	  <% end %>
+  	</div>
+  	<div class="span-8 last">
+	  <%= f.field_container :title_cn do %>
+	    <%= desc.label :title_cn %><br />
+	    <%= desc.text_field :title_cn %>
+	  <% end %>
+  	</div>
+  </div>
   <div class="container">
     <div class="span-8">
       <%= f.field_container :en do %>

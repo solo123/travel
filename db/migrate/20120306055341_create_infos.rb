@@ -1,8 +1,6 @@
 class CreateInfos < ActiveRecord::Migration
   def change
   	create_table :destinations do |t|
-    	t.string :title
-    	t.string :title_cn
     	t.integer :city_id
     	t.integer :title_photo_id
     	t.integer :status
@@ -11,6 +9,8 @@ class CreateInfos < ActiveRecord::Migration
     create_table :descriptions do |t|
     	t.string :desc_data_type
     	t.integer :desc_data_id
+      t.string :title
+      t.string :title_cn
     	t.text :en
     	t.text :cn
     	t.timestamps
@@ -32,17 +32,11 @@ class CreateInfos < ActiveRecord::Migration
     create_table :photos do |t|
       t.string :photo_data_type
       t.integer :photo_data_id
-      t.string :photoset
-      t.string :photo_s
-      t.string :photo_t
-      t.string :photo_m
-      t.string :photo_b
+      t.integer :created_by
       t.timestamps
     end
 
-		create_table :tours do |t|
-    	t.string :title
-    	t.string :title_cn
+    create_table :tours do |t|
     	t.integer :days, :default => 0
     	t.integer :tour_type, :default => 0
     	t.integer :title_photo_id
@@ -111,8 +105,7 @@ class CreateInfos < ActiveRecord::Migration
       t.timestamps
     end
    create_table :user_infos do |t|
-      t.string :user_data_type
-    	t.integer :user_data_id
+    	t.integer :user_id
     	t.string :full_name
     	t.string :user_type
     	t.integer :user_level, :default => 0

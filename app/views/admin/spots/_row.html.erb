@@ -1,28 +1,24 @@
 <div id="<%= dom_id obj %>">
- <div class='container'>
+  <div class='container'>
     <div class='color-title'>
-			Day <%= obj.visit_day %>:
+      Day <%= obj.visit_day %>:
       <%= obj.visit_order %>)  
-			<%= obj.destination.title + ', ' + obj.destination.title_cn if obj.destination %>
+      <%= obj.destination.description.title + ', ' + obj.destination.description.title_cn if obj.destination %>
       | <%= link_to 'Edit', "spots/#{obj.id}/edit", :remote => true, :class => 'edit_button'   %>
-    </div>
-	</div>
-   <div class='container image-div'>
-    <div class='column span-3'>
-      <%= image_tag obj.destination.photo.photo_t, :class => 'info-icon' if obj.destination && obj.destination.photo %>
-    </div>
-    <div class='column span-3 last'>
-      <%= link_to '<-- set tour icon',"spots/#{obj.id}", :remote => true %>
     </div>
   </div>
   <div class='container'>
-  	<% if obj.description %>
-	    <div class='column span-10'>
-		    <%= raw obj.description.en %>
-    	</div>
-    	<div class='column span-10 last'>
-    		<%= raw obj.description.cn %>
-    	</div>
+    <div class='column span-6'>
+      <%= image_tag obj.destination.title_photo.pic.url(:thumb), :class => 'info-icon' if obj.destination && obj.destination.title_photo %><br />
+      <%= link_to '<-- set tour icon',"spots/#{obj.id}", :remote => true %>
+    </div>
+    <% if obj.description %>
+      <div class='column span-10'>
+        <%= raw obj.description.en %>
+      </div>
+      <div class='column span-10 last'>
+        <%= raw obj.description.cn %>
+      </div>
     <% end %>
   </div>
 </div> 

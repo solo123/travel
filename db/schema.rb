@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121018015738) do
+ActiveRecord::Schema.define(:version => 20121218142626) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address_data_type"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20121018015738) do
     t.integer  "status",            :default => 0
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
+    t.integer  "title_photo_id"
   end
 
   create_table "cities", :force => true do |t|
@@ -129,6 +130,8 @@ ActiveRecord::Schema.define(:version => 20121018015738) do
   create_table "descriptions", :force => true do |t|
     t.string   "desc_data_type"
     t.integer  "desc_data_id"
+    t.string   "title"
+    t.string   "title_cn"
     t.text     "en"
     t.text     "cn"
     t.datetime "created_at",     :null => false
@@ -136,8 +139,6 @@ ActiveRecord::Schema.define(:version => 20121018015738) do
   end
 
   create_table "destinations", :force => true do |t|
-    t.string   "title"
-    t.string   "title_cn"
     t.integer  "city_id"
     t.integer  "title_photo_id"
     t.integer  "status"
@@ -382,13 +383,13 @@ ActiveRecord::Schema.define(:version => 20121018015738) do
   create_table "photos", :force => true do |t|
     t.string   "photo_data_type"
     t.integer  "photo_data_id"
-    t.string   "photoset"
-    t.string   "photo_s"
-    t.string   "photo_t"
-    t.string   "photo_m"
-    t.string   "photo_b"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.integer  "created_by"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "pic_file_name"
+    t.string   "pic_content_type"
+    t.integer  "pic_file_size"
+    t.datetime "pic_updated_at"
   end
 
   create_table "preferences", :force => true do |t|
@@ -516,8 +517,6 @@ ActiveRecord::Schema.define(:version => 20121018015738) do
   end
 
   create_table "tours", :force => true do |t|
-    t.string   "title"
-    t.string   "title_cn"
     t.integer  "days",           :default => 0
     t.integer  "tour_type",      :default => 0
     t.integer  "title_photo_id"
@@ -527,16 +526,15 @@ ActiveRecord::Schema.define(:version => 20121018015738) do
   end
 
   create_table "user_infos", :force => true do |t|
-    t.string   "user_data_type"
-    t.integer  "user_data_id"
+    t.integer  "user_id"
     t.string   "full_name"
     t.string   "user_type"
-    t.integer  "user_level",     :default => 0
+    t.integer  "user_level", :default => 0
     t.string   "login_name"
     t.string   "pin"
-    t.integer  "status",         :default => 0
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.integer  "status",     :default => 0
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "users", :force => true do |t|

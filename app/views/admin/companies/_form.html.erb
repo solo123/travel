@@ -23,11 +23,11 @@
 	  <div class='span-8 last'>
 		  <div>
 		  	<b>Accounts:</b><br />
-		  	<% if @object.agent_account %>
+		  	<% if @object.company_account %>
 		  	<table>
-		  		<tr><td>Discount:</td><td><%= @object.agent_account.discount %></td></tr>
-		  		<tr><td>Max credit:</td><td><%= @object.agent_account.max_credit %></td></tr>
-		  		<tr><td>Balance:</td><td><%= @object.agent_account.balance %></td></tr>
+		  		<tr><td>Discount:</td><td><%= @object.company_account.discount %></td></tr>
+		  		<tr><td>Max credit:</td><td><%= @object.company_account.max_credit %></td></tr>
+		  		<tr><td>Balance:</td><td><%= @object.company_account.balance %></td></tr>
 		  	</table>
 		  	<% end %>
 
@@ -37,7 +37,7 @@
           <% @object.contacts.each do |c| %>
             <tr>
               <td><%= c.to_s %></td>
-              <td><%= link_to_hide c, 'data-confirm' => 'Are you sure to delete this contact?' %></td>
+              <td><%= link_to 'del', 'c', 'data-confirm' => 'Are you sure to delete this contact?' %></td>
             </tr>
 		  	<% end %>
         </table>

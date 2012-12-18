@@ -1,13 +1,14 @@
 <% c = obj.city %>
 <tr id="<%= dom_id obj%>" <%= 'class=\'deleted\'' if !obj.status || obj.status < 1 %>>
-	<td><%= obj.id %></td>
-	<td><%= obj.title %></td>
-	<td><%= obj.title_cn %></td>
-	<td><%= "#{c.city}, #{c.state}, #{c.country}" if c %></td>
-	<td><%= obj.status_text %></td>
-	<td>
-		<%= link_to_edit obj %> |
-		<%= link_to_hide obj, 'data-confirm' => 'Are you sure to hide/show this Destination?' %> |
-		<%= link_to 'Photos', admin_destination_path(obj) %>
-	</td>
+  <td><%= obj.id %></td>
+  <td><%= obj.description.title %></td>
+  <td><%= obj.description.title_cn %></td>
+  <td><%= "#{c.city}, #{c.state}, #{c.country}" if c %></td>
+  <td><%= obj.status_text %></td>
+  <td>
+    <%= link_to 'View', obj, {:target => 'website'} %> |
+    <%= link_to_edit obj %> |
+    <%= link_to_hide obj, 'data-confirm' => 'Are you sure to hide/show this Destination?' %> |
+    <%= link_to 'Photos', admin_destination_photos_path(obj), {:target => 'edit-win'} %>
+  </td>
 </tr>

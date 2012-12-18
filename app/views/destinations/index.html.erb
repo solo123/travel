@@ -1,23 +1,23 @@
 <%= content_for :head do %>
-	<script type='text/javascript'>
-	$(function(){
-		$('#dest_list').listnav();
-	});
+  <script type='text/javascript'>
+    $(function(){
+        $('#dest_list').listnav();
+        });
 
-	</script>
+</script>
 <% end %>
 <h2>Destinations</h2>
 <div id="dest_list-nav" style='margin-top:10px;margin-bottom:10px;'></div>
 <ul id="dest_list">
   <% @destinations.each do |d| %>
-  	<li title="<%=h d.title%>">
-  		<a href='<%= destination_path(d) %>'>
-  		<div class='img-case'>
-	  	<%= image_tag d.photo.photo_s if d.photo && d.photo.photo_s %>
-	  	</div>
-			<%= d.title %>
-			</a>
-		</li>
+    <li title="<%=h d.title%>">
+    <a href='<%= destination_path(d) %>'>
+      <div class='img-case'>
+        <%= image_tag d.title_photo.pic.url(:thumb) if d.title_photo %>
+      </div>
+      <%= d.title %>
+    </a>
+    </li>
   <% end %>
 </ul>
 <div class="clear"></div>

@@ -6,15 +6,12 @@
   <ul class="actions">
   	<li>
 			<%= form_for( @search, :url => admin_destinations_path ) do |f| %>
-  		<%= f.label :title_contains, "Title" %> <%= f.text_field :title_contains, :size => 15 %> &nbsp;
+  		<%= f.label :description_title_contains, "Title" %> <%= f.text_field :description_title_contains, :size => 15 %> &nbsp;
   		<%= button 'Search' %>
 			<% end %>
   	</li>
     <li>
     	<%= button_link_to 'New Destination', 'destinations/new', {:icon => 'add', 'data-remote' => true} %>
-    </li>
-    <li>
-    <%= button_link_to 'Reload Photos', 'destinations/photos', {:icon => 'flickr16'} %>
     </li>
   </ul>
   <br class="clear">

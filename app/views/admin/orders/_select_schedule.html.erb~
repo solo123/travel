@@ -1,7 +1,0 @@
-<p>
-Tour: <input type='text' id='tour_id' />
-</p>
-
-<p>
-Schedule: <input type='text' id='schedule_id' />
-</p>

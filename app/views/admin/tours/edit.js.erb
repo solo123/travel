@@ -1,0 +1,10 @@
+$("#edit_div")
+	.html("<%= j render(:partial => "form") %>")
+  .css('height','560px')
+	.dialog('option', 'title', 'Edit Tour <%= @object.id%>#');
+
+$('.html-editor').xheditor({tools: 'Blocktag,Bold,Italic,Underline,|,List,Link,Img,|,Source'});	
+$('input[type=submit]').addClass('button green');
+$("ul.tabs").tabs("div.panes > div");
+
+$('#edit_div').dialog('open');

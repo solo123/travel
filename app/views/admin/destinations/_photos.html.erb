@@ -1,0 +1,14 @@
+<% if obj.description %>
+<h1><%= obj.description.title%>, <%= obj.description.title_cn %></h1>
+  <div style='width:320px; float:left;'>
+    <%= image_tag obj.title_photo.pic.url(:small) if obj.title_photo %>
+  </div>
+<div style='margin-bottom:10px;'>
+  <%= obj.description.cn %>
+</div>
+<div>
+  <%= obj.description.en %>
+</div>
+<div class='clear'></div>
+<% end %>
+

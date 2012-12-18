@@ -1,0 +1,13 @@
+<h1>Bus: <%= obj.name %></h1>
+<div class='container'>
+  <div class='span-8'>
+    <%= image_tag obj.title_photo.pic.url(:small) if obj.title_photo %>
+  </div>
+  <div class='span-8 last'>
+    <% if obj.company %>
+      <p>Company: <%= obj.company.company_name %>(<%= obj.company.short_name %>)</p>
+    <% end %>
+    <p>Bus Type: <%= obj.bus_type %></p>
+    <p>Seats number: <%= obj.seats %></p>
+  </div>
+</div>

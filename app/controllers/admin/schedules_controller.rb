@@ -36,7 +36,7 @@ module Admin
               ds << d
             end
           end
-          @messages << [tour.id, tour.title, ds] if ds.count > 0
+          @messages << [tour.id, tour.description.title, ds] if ds.count > 0
         end
       end
     end
