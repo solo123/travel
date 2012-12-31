@@ -1,0 +1,14 @@
+  <h1>Todo:</h1>
+  <table class='compact'>
+    <% @collection.each do |o| %>
+    <tr>
+      <td><%= o.level %></td>
+      <td><%= o.message %></td>
+      <td><%= o.msg_from %></td>
+      <td><%= o.due_date %></td>
+      <td class='note-text'><time class='timeago' datetime='<%= o.created_at.iso8601 %>'><%= o.created_at %></time></td>
+    </tr>
+    <% end %>
+  </table>
+
+

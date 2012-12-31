@@ -9,10 +9,18 @@ class CreateOrders < ActiveRecord::Migration
       t.integer :status
       t.timestamps
     end
-    create_table :order_options do |t|
+    create_table :order_details do |t|
       t.integer :order_id
       t.string :pickup
-      t.integer :bill_address_id
+      t.integer :user_info_id
+      t.string :full_name
+      t.string :telephone
+      t.string :email
+      t.string :bill_addresss
+      t.integer :created_by
+      t.integer :last_operator
+      t.integer :last_payment
+      t.string :notes
       t.timestamps
     end
     create_table :order_prices do |t|
@@ -28,13 +36,6 @@ class CreateOrders < ActiveRecord::Migration
       t.decimal :balance_amount, :precision => 8, :scale => 2, :default => 0
       t.timestamps
     end
-    create_table :order_operates do |t|
-      t.integer :order_id
-      t.integer :created_by
-      t.integer :last_operator
-      t.integer :last_payment
-      t.timestamps
-    end
     create_table :order_items do |t|
       t.integer :order_id
       t.string :room_number
@@ -44,11 +45,5 @@ class CreateOrders < ActiveRecord::Migration
       t.decimal :amount, :precision => 8, :scale => 2, :default => 0
       t.timestamps
     end
-    create_table :order_customers do |t|
-      t.integer  :order_id
-      t.integer  :customer_id
-      t.string   :full_name
-      t.timestamps
-    end  	
   end
 end

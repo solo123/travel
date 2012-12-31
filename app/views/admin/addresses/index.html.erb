@@ -1,0 +1,41 @@
+<%= content_for :breadcrumbs do %>
+  Orders &gt;
+  Users &gt; Addresses
+<% end %>
+<div class="toolbar">
+  <ul class="actions">
+  	<li>
+			<%= form_for( @search, :url => admin_addresses_path ) do |f| %>
+  		<%= f.label :address1_or_address2_or_email_address_contains, "Email" %> <%= f.text_field :email_address_contains, :size => 15 %> &nbsp;
+  		<%= button 'Search' %>
+			<% end %>
+  	</li>
+  </ul>
+  <br class="clear">
+</div>
+
+<div id="edit_div" class='dialog-normal'></div>
+
+<div class='data-pager'>
+<%= will_paginate(@collection) %>
+</div>
+<table class="data-list" id="list_emails">
+  <thead>
+  <tr>
+    <th>id</th>
+	<th>email</th>
+	<th>data type</th>
+  <th>data id</th>
+	<th>created_at</th>
+  <th>updated_at</th>
+  <th>op</th>
+  </tr>
+</thead>
+<% @collection.each do |d| %>
+	<%= render :partial => 'row', :locals => {:obj => d} %>
+<% end %>
+</table>
+<%= will_paginate(@collection) %>
+
+
+

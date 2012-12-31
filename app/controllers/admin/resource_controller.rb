@@ -1,7 +1,7 @@
 require 'core/action_callbacks'
 module Admin
   class ResourceController < AdminController
-    respond_to :html, :js
+    respond_to :html, :js, :json
 
     def index
       return @collection if @collection.present?

@@ -1,0 +1,13 @@
+<tr id="<%= dom_id obj%>" <%= 'class=\'deleted\'' if !obj.status || obj.status < 1 %>>
+  <td><%= obj.id %></td>
+  <td><%= obj.level %></td>
+  <td><%= obj.message %></td>
+  <td><%= obj.status %></td>
+  <td><%= obj.created_at %></td>
+  <td><%= obj.updated_at %></td>
+  <td>
+    <%= link_to_edit obj %> |
+    <%= link_to_hide obj, 'data-confirm' => 'Are you sure to hide/show this Destination?' %> |
+  </td>
+</tr>
+

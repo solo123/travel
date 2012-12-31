@@ -1,19 +1,30 @@
-$("#select_customer_div")
+var edit_div = "edit_<%= @object.class.name.underscore %>_div";
+if ($('#'+edit_div).length == 0){
+  $('#page_main').append("<div id='"+ edit_div +"'></div>");
+  $('#'+edit_div).dialog({ autoOpen:false, width:700, dialogClass:'shadow', modal:true});
+}
+
+$('#'+edit_div)
 	.html("<%= escape_javascript(render(:partial => "select_form"))%>")
 	.dialog('open');
 
-
-$( "#member_select" ).autocomplete({
-	source: "/admin/members/search",
+$( "#user_select" ).autocomplete({
+	source: "/admin/user_infos/search",
 	minLength: 2,
 	select: function( event, ui ) {
 		if (ui.item) {
-			$('#member_id').val(ui.item.id);
+			$('#user_id').val(ui.item.id);
+      $('#select_user_button').attr('href', '/admin/user_infos/select?id='+ui.item.id.toString());
 		}
 	}
 });
 
-$('#member_select').click(function(){
+$('#user_select').click(function(){
 	$(this).select();
 });
+
+function user_info_after_updated(user_info_id){
+  $('#order_order_detail_attributes_user_info_id').val(user_info_id);
+  refresh_customer();
+}
 

@@ -1,9 +1,9 @@
+<% @object.build_order_detail if !@object.order_detail %>
 <%= form_for([:admin, @object], :remote => true) do |f| %>
   <div class="container">
     <div class='span-8'>
-    <p>
-      order_number: <%= @object.order_number %>
-    </p>
+      <fieldset>
+        <legend>Tour Schedule</legend>
     <%= f.hidden_field :schedule_id %>
     <%= f.hidden_field :schedule_assignment_id %>
     <%= f.hidden_field :seats %>
@@ -11,23 +11,31 @@
       <%= render 'schedule_title', :schedule => @object.schedule %>
     </div>
     <%= button_link_to 'Select Schdule', '/admin/schedules/select?page=order', {:icon => 'add', :remote => true} %>
-    <%= f.fields_for :order_customer do |customer| %>
-      <p>
-        <%= customer.label :customer_id %><br />
-        <%= customer.text_field :customer_id %>
-        <%= customer.hidden_field :full_name %>
-        <%= button_link_to 'Select Customer', '/admin/members/select', {:icon => 'add', 'data-remote' => true} %>
-      </p>
-    <% end %>
-    <%= f.fields_for :order_option do |option| %>
-      <p>
-        <%= option.label :pickup %><br />
-        <%= option.text_field :pickup %>
-      </p>
-    <% end %>
+        </fieldset>
+        <fieldset>
+          <legend>Detail</legend>
+          <%= f.fields_for :order_detail do |detail| %>
+            Customer id: (<%= link_to 'Change Customer', '/admin/user_infos/select?id=' + (@object.order_detail.user_info ? @object.order_detail.user_info.id.to_s : '0'), {'data-remote' => true} %>) <br />
+            <%= detail.text_field :user_info_id, :readonly => true %><br />
+            Full name:<br />
+            <%= detail.text_field :full_name, :readonly => true %><br />
+            Telephone:<br />
+            <%= detail.text_field :telephone, :readonly => true %><br />
+            Email:<br />
+            <%= detail.text_field :email, :readonly => true %><br />
+            Bill address:<br />
+            <%= detail.text_field :bill_address, :readonly => true %><br />
 
+            
+            Pickup: <br />
+            <%= detail.text_field :pickup %><br />
+      </p>
+    <% end %>
+  </fieldset>
     </div>
     <div class='span-8 last'>
+      <fieldset>
+        <legend>Rooms</legend>
       <table id='rooms' border='1' padding='2'>
         <thead>
           <tr>
@@ -45,6 +53,7 @@
         </tbody>
       </table>
       <p><%= link_to "Add room", 'javascript:add_room();' %></p>
+    </fieldset>
     </div>
   <div class="actions">
     <%= f.submit %>

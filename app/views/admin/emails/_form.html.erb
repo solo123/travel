@@ -1,0 +1,24 @@
+<%= form_for( [:admin, @object], :remote => true) do |f| %>
+  <div class="container">
+  	<div class='span-8'>
+	  <%= f.field_container :email_address do %>
+	  	<%= f.label :email_address %><br />
+	  	<%= f.text_field :email_address %>
+    <% end %>
+    <p>
+    Data Type: <%= @object.email_data_type %><br />
+    Data ID: <%= @object.email_data_id %><br />
+    Created at: <%= @object.created_at %><br />
+    Updated at: <%= @object.updated_at %><br />
+	  </div>
+	  <div class='span-8 last'>
+    </div>   
+	</div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+

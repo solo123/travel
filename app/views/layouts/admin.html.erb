@@ -2,7 +2,7 @@
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title>omei-admin</title>
+  <title>admin-<%= @title %></title>
   <%= favicon_link_tag %>
   <%= stylesheet_link_tag 'blueprint/print', 'media' => 'print' %>
   <!--[if lt IE 8]>
@@ -16,20 +16,25 @@
   <%= yield :head %>
 </head>
 <body>
-
   <div id='page_container'>
     <div id='page_head'>
       <%= image_tag 'ae_logo.png', :class => 'logo' %>
       <div id="progress"><%= image_tag 'admin/progress.gif' %> <%= t(:loading) %>...</div>      
       <%= render '/admin/shared/main_menu' %>
 
+      <div id='login'>
+        <% if current_employee %>
+        Welcome <%= current_employee.employee_info.nickname %> |
+        <%= link_to 'Logout', destroy_employee_session_path, :method => :delete %>
+        <% end %>
+      </div>
     </div>
     <div id='page_breadcrumbs'>
       <%= yield :breadcrumbs %>
     </div>
 
-    <div id='page_main'>
-      <div class='contents'>
+    <div id='page_main' class='use-sidebar sidebar-at-right'>
+      <div id='contents'>
 
         <% if flash[:error] %>
           <div class="flash error"><%= flash[:error] %></div>
@@ -40,6 +45,12 @@
 
         <%= yield %>
       </div>
+      <div id='sidebar'>
+        <div id='todos' class='zone'></div>
+        <div id='last_logs' class='zone'></div>
+      </div>
+      <a href='#' id='separator'></a>
+      <div class='clear'></div>
     </div>
 
     <div id='page_foot'>

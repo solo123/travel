@@ -1,6 +1,7 @@
 module Admin
   class OrdersController < ResourceController
     new_action.after :new_params
+    create.after :save_seats
 
     private
     def new_params
@@ -19,6 +20,9 @@ module Admin
           rn = rn - 2
         end
       end
+    end
+    def save_seats
+      @object.save_seats
     end
   end
 end

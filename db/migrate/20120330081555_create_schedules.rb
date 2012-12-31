@@ -35,8 +35,10 @@ class CreateSchedules < ActiveRecord::Migration
       t.integer :schedule_assignment_id
       t.integer :seat_number
       t.integer :order_id
-      t.string :message1
-      t.string :message2
+      t.string :message
+      t.string :customer_name
+      t.string :telephone
+      t.integer :operator_id
       t.string :state
       t.timestamps
     end  	

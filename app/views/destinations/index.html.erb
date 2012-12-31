@@ -10,12 +10,12 @@
 <div id="dest_list-nav" style='margin-top:10px;margin-bottom:10px;'></div>
 <ul id="dest_list">
   <% @destinations.each do |d| %>
-    <li title="<%=h d.title%>">
+    <li title="<%=h d.description.title%>">
     <a href='<%= destination_path(d) %>'>
       <div class='img-case'>
         <%= image_tag d.title_photo.pic.url(:thumb) if d.title_photo %>
       </div>
-      <%= d.title %>
+      <%= d.description.title %>
     </a>
     </li>
   <% end %>

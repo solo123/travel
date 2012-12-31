@@ -1,5 +1,4 @@
 <% 
-  seat = assignment.seats.where(:seat_number => i).first
   css = ''
   if i > assignment.total_seats
     css = 'unav'
@@ -16,19 +15,37 @@
 <td id='seat_<%= i %>' class='seat <%= css %>'>
     <div class="seat-check">
       <% unless css == 'unav' %>
-        <input type="checkbox" name="seats[<%= i %>]" id="cb_<%= i %>">
+        <input type="checkbox" name="seats[<%= i %>]" id="cb_<%= i %>" <%= "hold_id=#{seat.order_id}" if seat && seat.state == 'hold' %>>
         <label for="cb_<%= i %>"><%= i %></label>
       <% end %>
     </div>
     <div class="seat-pickup">
-      <% if seat && seat.state == 'hold' %>
-        <%= link_to 'new', 'newOrder' %>
+      <% if seat %>
+        <% if seat.order %>
+          <%= seat.order.order_detail.pickup %>
+        <% else %>
+          <%= seat.message %>
+        <% end %>
       <% end %>
-      <%= raw seat.message1 if seat %>
     </div>
     <div class="seat-info">
-      <%= raw seat.order_id.to_s + '<br />' if seat && seat.order_id && seat.order_id > 0 %>
-      <%= raw seat.message2 if seat %>
+      <% if seat %>
+        <% if seat.order %>
+          <%= link_to seat.order.id, edit_admin_order_path(seat.order), :remote => true %>
+          (<%= seat.order.order_price.num_total %>p)
+          <br />
+          <% if seat.order.order_detail %>
+            <%= seat.order.order_detail.full_name %><br />
+            <%= number_to_phone(seat.order.order_detail.telephone) %>
+          <% end %>
+        <% else %>
+           <% if seat.state == 'hold' %>
+             <%= link_to 'check', "javascript:check_hold(#{seat.order_id})" %><br />
+           <% end %>
+           <%= seat.customer_name %><br />
+           <%= number_to_phone(seat.telephone) %>
+        <% end %>
+      <% end %>
       &nbsp;
     </div>
 </td>

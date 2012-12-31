@@ -6,7 +6,7 @@ class Destination < ActiveRecord::Base
   has_many :photos, :as => :photo_data, :dependent => :destroy
   belongs_to :city
   
-  scope :visible, where(:status => 1).order('title')
+  scope :visible, where(:status => 1)
   def status_text
     if self.status && self.status > 0
       'show'

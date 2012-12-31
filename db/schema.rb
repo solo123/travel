@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121218142626) do
+ActiveRecord::Schema.define(:version => 20121231000001) do
+
+  create_table "accounts", :force => true do |t|
+    t.string   "owner_type"
+    t.integer  "owner_id"
+    t.string   "account_name"
+    t.string   "account_brief"
+    t.decimal  "balance",       :precision => 8, :scale => 2, :default => 0.0
+    t.integer  "status",                                      :default => 0
+    t.datetime "created_at",                                                   :null => false
+    t.datetime "updated_at",                                                   :null => false
+  end
 
   create_table "addresses", :force => true do |t|
     t.string   "address_data_type"
@@ -37,7 +48,7 @@ ActiveRecord::Schema.define(:version => 20121218142626) do
   end
 
   create_table "agent_invoices", :force => true do |t|
-    t.integer  "agent_id"
+    t.integer  "company_id"
     t.decimal  "amount",     :precision => 8, :scale => 2, :default => 0.0
     t.decimal  "commission", :precision => 8, :scale => 2, :default => 0.0
     t.decimal  "net_total",  :precision => 8, :scale => 2, :default => 0.0
@@ -62,9 +73,11 @@ ActiveRecord::Schema.define(:version => 20121218142626) do
     t.integer  "schedule_assignment_id"
     t.integer  "seat_number"
     t.integer  "order_id"
-    t.string   "message1"
-    t.string   "message2"
-    t.string   "state"
+    t.text     "message"
+    t.text     "customer_name"
+    t.text     "telephone"
+    t.integer  "operator_id"
+    t.text     "state"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
   end
@@ -101,11 +114,11 @@ ActiveRecord::Schema.define(:version => 20121218142626) do
   end
 
   create_table "companies", :force => true do |t|
-    t.string   "short_name"
-    t.string   "company_name"
-    t.integer  "company_type"
-    t.string   "icon_url"
-    t.string   "website"
+    t.text     "short_name"
+    t.text     "company_name"
+    t.text     "company_type"
+    t.text     "icon_url"
+    t.text     "website"
     t.integer  "status",       :default => 0
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
@@ -207,6 +220,24 @@ ActiveRecord::Schema.define(:version => 20121218142626) do
     t.datetime "updated_at",                :null => false
   end
 
+  create_table "logs", :force => true do |t|
+    t.integer  "employee_id"
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.integer  "sign_in_count"
+    t.string   "page_url"
+    t.string   "host"
+    t.string   "remote_host"
+    t.string   "remote_addr"
+    t.string   "controller"
+    t.string   "action"
+    t.string   "log_brief"
+    t.string   "log_text"
+    t.integer  "level",              :default => 0
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+  end
+
   create_table "operations", :force => true do |t|
     t.string   "operate_type"
     t.integer  "operate_id"
@@ -220,10 +251,26 @@ ActiveRecord::Schema.define(:version => 20121218142626) do
 
   create_table "order_customers", :force => true do |t|
     t.integer  "order_id"
-    t.integer  "customer_id"
-    t.string   "full_name"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "user_info_id"
+    t.text     "full_name"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "order_details", :force => true do |t|
+    t.integer  "order_id"
+    t.text     "pickup"
+    t.integer  "user_info_id"
+    t.text     "full_name"
+    t.text     "telephone"
+    t.text     "email"
+    t.text     "bill_address"
+    t.integer  "created_by"
+    t.integer  "last_operator"
+    t.integer  "last_payment"
+    t.text     "notes"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "order_items", :force => true do |t|
@@ -290,44 +337,40 @@ ActiveRecord::Schema.define(:version => 20121218142626) do
     t.datetime "updated_at",                      :null => false
   end
 
-  create_table "pay_agents", :force => true do |t|
-    t.integer  "payment_id"
-    t.integer  "order_id"
-    t.integer  "agent_id"
-    t.integer  "invoice_id"
-    t.decimal  "amount",              :precision => 8, :scale => 2, :default => 0.0
-    t.decimal  "agent_discount",      :precision => 8, :scale => 2, :default => 0.0
-    t.decimal  "additional_discount", :precision => 8, :scale => 2, :default => 0.0
-    t.decimal  "account_receivable",  :precision => 8, :scale => 2, :default => 0.0
-    t.integer  "confirm_by_id"
-    t.integer  "confirm_at"
-    t.integer  "finished_at"
-    t.integer  "finished_by_id"
-    t.string   "agent_order_number"
-    t.integer  "status",                                            :default => 0
-    t.datetime "created_at",                                                         :null => false
-    t.datetime "updated_at",                                                         :null => false
-  end
-
   create_table "pay_cashes", :force => true do |t|
     t.integer  "payment_id"
-    t.decimal  "amount",      :precision => 8, :scale => 2, :default => 0.0
-    t.integer  "employee_id"
-    t.integer  "status",                                    :default => 0
-    t.datetime "created_at",                                                 :null => false
-    t.datetime "updated_at",                                                 :null => false
+    t.decimal  "amount",     :precision => 8, :scale => 2, :default => 0.0
+    t.integer  "casher_id"
+    t.integer  "status",                                   :default => 0
+    t.datetime "created_at",                                                :null => false
+    t.datetime "updated_at",                                                :null => false
   end
 
   create_table "pay_checks", :force => true do |t|
     t.integer  "payment_id"
     t.string   "check_number"
     t.decimal  "amount",         :precision => 8, :scale => 2, :default => 0.0
-    t.integer  "employee_id"
+    t.integer  "casher_id"
     t.datetime "finished_at"
     t.integer  "finished_by_id"
     t.integer  "status",                                       :default => 0
     t.datetime "created_at",                                                    :null => false
     t.datetime "updated_at",                                                    :null => false
+  end
+
+  create_table "pay_companies", :force => true do |t|
+    t.integer  "payment_id"
+    t.integer  "company_id"
+    t.string   "company_order_number"
+    t.integer  "invoice_id"
+    t.decimal  "amount",               :precision => 8, :scale => 2, :default => 0.0
+    t.integer  "confirm_by_id"
+    t.integer  "confirm_at"
+    t.integer  "finished_at"
+    t.integer  "finished_by_id"
+    t.integer  "status",                                             :default => 0
+    t.datetime "created_at",                                                          :null => false
+    t.datetime "updated_at",                                                          :null => false
   end
 
   create_table "pay_credit_cards", :force => true do |t|
@@ -339,45 +382,43 @@ ActiveRecord::Schema.define(:version => 20121218142626) do
     t.string   "csc"
     t.integer  "address_id"
     t.string   "prof_code"
-    t.decimal  "amount",          :precision => 8, :scale => 2, :default => 0.0
-    t.decimal  "service_fee",     :precision => 8, :scale => 2, :default => 0.0
-    t.decimal  "total_amount",    :precision => 8, :scale => 2, :default => 0.0
-    t.integer  "look_card_by_id"
-    t.datetime "look_card_at"
+    t.decimal  "amount",         :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "service_fee",    :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "total_amount",   :precision => 8, :scale => 2, :default => 0.0
+    t.integer  "casher_id"
     t.integer  "finished_by_id"
     t.datetime "finished_at"
-    t.integer  "member_id"
-    t.integer  "is_web",                                        :default => 0
-    t.integer  "status",                                        :default => 0
-    t.datetime "created_at",                                                     :null => false
-    t.datetime "updated_at",                                                     :null => false
+    t.integer  "user_id"
+    t.integer  "is_web",                                       :default => 0
+    t.integer  "status",                                       :default => 0
+    t.datetime "created_at",                                                    :null => false
+    t.datetime "updated_at",                                                    :null => false
   end
 
   create_table "pay_vouchers", :force => true do |t|
     t.integer  "payment_id"
     t.integer  "voucher_id"
-    t.decimal  "amount",      :precision => 8, :scale => 2, :default => 0.0
-    t.integer  "employee_id"
-    t.integer  "status",                                    :default => 0
-    t.datetime "created_at",                                                 :null => false
-    t.datetime "updated_at",                                                 :null => false
+    t.decimal  "amount",     :precision => 8, :scale => 2, :default => 0.0
+    t.integer  "casher_id"
+    t.integer  "status",                                   :default => 0
+    t.datetime "created_at",                                                :null => false
+    t.datetime "updated_at",                                                :null => false
   end
 
   create_table "payments", :force => true do |t|
-    t.string   "bill_type"
-    t.string   "bill_id"
-    t.decimal  "pay_before",      :precision => 8, :scale => 2, :default => 0.0
-    t.decimal  "amount",          :precision => 8, :scale => 2, :default => 0.0
-    t.decimal  "pay_after",       :precision => 8, :scale => 2, :default => 0.0
+    t.string   "payment_data_type"
+    t.string   "payment_data_id"
+    t.decimal  "balance_before",    :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "amount",            :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "current_balance",   :precision => 8, :scale => 2, :default => 0.0
     t.string   "pay_from_type"
     t.integer  "pay_from_id"
-    t.string   "pay_to_type"
-    t.integer  "pay_to_id"
+    t.string   "account_id"
     t.string   "pay_method_type"
     t.integer  "pay_method_id"
     t.integer  "operator_id"
-    t.datetime "created_at",                                                     :null => false
-    t.datetime "updated_at",                                                     :null => false
+    t.datetime "created_at",                                                       :null => false
+    t.datetime "updated_at",                                                       :null => false
   end
 
   create_table "photos", :force => true do |t|
@@ -480,6 +521,17 @@ ActiveRecord::Schema.define(:version => 20121218142626) do
     t.string   "tel"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+  end
+
+  create_table "todos", :force => true do |t|
+    t.integer  "msg_from"
+    t.integer  "msg_to"
+    t.string   "message"
+    t.integer  "level"
+    t.integer  "status"
+    t.datetime "due_date"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "tour_prices", :force => true do |t|

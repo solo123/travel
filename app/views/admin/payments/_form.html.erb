@@ -1,12 +1,13 @@
 <%= form_for :payment, :url => admin_payments_path, :remote => true do |f| %>
-<%= f.hidden_field :bill_type, :value => 'Operates::Order' %>
-<%= f.hidden_field :bill_id, :value => params[:order_id] %>
+<%= f.hidden_field :payment_data_type, :value => 'Order' %>
+<%= f.hidden_field :payment_data_id, :value => params[:order_id] %>
+<% order = Order.find(params[:order_id]) %>
 <p>
-	Balance before: <label id='balance'><%#= @shop_order.price.balance_amount %></label>
+	Balance before: <label id='balance'><%= order.order_price.balance_amount %></label>
 	&nbsp;&nbsp;
   Pay Amount: <%= f.text_field :amount, :readonly => 'readonly' %>
   &nbsp;&nbsp;
-  Balance after: <label id='balance_after'><%#= @shop_order.price.balance_amount %></label>
+  Balance after: <label id='balance_after'><%= order.order_price.balance_amount %></label>
 </p>
 <p>
 	<%= hidden_field_tag :pay_method, 'cash' %>
@@ -15,15 +16,16 @@
 	<%= button_link_to 'By Credit card', 'payments/pay_credit_card', {:icon => 'add', 'data-remote' => true} %>
 </div>
 
-<div id='tabs-payment'>
-	<ul>
-		<li><a href='#tab-cash'>Cash</a></li>
-		<li><a href='#tab-cc'>Credit Card</a></li>
-		<li><a href='#tab-check'>Check</a></li>
-		<li><a href='#tab-voucher'>Credit Voucher</a></li>
-		<li><a href='#tab-pr'>Company PR</a></li>
-	</ul>
-	<div id='tab-cash' tag='cash' style="height:100px;">
+<div>
+	<ul id='tabs_payment' class='tabs'>
+		<li><a href='#'>Cash</a></li>
+		<li><a href='#'>Credit Card</a></li>
+		<li><a href='#'>Check</a></li>
+		<li><a href='#'>Credit Voucher</a></li>
+		<li><a href='#'>Company PR</a></li>
+  </ul>
+  <div class='panes'>
+	<div id='tab-cash' tag='cash'>
 		<table style="width:auto;">
 			<tr>
 				<td style="padding-top:20px;text-align: right;">Pay:</td>
@@ -119,7 +121,8 @@
 		<p>
 			Company order# <%= text_field_tag 'company-receivable[related_order_number]' %>
 		</p>
-	</div>
+  </div>
+</div>
 </div>
 <br />
 <p>
@@ -129,3 +132,4 @@
   <%= f.submit %>
 </p>
 <% end %>
+

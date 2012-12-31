@@ -9,7 +9,7 @@ $( "#tour_select" ).autocomplete({
 		if (ui.item) {
 			$('#tour_id').val(ui.item.id);
 			$('#departure_date').val('');
-			$.ajax('tours/' + ui.item.id + '/dates.js');
+			$.ajax('/admin/tours/' + ui.item.id + '/dates.js');
 		}
 	}
 });

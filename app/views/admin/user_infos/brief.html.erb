@@ -1,0 +1,6 @@
+<% if @user_info %> 
+  Tel: <%= @user_info.telephones.first %><br />
+  Email: <%= @user_info.emails.first %><br />
+<% else %>
+  (Empty)
+<% end %>

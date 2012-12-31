@@ -8,4 +8,9 @@
 	  alert("[<%= class_name %>] Add 1 new <%= @object.class.name %> data.");
   }
 
-  $("#edit_div").dialog('close');
+var edit_div = "#edit_<%= @object.class.name.underscore %>_div";
+$(edit_div).dialog('close');
+
+var after_function_name = "<%= @object.class.name.underscore %>_after_created";
+if (typeof(window[after_function_name]) == 'function')
+  eval(after_function_name + "(<%= @object.id %>)");

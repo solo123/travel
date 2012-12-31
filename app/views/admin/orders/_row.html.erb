@@ -1,6 +1,6 @@
     <tr>
         <td><%= link_to obj.order_number, admin_order_path(obj) %></td>
-        <td><%= obj.order_customer.full_name if obj.order_customer %></td>
+        <td><%= obj.order_detail.full_name if obj.order_detail %></td>
         <td><%= obj.schedule.title if obj.schedule %></td>
         <td><%= obj.created_at %></td>
         <td><%= obj.status %></td>

@@ -1,6 +1,12 @@
 module Admin
   class SchedulesController < ResourceController
-    
+    def title
+      if action_name == 'show'
+        @title = 'Seats table'
+      else
+       super
+      end 
+    end 
     def generate
       @today = Date.today
       @default_days = AppConfig[:max_reservation_days].to_i
@@ -41,6 +47,10 @@ module Admin
       end
     end
     
+    def orders
+      load_object
+      render :partial => 'orders', :object => @object.orders
+    end
     def selected
       @object = Schedule.where(:tour_id => params[:tour_id]).where(:departure_date => params[:departure_date]).first
       if params[:page] == 'order'

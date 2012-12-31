@@ -6,7 +6,7 @@
 			<div style='width:220px;height:161px;float:right;'></div>
 			<ul class='list-108'>
 			<% Destination.order('updated_at desc').limit(28).each do |d| %>
-				<li><%= link_to d.title, destination_path(d), :title => d.title %></li>
+				<li><%= link_to d.description.title, destination_path(d), :title => d.description.title %></li>
 			<% end %>
 			</ul>
 		</div>

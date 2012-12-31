@@ -1,19 +1,16 @@
 class Order < ActiveRecord::Base
-  after_save :save_seats
+  #after_save :save_seats
 
   attr_accessor :seats
 
   belongs_to :schedule
   belongs_to :schedule_assignment
-  has_one :order_option
-  has_one :order_customer
-  has_one :order_operate
+  has_one :order_detail
   has_one :order_price
   has_many :order_items
+  has_many :payments, :as => :payment_data
 
-  accepts_nested_attributes_for :order_customer, :allow_destroy => true
-  accepts_nested_attributes_for :order_option, :allow_destroy => true
-  accepts_nested_attributes_for :order_operate, :allow_destroy => true
+  accepts_nested_attributes_for :order_detail, :allow_destroy => true
   accepts_nested_attributes_for :order_price, :allow_destroy => true
   accepts_nested_attributes_for :order_items, :allow_destroy => true, :reject_if => proc { |attributes| attributes['num_adult'].blank? || attributes[:num_adult].to_i < 1 }
 
@@ -25,11 +22,7 @@ class Order < ActiveRecord::Base
   end
 
   def seats
-    if @seats
-       @seats
-    else
-      @seats = get_seats
-    end
+    @seats ||= get_seats
   end
 
   def save_seats
@@ -39,10 +32,8 @@ class Order < ActiveRecord::Base
       return
     end
     @seats = eval('[' + @seats + ']') if @seats.class.name == 'String'
+    BusSeat.where(:order_id => self.id).delete_all
     o_seats = get_seats
-    (o_seats - @seats).each do |s|
-      BusSeat.where(:order_id => self.id, :seat_number => s).delete_all
-    end
     (@seats - o_seats).each do |s|
         bs = BusSeat.new
         bs.order_id = self.id
@@ -52,7 +43,11 @@ class Order < ActiveRecord::Base
     end
   end
   def get_seats
+    if self.schedule_assignment
       self.schedule_assignment.seats.where(:order_id => self.id).map {|ass| ass.seat_number}
+    else
+      nil
+    end
   end
   def recaculate_price
     return unless self.schedule

@@ -1,0 +1,7 @@
+{
+  "id": "<%= @object.id %>", 
+  "full_name": "<%= @object.full_name %>", 
+  "telephone": "<%= @object.telephones.first.tel unless @object.telephones.empty? %>", 
+  "email": "<%= @object.emails.first.email_address unless @object.emails.empty? %>", 
+  "address":"<%= @object.addresses.first.to_s unless @object.addresses.empty? %>"
+}

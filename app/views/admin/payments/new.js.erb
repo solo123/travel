@@ -1,14 +1,15 @@
-$("#dialog")
+var edit_div = "edit_<%= @object.class.name.underscore %>_div";
+if ($('#'+edit_div).length == 0){
+  $('#page_main').append("<div id='"+ edit_div +"'></div>");
+  $('#'+edit_div).dialog({ autoOpen:false, width:700, dialogClass:'shadow', modal:true});
+}
+
+$('#'+edit_div)
 	.html("<%= escape_javascript(render(:partial => "form"))%>");
 
-$('#tabs-payment').tabs({
-	selected: 0,
-	select: function(e,ui){
-		$('#pay_method').val(ui.panel.attributes['tag'].value);
-	}
-});
+$('#tabs_payment').tabs("div.panes > div");
 	
-$('#dialog')
+$('#'+edit_div)
 	.dialog('option', 'title', 'Payment')
 	.dialog('open');
 

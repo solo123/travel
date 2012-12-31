@@ -10,7 +10,7 @@
       <li>
       <%= button_link_to 'Add bus', new_admin_schedule_schedule_assignment_path(@object) + "?schedule_id=#{params[:id]}", { :remote => true, :icon => 'bus'} %></li>
       <li><%= button_link_to 'Hold', 'javascript:hold()', {:icon => 'hold'} %></li>
-      <li><%= button_link_to 'Release', 'javascript:release();', {:icon => 'undo'} %></li>Red
+      <li><%= button_link_to 'Release', 'javascript:release();', {:icon => 'undo'} %></li>
       <li><%= button_link_to 'Order', 'javascript:order();', {:icon => 'cart'} %></li>
     </ul>
 
@@ -34,37 +34,11 @@
 
 </div>
 
-<div>
-  <table class="index">
-    <tr>
-      <th><%= t("order_id") %></th>
-      <th>Type</th>
-      <th>Related id</th>
-      <th><%= t("tour") %></th>
-      <th>Departure</th>
-      <th>Customer</th>
-      <th>Phone</th>
-      <th>Status</th>
-    </tr>
-    <% @object.orders.each do |order| 
-         order.recaculate_price unless order.order_price
-         next if order.order_price.num_total == order.seats.count
-  %>
-      <tr id="<%= dom_id order %>" class='<%= cycle('row', 'alt-row') %>'>
-        <td style="font-weight:bold;text-align:center;text-decoration:underline;">
-          <%= link_to order.id, admin_order_path(order) + "/edit?p=order_seats", :remote => true %>
-        </td>
-        <td><%= order.schedule_id %></td>
-        <td><%= order.schedule_assignment_id %></td>
-        <td></td>
-        <td></td>
-        <td><%= order.order_customer.full_name if order.order_customer %></td>
-        <td>phone</td>
-        <td><%= order.status %></td>
-      </tr>
-    <% end %>
-  </table>
+<div id='unseat_orders'>
+  <%= render 'orders', :orders => @object.orders %>
 </div>
 
 <div id='edit_div' class='dialog-normal'></div>
+<div id='select_schedule_div' class='dialog-popup'></div>
+<div id='select_customer_div' class='dialog-popup'></div>
 

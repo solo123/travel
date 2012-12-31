@@ -48,3 +48,11 @@ table.compact {
 	tr {margin:0; padding: 0;}
 	td {margin:0; padding:0;}
 }
+table.border-table{
+  margin:0;
+  padding:2px;
+  border-collapse:collapse;
+  td{border:solid 1px $bd2;}
+}
+td.align-right {text-align:right;}
+td.align-center {text-align:center;}

@@ -1,0 +1,28 @@
+  <table class="index">
+    <tr>
+      <th><%= t("order_id") %></th>
+      <th>Customer</th>
+      <th>Telephone</th>
+      <th>Pick up</th>
+      <th>Status</th>
+      <th>Created at</th>
+      <th>Seat</th>
+    </tr>
+    <% orders.each do |order| 
+         order.recaculate_price unless order.order_price
+         next if order.order_price.num_total == order.seats.count
+  %>
+      <tr id="<%= dom_id order %>" class='<%= cycle('row', 'alt-row') %>'>
+        <td style="font-weight:bold;text-align:center;text-decoration:underline;">
+          <%= link_to order.id, edit_admin_order_path(order), :remote => true %>
+        </td>
+        <td><%= order.order_detail.full_name if order.order_detail %></td>
+        <td><%= order.order_detail.telephone if order.order_detail %></td>
+        <td><%= order.order_detail.pickup if order.order_detail %></td>
+        <td><%= order.status %></td>
+        <td><%= order.updated_at %></td>
+        <td><a href='javascript:void(0)' onclick='assign_seat(<%= order.id %>);'>seat</a></td>
+      </tr>
+    <% end %>
+  </table>
+

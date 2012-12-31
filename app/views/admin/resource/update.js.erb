@@ -1,3 +1,8 @@
 $("#<%= dom_id(@object) %>")
 	.replaceWith("<%= escape_javascript(render(:partial => 'row', :locals => {:obj => @object})) %>");
-$("#edit_div").dialog('close');
+  $("#edit_<%= @object.class.name.underscore %>_div").dialog('close');
+
+  var after_function_name = "<%= @object.class.name.underscore %>_after_updated";
+  if (typeof(window[after_function_name]) == 'function')
+    eval(after_function_name + "(<%= @object.id %>)");
+

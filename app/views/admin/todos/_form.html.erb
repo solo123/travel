@@ -1,0 +1,23 @@
+<%= form_for( [:admin, @object], :remote => true) do |f| %>
+
+  <div class='container'>
+    <div class='span-8'>
+      <%= f.field_container :msg_to do %>
+        <%= f.label :msg_to %><br />
+        <%= f.text_field :msg_to %>
+      <% end %>
+      <%= f.field_container :level do %>
+        <%= f.label :level %><br />
+        <%= f.text_field :level %>
+      <% end %>
+      <%= f.field_container :message do %>
+        <%= f.label :message %><br />
+        <%= f.text_field :message %>
+      <% end %>
+    </div>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+

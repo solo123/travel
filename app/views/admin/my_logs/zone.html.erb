@@ -1,0 +1,11 @@
+  <h1>Last operations</h1>
+  <table class='compact'>
+    <% @collection.each do |op| %>
+    <tr>
+      <td><%= op.level %></td>
+      <td><%= op.level == 1 ? (link_to op.log_brief, op.page_url) : op.log_brief %></td>
+      <td class='note-text'><time class='timeago' datetime='<%= op.created_at.iso8601 %>'><%= op.created_at %></time></td>
+    </tr>
+    <% end %>
+  </table>
+

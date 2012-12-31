@@ -40,8 +40,8 @@ module Admin
 
     def search
       r = []
-      Tour.where("title like '%#{params[:term]}%'").limit(100).order('title').each do |t|
-        r << {:value => "#{t.id}: #{t.title}/#{t.title_cn}", :id => t.id}
+      Tour.joins(:description).where("descriptions.title like '%#{params[:term]}%'").limit(100).order('title').each do |t|
+        r << {:value => "#{t.id}: #{t.description.title}/#{t.description.title_cn}", :id => t.id}
       end
       render :text => r.to_json      
     end

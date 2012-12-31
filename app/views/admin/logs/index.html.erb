@@ -1,0 +1,42 @@
+<%= content_for :breadcrumbs do %>
+  Data &gt;
+  Logs
+<% end %>
+<div class="toolbar">
+  <ul class="actions">
+  	<li>
+			<%= form_for( @search, :url => admin_logs_path ) do |f| %>
+  		<%= f.label :log_brief_contains, "Search" %> <%= f.text_field :log_brief_contains, :size => 15 %> &nbsp;
+  		<%= button 'Search' %>
+			<% end %>
+  	</li>
+    <li>
+    	<%= button_link_to 'New Destination', 'destinations/new', {:icon => 'add', 'data-remote' => true} %>
+    </li>
+  </ul>
+  <br class="clear">
+</div>
+
+<div id="edit_div" class='dialog-normal'></div>
+
+<div class='data-pager'>
+<%= will_paginate(@collection) %>
+</div>
+<table class="data-list" id="list_logs">
+  <thead>
+  <tr>
+    <th><%= t("id") %></th>
+    <th>level</th>
+	<th><%= t("page_url") %></th>
+	<th><%= t("controller") %></th>
+	<th><%= t("action")%></th>
+  <th><%= t("log")%></th>
+  <th>time</th>
+  </tr>
+</thead>
+<% @collection.each do |d| %>
+	<%= render :partial => 'row', :locals => {:obj => d} %>
+<% end %>
+</table>
+<%= will_paginate(@collection) %>
+

@@ -1,0 +1,37 @@
+/* Content & sidebar */
+#sidebar {
+	background-color: #DEF;
+	border-color: #BCD;
+	display: none;
+  h1 {font-size: 14px; font-weight:bold;}
+  .zone {border:solid 1px white; padding:4px;margin: 4px 0;} 
+}
+#contents{width:97%;}
+.use-sidebar #contents {width: 76%;}
+.use-sidebar #sidebar {
+	display: block;
+	width: 20%;
+}
+
+.sidebar-at-left #sidebars {margin-right: 1%;}
+.sidebar-at-right #sidebar {margin-left: 1%;}
+
+.sidebar-at-left #contents, .use-sidebar.sidebar-at-right #sidebar, .sidebar-at-right #separator {float: right;}
+.sidebar-at-right #contents, .use-sidebar.sidebar-at-left #sidebar, .sidebar-at-left #separator {float: left;}
+
+#separator {
+	background-color: #EEE;
+	border: 1px solid #CCC;
+	display: block;
+	outline: none;
+	width: 1%;
+}
+#separator {
+	background: url('<%= asset_path("admin/vertical-separator.png") %>') no-repeat center center;
+	border-color: #FFF;
+}
+#separator:hover {
+	border-color: #ABC;
+	background-color: #DEF;
+}
+

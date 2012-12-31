@@ -10,7 +10,10 @@ function hold(){
     }
 	}	
 }
-
+function check_hold(hold_id){
+  var cbs = 'input[type=checkbox][hold_id=' + hold_id + ']';
+  $(cbs).prop('checked', !$(cbs).prop('checked'));
+}
 function release(){
 	if (validate_hold_seats()) {
 		if (confirm('Are you sure to RELEASE these seats?')){
@@ -32,6 +35,22 @@ function order(){
   }
 }
 
+function order_after_updated(){
+  reload_seat_table();
+  reload_orders();
+}
+function order_after_created(){
+  order_after_updated();
+}
+function reload_seat_table(){
+  var api = $('.tabs').data('tabs');
+  api.getCurrentPane().load(api.getCurrentTab().attr('href'));
+}
+function reload_orders(){
+  $.get("/admin/schedules/"+ $('.s-id').text().trim() +"/orders",function(data){
+    $('#.unseat_orders').html(data);
+  });
+}
 function get_current_assignment_id(){
 	var pane = $('.panes > div:visible');
 	return pane.find('div').attr('id').substring(5);
@@ -66,7 +85,10 @@ function validate_hold_seats(){
 	}
 
 	var result = '';
-	pane.find('input[type="checkbox"]:checked').each(function(){ if(!$(this).parent().parent().hasClass('hold')) result += $(this).next().text() + ', '; });
+	pane.find('input[type="checkbox"]:checked').each(function(){
+    var seat = $(this).parent().parent();
+    if(!seat.hasClass('hold') && !seat.hasClass('sold')) result += $(this).next().text() + ', '; 
+  });
 	if (result.length > 0) {
 		alert('Seats: ' + result + ' not hold. Please check again.');
 		return false;
@@ -113,6 +135,37 @@ function assign_seat(order_id){
     pane.find('input[name=operate]').val('order_seats');
     pane.find('form').submit();
   }
+}
+function refresh_customer(){
+  var uid = parseInt($('#order_order_detail_attributes_user_info_id').val());
+  if (uid > 0 ){
+    $.getJSON('/admin/user_infos/' + uid, function(data){
+      $('#order_order_detail_attributes_full_name').val(data.full_name);
+      $('#order_order_detail_attributes_telephone').val(data.telephone);
+      $('#order_order_detail_attributes_email').val(data.email);
+      $('#order_order_detail_attributes_bill_address').val(data.address);
+    });
+  } else {
+    $('#order_order_detail_attributes_full_name').val("");
+    $('#order_order_detail_attributes_telephone').val("");
+    $('#order_order_detail_attributes_email').val("");
+    $('#order_order_detail_attributes_bill_address').val("");
+  }
+}
+var order_room_template = 
+"<tr><td><input name='order[order_items_attributes][000][num_adult]' size='2' type='text' value=''></td>" +
+"<td><input name='order[order_items_attributes][000][num_child]' size='2' type='text' value=''></td>" +
+"<td>amount:</td><td><a href='javascript:void(0)' class='delete_room'>Remove</a></td></tr>";
+
+function add_room(){
+  var new_id = new Date().getTime();
+  var regexp = new RegExp("000", "g");
+  $("#rooms")
+    .append(order_room_template.replace(regexp, new_id));
+
+  $('.delete_room').click(function(){
+    $(this).parent().parent().remove();
+  });
 }
 // auto-run commands
 $(function(){

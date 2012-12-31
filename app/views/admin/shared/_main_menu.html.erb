@@ -11,7 +11,14 @@
   <li><a href='#'>Orders</a>
   <ul>
     <li><%= link_to t(:orders), admin_orders_path %></li>
-    <li><%= link_to t(:user_infos), admin_user_infos_path %></li>
+    <li><a href='#'>Users</a>
+    <ul>
+      <li><%= link_to t(:user_infos), admin_user_infos_path %></li>
+      <li><%= link_to t(:emails), admin_emails_path %></li>
+      <li><%= link_to t(:telephones), admin_telephones_path %></li>
+      <li><%= link_to t(:addresses), admin_addresses_path %></li>
+    </ul>
+    </li>
   </ul>
   </li>
   <li><a href='#'>Accounts</a>

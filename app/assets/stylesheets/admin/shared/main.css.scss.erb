@@ -14,7 +14,7 @@ textarea {width:90%;}
 
 #main_menu {top: 13px; left: 300px; position: relative;}
 
-.contents {padding:10px;}
+#contents {padding:10px;}
 .logo { height:30px; left: 30px; top: 29px; position:absolute;}
 .color-title{margin-top:8px; padding:4px; background-color: $bg2; font-size: 130%;}
 .span-half {float:left;width:46%;margin-right:10px;}
@@ -37,6 +37,7 @@ legend{border:solid 1px $bg3; padding: 2px 6px; background-color: $bg3; color: w
 input {background-color: $bg1; font-size:110%; padding:3px;}
 input[type=text]{border:solid 1px #bbb;}
 input[type=text]:focus {border:solid 1px red;background-color:lightyellow;}
+input[type=text][readonly]{background-color: $bg2; border:none; border-bottom:solid 1px $bg1;color:$ptn3;}
 p{margin:3px 0;}
 
 .thumbs{
@@ -45,3 +46,5 @@ p{margin:3px 0;}
     div.buttons {text-align:center;margin-top:4px;}
   }
 }
+div#login{position:absolute;right:30px;}
+.note-text {color: $ptn3;}

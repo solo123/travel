@@ -1,10 +1,7 @@
-<%= form_tag 'members/selected', :method => :put do %>
-	<p>
-		Search:<br />
-		<%= text_field_tag :member_select, '', :style => 'width:200px' %>
-		<%= hidden_field_tag :member_id %>
-	</p>
-	<p>
-		<input type='button' value='Submit' onclick='set_member();' />
-	</p>
-<% end %>
+	<div class='toolbar' style='padding:4px;'>
+		Search Customer by name/email/telephone:<br />
+		<%= text_field_tag :user_select, '', :style => 'width:300px' %>
+		<%= hidden_field_tag :user_id %>
+    <%= button_link_to 'Select', '/admin/user_infos/select?id=0', {:icon => 'add', :remote => true, :id => 'select_user_button'} %> <br />
+	</div>
+    <%= render 'form' %>
